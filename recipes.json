@@ -1,0 +1,1785 @@
+[
+    {
+        "id": "italian-1",
+        "name": "Frittata with Spinach and Cheese",
+        "ingredients": [
+            "6 eggs",
+            "100g spinach",
+            "50g cheese",
+            "1 tbsp olive oil",
+            "salt and pepper to taste"
+        ],
+        "image": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Farchive%2Fdb86e38bdf8cfdd3cddcfa2d4884282e079d7fd6",
+        "time": {
+            "prep": 10,
+            "cook": 15,
+            "total": 25
+        },
+        "instructions": [
+            "Preheat oven to 180°C (350°F).",
+            "Sauté spinach in olive oil until wilted.",
+            "Beat eggs with salt and pepper.",
+            "Mix in sautéed spinach and grated cheese.",
+            "Pour mixture into an oven-safe skillet.",
+            "Bake for 15 minutes or until set.",
+            "Serve warm."
+        ],
+        "difficulty": "easy",
+        "cuisine": "italian",
+        "mealType": "breakfast",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=1p3Z7FUVke8",
+        "nutrition": {
+            "calories_kcal": 750,
+            "fat_g": 59,
+            "protein_g": 48,
+            "carbs_g": 6
+        }
+    },
+    {
+        "id": "italian-2",
+        "name": "Italian Breakfast Bruschetta",
+        "ingredients": [
+            "6 baguette slices",
+            "100g cherry tomatoes",
+            "10 basil leaves",
+            "1 tbsp olive oil",
+            "salt and pepper"
+        ],
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKmqhAVh6qSHFTV3xpc5bwN2Hbft6uhgKgAQ&s",
+        "time": {
+            "prep": 10,
+            "cook": 5,
+            "total": 15
+        },
+        "instructions": [
+            "Toast the baguette slices lightly.",
+            "Dice tomatoes and mix with chopped basil, olive oil, salt and pepper.",
+            "Spoon tomato mixture over toasted bread.",
+            "Serve immediately."
+        ],
+        "difficulty": "easy",
+        "cuisine": "italian",
+        "mealType": "breakfast",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=W4zr_fW2nVQ",
+        "nutrition": {
+            "calories_kcal": 320,
+            "fat_g": 12,
+            "protein_g": 9,
+            "carbs_g": 40
+        }
+    },
+    {
+        "id": "italian-3",
+        "name": "Spaghetti Carbonara",
+        "ingredients": [
+            "200g spaghetti",
+            "100g guanciale",
+            "2 eggs",
+            "50g pecorino romano",
+            "black pepper"
+        ],
+        "image": "data:image/jpeg;base64,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",
+        "time": {
+            "prep": 10,
+            "cook": 15,
+            "total": 25
+        },
+        "instructions": [
+            "Cook spaghetti in salted boiling water until al dente.",
+            "Sauté guanciale until crispy.",
+            "Whisk eggs with pecorino and black pepper.",
+            "Mix pasta with guanciale and egg mixture off the heat.",
+            "Serve immediately."
+        ],
+        "difficulty": "medium",
+        "cuisine": "italian",
+        "mealType": "lunch",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=D_2DBLAt57c",
+        "nutrition": {
+            "calories_kcal": 900,
+            "fat_g": 40,
+            "protein_g": 45,
+            "carbs_g": 80
+        }
+    },
+    {
+        "id": "italian-4",
+        "name": "Pasta Primavera",
+        "ingredients": [
+            "200g penne pasta",
+            "1 zucchini",
+            "2 bell peppers",
+            "100g cherry tomatoes",
+            "2 tbsp olive oil",
+            "2 garlic cloves",
+            "50g parmesan"
+        ],
+        "image": "https://images.themodernproper.com/production/posts/PastaPrimavera_9.jpg?w=960&h=960&q=82&fm=jpg&fit=crop&dm=1719193336&s=937ab7a995140869e824b6eac4374aa7",
+        "time": {
+            "prep": 15,
+            "cook": 20,
+            "total": 35
+        },
+        "instructions": [
+            "Cook pasta until al dente.",
+            "Sauté vegetables in olive oil.",
+            "Add garlic and cook briefly.",
+            "Combine pasta with vegetables and parmesan.",
+            "Serve warm."
+        ],
+        "difficulty": "easy",
+        "cuisine": "italian",
+        "mealType": "lunch",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=j1hAAcPay1w",
+        "nutrition": {
+            "calories_kcal": 520,
+            "fat_g": 18,
+            "protein_g": 16,
+            "carbs_g": 70
+        }
+    },
+    {
+        "id": "italian-5",
+        "name": "Caprese Salad",
+        "ingredients": [
+            "150g tomatoes",
+            "100g mozzarella",
+            "10 basil leaves",
+            "1 tbsp olive oil",
+            "1 tsp balsamic vinegar"
+        ],
+        "image": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/07/Caprese-Salad-2-2.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 0,
+            "total": 10
+        },
+        "instructions": [
+            "Slice tomatoes and mozzarella.",
+            "Layer tomato and mozzarella slices.",
+            "Top with basil leaves.",
+            "Drizzle olive oil and balsamic vinegar.",
+            "Serve immediately."
+        ],
+        "difficulty": "easy",
+        "cuisine": "italian",
+        "mealType": "lunch",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=gOcfUgd4ekA",
+        "nutrition": {
+            "calories_kcal": 350,
+            "fat_g": 24,
+            "protein_g": 18,
+            "carbs_g": 6
+        }
+    },
+    {
+        "id": "italian-6",
+        "name": "Margherita Pizza",
+        "ingredients": [
+            "1 pizza dough",
+            "100g tomato sauce",
+            "150g mozzarella",
+            "10 basil leaves",
+            "1 tbsp olive oil"
+        ],
+        "image": "https://simplyhomecooked.com/wp-content/uploads/2023/04/Margherita-Pizza-3.jpg",
+        "time": {
+            "prep": 15,
+            "cook": 10,
+            "total": 25
+        },
+        "instructions": [
+            "Preheat oven to 250°C.",
+            "Roll dough and spread tomato sauce.",
+            "Top with mozzarella and basil.",
+            "Bake for 7–10 minutes.",
+            "Serve hot."
+        ],
+        "difficulty": "medium",
+        "cuisine": "italian",
+        "mealType": "dinner",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=xKDnD8sJsuY",
+        "nutrition": {
+            "calories_kcal": 800,
+            "fat_g": 28,
+            "protein_g": 35,
+            "carbs_g": 90
+        }
+    },
+    {
+        "id": "italian-7",
+        "name": "Osso Buco",
+        "ingredients": [
+            "4 veal shanks",
+            "1 onion",
+            "2 carrots",
+            "2 celery stalks",
+            "400ml beef broth",
+            "200ml white wine",
+            "2 tbsp olive oil"
+        ],
+        "image": "https://assets.simpleviewinc.com/simpleview/image/upload/q_75/v1/clients/nmmagazine/OssoBucco_Merriam005_a1af5b45-5f0d-469d-b790-4b7377d5905a.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 90,
+            "total": 110
+        },
+        "instructions": [
+            "Season and sear veal shanks.",
+            "Sauté vegetables in olive oil.",
+            "Deglaze with wine, then add broth.",
+            "Simmer covered for 1.5 hours.",
+            "Serve with gremolata."
+        ],
+        "difficulty": "hard",
+        "cuisine": "italian",
+        "mealType": "dinner",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=zmj3U1VvYdU",
+        "nutrition": {
+            "calories_kcal": 950,
+            "fat_g": 60,
+            "protein_g": 55,
+            "carbs_g": 20
+        }
+    },
+    {
+        "id": "italian-8",
+        "name": "Bruschetta al Pomodoro",
+        "ingredients": [
+            "6 baguette slices",
+            "150g tomatoes",
+            "1 clove garlic",
+            "10 basil leaves",
+            "1 tbsp olive oil"
+        ],
+        "image": "https://mittengirl.com/wp-content/uploads/2025/04/bruschetta-al-pomodoro-SQ.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 5,
+            "total": 15
+        },
+        "instructions": [
+            "Toast bread slices.",
+            "Mix chopped tomatoes, garlic, basil, olive oil.",
+            "Spoon mixture over toasted bread.",
+            "Serve immediately."
+        ],
+        "difficulty": "easy",
+        "cuisine": "italian",
+        "mealType": "appetizer",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=sHLvqfJQrwQ",
+        "nutrition": {
+            "calories_kcal": 220,
+            "fat_g": 8,
+            "protein_g": 6,
+            "carbs_g": 28
+        }
+    },
+    {
+        "id": "italian_9",
+        "name": "Tiramisu",
+        "ingredients": [
+            "200g ladyfingers",
+            "250g mascarpone",
+            "150ml espresso",
+            "2 tbsp cocoa powder",
+            "100g sugar",
+            "2 eggs"
+        ],
+        "image": "https://www.reluctantgourmet.com/wp-content/uploads/2012/07/classic-tiramisu-r.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 0,
+            "total": 20
+        },
+        "instructions": [
+            "Brew espresso and cool.",
+            "Beat yolks with sugar.",
+            "Fold in mascarpone.",
+            "Dip ladyfingers in espresso and layer in dish.",
+            "Spread mascarpone mixture.",
+            "Repeat layers and dust with cocoa.",
+            "Refrigerate for 4 hours."
+        ],
+        "difficulty": "hard",
+        "cuisine": "italian",
+        "mealType": "dessert",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=87V4nizNJiE",
+        "nutrition": {
+            "calories_kcal": 450,
+            "fat_g": 25,
+            "protein_g": 8,
+            "carbs_g": 50
+        }
+    },
+    {
+        "id": "italian_10",
+        "name": "Panna Cotta",
+        "ingredients": [
+            "500ml heavy cream",
+            "100g sugar",
+            "1 tsp vanilla",
+            "2 tsp gelatin",
+            "50g berries"
+        ],
+        "image": "https://www.allrecipes.com/thmb/NlP50cO2BjJdN4uGvl5JhW0Rx2A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-72567-Panna-cotta-ddmfs-4x3-14ae724a2a8e4ca3a79c5e27b2b61994.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 10,
+            "total": 20
+        },
+        "instructions": [
+            "Soften gelatin in cold water.",
+            "Heat cream, sugar, and vanilla until warm.",
+            "Add gelatin and stir until dissolved.",
+            "Pour into molds and refrigerate 4 hours.",
+            "Top with berries and serve."
+        ],
+        "difficulty": "medium",
+        "cuisine": "italian",
+        "mealType": "dessert",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=paWNWpFAr5U",
+        "nutrition": {
+            "calories_kcal": 320,
+            "fat_g": 22,
+            "protein_g": 6,
+            "carbs_g": 20
+        }
+    },
+    {
+        "id": "chinese_bf_001",
+        "name": "Congee (Rice Porridge)",
+        "ingredients": [
+            "1 cup jasmine rice",
+            "8 cups water",
+            "1 tsp salt",
+            "spring onions for garnish",
+            "soy sauce to taste"
+        ],
+        "image": "https://piquantpost.com/cdn/shop/articles/N959m8nk-arUkwY_-hBbd_1000x.jpg?v=1632141531",
+        "time": {
+            "prep": 5,
+            "cook": 60,
+            "total": 65
+        },
+        "instructions": [
+            "Rinse rice thoroughly.",
+            "Bring water to boil, add rice and salt.",
+            "Simmer for 1 hour, stirring occasionally, until thick and creamy.",
+            "Adjust seasoning and garnish with spring onions."
+        ],
+        "difficulty": "easy",
+        "cuisine": "chinese",
+        "mealType": "breakfast",
+        "diet": "vegan",
+        "videoUrl": "https://www.youtube.com/watch?v=CQG7EvqbzSo",
+        "nutrition": {
+            "calories_kcal": 99,
+            "fat_g": 0.2,
+            "protein_g": 2.0,
+            "carbs_g": 21.4
+        }
+    },
+    {
+        "id": "chinese_ln_001",
+        "name": "Kung Pao Chicken",
+        "ingredients": [
+            "400g chicken breast",
+            "1 red bell pepper",
+            "1 green bell pepper",
+            "3 tbsp soy sauce",
+            "2 tbsp rice vinegar",
+            "2 garlic cloves",
+            "1 tbsp chili paste",
+            "1 tbsp cornstarch",
+            "peanuts"
+        ],
+        "image": "https://theyummybowl.com/wp-content/uploads/kung-pao-chicken-n-1-of-1.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 20,
+            "total": 40
+        },
+        "instructions": [
+            "Dice chicken and marinate with soy sauce and cornstarch.",
+            "Stir-fry chicken until browned.",
+            "Add vegetables, garlic, chili paste, and vinegar.",
+            "Toss in peanuts and cook for another 5 minutes.",
+            "Serve hot."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "lunch",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=woo3xycjcTg",
+        "nutrition": {
+            "calories_kcal": 209,
+            "fat_g": 11,
+            "protein_g": 16,
+            "carbs_g": 11
+        }
+    },
+    {
+        "id": "chinese_ln_002",
+        "name": "Vegetable Chow Mein",
+        "ingredients": [
+            "200g egg noodles",
+            "1 carrot",
+            "1 bell pepper",
+            "1 cup cabbage",
+            "3 tbsp soy sauce",
+            "1 tbsp sesame oil",
+            "2 garlic cloves"
+        ],
+        "image": "https://s.lightorangebean.com/media/20240914164843/chow-mein-fun-done.png",
+        "time": {
+            "prep": 15,
+            "cook": 15,
+            "total": 30
+        },
+        "instructions": [
+            "Boil noodles according to package instructions and drain.",
+            "Sauté vegetables in sesame oil with garlic.",
+            "Add soy sauce and stir-fry noodles with vegetables.",
+            "Cook for 5 minutes, tossing frequently.",
+            "Serve hot."
+        ],
+        "difficulty": "easy",
+        "cuisine": "chinese",
+        "mealType": "lunch",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=g48gfSOp5Hc",
+        "nutrition": {
+            "calories_kcal": 450,
+            "fat_g": 14,
+            "protein_g": 12,
+            "carbs_g": 66
+        }
+    },
+    {
+        "id": "chinese_ln_003",
+        "name": "Sweet and Sour Shrimp",
+        "ingredients": [
+            "300g shrimp",
+            "1 red bell pepper",
+            "1 green bell pepper",
+            "2 tbsp vinegar",
+            "2 tbsp sugar",
+            "3 tbsp soy sauce",
+            "1 tbsp cornstarch",
+            "1 tbsp oil"
+        ],
+        "image": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-05-Sweet-And-Sour-Shrimp%2FSweet_Sour_Shrimp_-_Hi-Res",
+        "time": {
+            "prep": 20,
+            "cook": 15,
+            "total": 35
+        },
+        "instructions": [
+            "Coat shrimp lightly with cornstarch.",
+            "Fry shrimp until pink and cooked.",
+            "Stir-fry peppers, then add vinegar, sugar, and soy sauce.",
+            "Toss shrimp back in and coat evenly.",
+            "Serve immediately."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "lunch",
+        "diet": "pescatarian",
+        "videoUrl": "https://www.youtube.com/watch?v=oDm0PM_2lXs",
+        "nutrition": {
+            "calories_kcal": 320,
+            "fat_g": 8,
+            "protein_g": 30,
+            "carbs_g": 28
+        }
+    },
+    {
+        "id": "chinese_dn_001",
+        "name": "Peking Duck",
+        "ingredients": [
+            "1 whole duck",
+            "1/4 cup honey",
+            "1/4 cup soy sauce",
+            "1 tbsp five spice powder",
+            "pancakes",
+            "spring onions",
+            "hoisin sauce"
+        ],
+        "image": "https://redhousespice.com/wp-content/uploads/2022/01/sliced-peking-duck-with-pancakes-scaled.jpg",
+        "time": {
+            "prep": 30,
+            "cook": 120,
+            "total": 150
+        },
+        "instructions": [
+            "Marinate duck with honey, soy sauce, and five spice.",
+            "Air dry duck overnight for crispy skin.",
+            "Roast in oven at 190°C for 1.5–2 hours.",
+            "Slice thinly and serve with pancakes, hoisin, and onions."
+        ],
+        "difficulty": "hard",
+        "cuisine": "chinese",
+        "mealType": "dinner",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=KnJ3abXjgME",
+        "nutrition": {
+            "calories_kcal": 700,
+            "fat_g": 45,
+            "protein_g": 50,
+            "carbs_g": 15
+        }
+    },
+    {
+        "id": "chinese_dn_002",
+        "name": "Mapo Tofu",
+        "ingredients": [
+            "300g tofu",
+            "200g ground pork",
+            "2 tbsp doubanjiang (chili bean paste)",
+            "1 tbsp soy sauce",
+            "1 tbsp Sichuan peppercorns",
+            "2 garlic cloves",
+            "2 tbsp oil"
+        ],
+        "image": "https://assets.epicurious.com/photos/624b45cc1184c47f7e94b17e/16:9/w_5989,h_3368,c_limit/MapoTofu_RECIPE_033122_31225.jpg",
+        "time": {
+            "prep": 15,
+            "cook": 20,
+            "total": 35
+        },
+        "instructions": [
+            "Brown pork in oil.",
+            "Add chili bean paste and garlic, stir-fry until fragrant.",
+            "Add tofu cubes and soy sauce, simmer for 10 minutes.",
+            "Sprinkle Sichuan peppercorns and serve."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "dinner",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=jCyzcDODL0I",
+        "nutrition": {
+            "calories_kcal": 375,
+            "fat_g": 25,
+            "protein_g": 19,
+            "carbs_g": 12
+        }
+    },
+    {
+        "id": "chinese_app_001",
+        "name": "Spring Rolls",
+        "ingredients": [
+            "12 spring roll wrappers",
+            "1 cup cabbage",
+            "1 carrot",
+            "1 cup bean sprouts",
+            "1 tbsp soy sauce",
+            "1 tsp sesame oil",
+            "oil for frying"
+        ],
+        "image": "https://www.recipetineats.com/uploads/2017/09/Spring-Rolls-6.jpg",
+        "time": {
+            "prep": 25,
+            "cook": 10,
+            "total": 35
+        },
+        "instructions": [
+            "Sauté vegetables in sesame oil and soy sauce.",
+            "Let mixture cool completely.",
+            "Fill wrappers and roll tightly.",
+            "Deep fry until golden brown.",
+            "Serve with sweet chili sauce."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "appetizer",
+        "diet": "vegan",
+        "videoUrl": "https://www.youtube.com/watch?v=ldVuxgEc1m0",
+        "nutrition": {
+            "calories_kcal": 300,
+            "fat_g": 16,
+            "protein_g": 5,
+            "carbs_g": 32
+        }
+    },
+    {
+        "id": "chinese_snack_001",
+        "name": "Egg Tarts",
+        "ingredients": [
+            "1 sheet puff pastry",
+            "4 egg yolks",
+            "200ml milk",
+            "50g sugar",
+            "1 tsp vanilla"
+        ],
+        "image": "https://www.foodnetwork.com/content/dam/images/food/fullset/2020/12/21/0/FN_hong-kong-egg-tarts_s4x3.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 25,
+            "total": 45
+        },
+        "instructions": [
+            "Preheat oven to 200°C.",
+            "Roll puff pastry into tart molds.",
+            "Whisk yolks, sugar, milk, and vanilla.",
+            "Fill tarts and bake 20–25 minutes until golden.",
+            "Cool before serving."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "dessert",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=Bx9OoebptDg",
+        "nutrition": {
+            "calories_kcal": 220,
+            "fat_g": 12,
+            "protein_g": 6,
+            "carbs_g": 20
+        }
+    },
+    {
+        "id": "chinese_snack_002",
+        "name": "Sesame Balls (Jian Dui)",
+        "ingredients": [
+            "1 cup glutinous rice flour",
+            "1/4 cup water",
+            "1/4 cup red bean paste",
+            "1/2 cup sesame seeds",
+            "oil for frying"
+        ],
+        "image": "https://assets.bonappetit.com/photos/598c6e7404eb7554d0b05c61/master/pass/seasme-balls-jian-dui.jpg",
+        "time": {
+            "prep": 25,
+            "cook": 15,
+            "total": 40
+        },
+        "instructions": [
+            "Mix rice flour and water into a dough.",
+            "Fill with red bean paste and roll into balls.",
+            "Coat with sesame seeds.",
+            "Deep fry until golden and crisp.",
+            "Cool slightly before serving."
+        ],
+        "difficulty": "hard",
+        "cuisine": "chinese",
+        "mealType": "dessert",
+        "diet": "vegan",
+        "videoUrl": "https://www.youtube.com/watch?v=jdjYGWiz1iI",
+        "nutrition": {
+            "calories_kcal": 220,
+            "fat_g": 8,
+            "protein_g": 4,
+            "carbs_g": 34
+        }
+    },
+    {
+        "id": "chinese_snack_003",
+        "name": "Steamed Sponge Cake (Ma Lai Gao)",
+        "ingredients": [
+            "1 cup flour",
+            "4 eggs",
+            "100g sugar",
+            "1 tsp baking powder",
+            "1 tbsp oil"
+        ],
+        "image": "https://thewoksoflife.com/wp-content/uploads/2019/01/ma-lai-go-18.jpg",
+        "time": {
+            "prep": 15,
+            "cook": 30,
+            "total": 45
+        },
+        "instructions": [
+            "Beat eggs and sugar until fluffy.",
+            "Fold in flour, baking powder, and oil.",
+            "Pour batter into steamer-safe pan.",
+            "Steam for 30 minutes until spongy.",
+            "Cool before slicing."
+        ],
+        "difficulty": "medium",
+        "cuisine": "chinese",
+        "mealType": "dessert",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=TfE8DMu9P1Q",
+        "nutrition": {
+            "calories_kcal": 280,
+            "fat_g": 10,
+            "protein_g": 8,
+            "carbs_g": 42
+        }
+    },
+     {
+    "id": "lebanese_bf_001",
+    "name": "Manakish Zaatar (Zaatar Flatbread)",
+    "ingredients": [
+      "500g all-purpose flour",
+      "300ml warm water",
+      "7g dry yeast",
+      "1 tsp salt",
+      "3 tbsp olive oil",
+      "150g zaatar mix",
+      "3 tbsp olive oil (for zaatar spread)"
+    ],
+    "image":"https://www.cookinwithmima.com/wp-content/uploads/2021/04/manaeesh-zaatar.jpg",
+    "time": { "prep": 20, "cook": 10, "total": 30 },
+    "instructions": [
+      "Mix flour, yeast, salt and warm water to form a soft dough; knead 8–10 minutes.",
+      "Let dough rest and rise for 30–45 minutes (optional for quicker 20 min proof).",
+      "Mix zaatar and olive oil into a paste.",
+      "Divide dough into rounds, roll thin, brush with zaatar mixture.",
+      "Bake at 240°C (460°F) for 8–10 minutes until edges are golden.",
+      "Serve warm."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "breakfast",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/ARmQEJK2qTg?si=anPEcxgDtM-o5Got",
+    "nutrition": {
+      "calories_kcal": 600,
+      "fat_g": 24,
+      "protein_g": 14,
+      "carbs_g": 80
+    }
+  },
+  {
+    "id": "lebanese_bf_002",
+    "name": "Labneh Plate with Olive Oil & Zaatar",
+    "ingredients": [
+      "400g labneh (strained yogurt)",
+      "2 tbsp extra-virgin olive oil",
+      "1 tsp zaatar",
+      "1 cucumber (sliced)",
+      "10 cherry tomatoes (halved)",
+      "Olives and fresh mint for garnish",
+      "Pita bread to serve"
+    ],
+    "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2019/10/14/141/MW406H_labneh_s4x3.jpg.rend.hgtvcom.1280.1280.suffix/1620689771479.webp",
+    "time": { "prep": 10, "cook": 0, "total": 10 },
+    "instructions": [
+      "Spoon labneh onto a shallow serving plate and spread slightly.",
+      "Drizzle olive oil generously over the labneh.",
+      "Sprinkle zaatar and garnish with cucumber, tomatoes, olives and mint.",
+      "Serve with warm pita or fresh vegetables."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "breakfast",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtube.com/shorts/njmpG1Toh1c?si=jFdhBi_xRx6vNlSh",
+    "nutrition": {
+      "calories_kcal": 450,
+      "fat_g": 30,
+      "protein_g": 20,
+      "carbs_g": 25
+    }
+  },
+  {
+    "id": "lebanese_bf_003",
+    "name": "Foul Medames (Stewed Fava Beans)",
+    "ingredients": [
+      "2 cups cooked fava beans (or canned)",
+      "3 tbsp olive oil",
+      "1 garlic clove (minced)",
+      "1 lemon (juiced)",
+      "1 tsp cumin",
+      "Chopped parsley and chopped tomatoes to garnish",
+      "Salt and pepper to taste"
+    ],
+    "image": "https://th.bing.com/th/id/OIP.VBkGSKjbzwMGixwHvCC4hgHaEJ?w=288&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+    "time": { "prep": 10, "cook": 20, "total": 30 },
+    "instructions": [
+      "Warm olive oil in a saucepan; sauté garlic briefly without burning.",
+      "Add fava beans, a splash of water, cumin, salt and pepper; simmer 10–15 minutes.",
+      "Mash slightly for a rustic texture.",
+      "Finish with lemon juice and garnish with parsley and tomatoes.",
+      "Serve warm with pita bread."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "breakfast",
+    "diet": "vegan",
+    "videoUrl": "https://youtu.be/HrX1k9TTGWI?si=fS0kSytT02c7thZv",
+    "nutrition": {
+      "calories_kcal": 380,
+      "fat_g": 18,
+      "protein_g": 18,
+      "carbs_g": 38
+    }
+  },
+  {
+    "id": "lebanese_ln_001",
+    "name": "Tabbouleh",
+    "ingredients": [
+      "1 cup fine bulgur (soaked and drained)",
+      "2 bunches parsley (finely chopped)",
+      "6–8 mint leaves (chopped)",
+      "3 tomatoes (finely diced)",
+      "1 small onion (finely chopped)",
+      "Juice of 2 lemons",
+      "3 tbsp extra-virgin olive oil",
+      "Salt to taste"
+    ],
+    "image": "https://urbanfarmandkitchen.com/wp-content/uploads/2023/01/lebanese-tabbouleh-salad-lettuce.jpg",
+    "time": { "prep": 20, "cook": 0, "total": 20 },
+    "instructions": [
+      "Soak bulgur 10 minutes in cold water, squeeze out excess moisture.",
+      "Combine chopped parsley, mint, tomato and onion in a bowl.",
+      "Add bulgur, lemon juice, olive oil and salt; toss well.",
+      "Adjust seasoning and chill briefly before serving."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "lunch",
+    "diet": "vegan",
+    "videoUrl": "https://youtu.be/tj7HF_iMO5U?si=_iNz1tIL9pNz2_xC",
+    "nutrition": {
+      "calories_kcal": 300,
+      "fat_g": 11,
+      "protein_g": 7,
+      "carbs_g": 45
+    }
+  },
+  {
+    "id": "lebanese_ln_002",
+    "name": "Fattoush Salad",
+    "ingredients": [
+      "2 romaine hearts (chopped)",
+      "2 tomatoes (diced)",
+      "1 cucumber (diced)",
+      "4 radishes (sliced)",
+      "1/2 cup chopped parsley",
+      "1 pita (toasted and broken)",
+      "2 tbsp pomegranate molasses",
+      "3 tbsp olive oil",
+      "Juice of 1 lemon",
+      "1 tsp sumac",
+      "Salt to taste"
+    ],
+    "image": "https://cdn.loveandlemons.com/wp-content/uploads/2023/06/fattoush.jpg",
+    "time": { "prep": 15, "cook": 5, "total": 20 },
+    "instructions": [
+      "Toast pita until crisp and break into bite-sized pieces.",
+      "Combine lettuce, tomatoes, cucumber, radish and parsley in a large bowl.",
+      "Whisk pomegranate molasses, olive oil, lemon juice, sumac and salt.",
+      "Pour dressing over salad, add pita pieces, toss and serve immediately."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "lunch",
+    "diet": "vegan",
+    "videoUrl": "https://youtu.be/362e1RIWH_U?si=sXTqGxxUwQ98g3-y",
+    "nutrition": {
+      "calories_kcal": 180,
+      "fat_g": 8,
+      "protein_g": 3.5,
+      "carbs_g": 23.5
+    }
+  },
+  {
+    "id": "lebanese_ln_003",
+    "name": "Shawarma (Chicken) Plate",
+    "ingredients": [
+      "600g boneless chicken thighs",
+      "3 tbsp plain yogurt",
+      "2 tbsp olive oil",
+      "2 garlic cloves (minced)",
+      "1 tbsp shawarma spice blend",
+      "1 tsp ground cumin",
+      "Salt and pepper",
+      "Pickled turnips and garlic sauce to serve"
+    ],
+    "image": "https://colleenchristensennutrition.com/wp-content/uploads/2021/06/Up-close-chicken-shawarma-plate-with-a-striped-napkin.jpg",
+    "time": { "prep": 20, "cook": 25, "total": 45 },
+    "instructions": [
+      "Mix yogurt, olive oil, garlic, shawarma spices, cumin, salt and pepper; marinate chicken 1–3 hours.",
+      "Grill or pan-sear chicken until fully cooked and slightly charred (6–8 min per side depending on thickness).",
+      "Slice thinly and serve with rice or on a plate with pickled turnips and garlic sauce.",
+      "Garnish with chopped parsley."
+    ],
+    "difficulty": "medium",
+    "cuisine": "lebanese",
+    "mealType": "lunch",
+    "diet": "non-vegetarian",
+    "videoUrl": "https://youtu.be/R6e7HItOVNA?si=UjUp52eQmkQrqZlZ",
+    "nutrition": {
+      "calories_kcal": 550,
+      "fat_g": 28,
+      "protein_g": 50,
+      "carbs_g": 20
+    }
+  },
+  {
+    "id": "lebanese_dn_001",
+    "name": "Kibbeh Bil Sanieh (Baked Kibbeh)",
+    "ingredients": [
+      "350g fine bulgur",
+      "500g lean ground beef or lamb",
+      "1 onion (finely chopped)",
+      "1/2 cup pine nuts (toasted)",
+      "1 tsp allspice",
+      "1 tsp cinnamon",
+      "Salt and pepper",
+      "Olive oil for brushing"
+    ],
+    "image": "https://www.cookinwithmima.com/wp-content/uploads/2021/04/kibbeh-bil-sanieh.jpg",
+    "time": { "prep": 40, "cook": 45, "total": 85 },
+    "instructions": [
+      "Soak bulgur 10 minutes, drain and squeeze out moisture.",
+      "Process half the bulgur with half the meat to make a smooth paste; season with salt and spices.",
+      "Sauté chopped onion and remaining meat; add pine nuts and season—this is the filling.",
+      "Spread half the meat-bulgur mixture in a baking dish, spread filling, and top with remaining mixture.",
+      "Score top, brush with olive oil and bake at 180 °C (350 °F) for 35–45 minutes until cooked through.",
+      "Slice and serve warm with yogurt or salad."
+    ],
+    "difficulty": "hard",
+    "cuisine": "lebanese",
+    "mealType": "dinner",
+    "diet": "non-vegetarian",
+    "videoUrl": "https://youtu.be/Zow75ixXqhE?si=zngRXPZs56FSIbW4",
+    "nutrition": {
+      "calories_kcal": 670,
+      "fat_g": 30,
+      "protein_g": 35,
+      "carbs_g": 60
+    }
+  },
+  {
+    "id": "lebanese_dn_002",
+    "name": "Sayadiyah (Fish with Spiced Rice)",
+    "ingredients": [
+      "800g firm white fish fillets (cod or sea bass)",
+      "2 cups basmati rice",
+      "2 onions (thinly sliced)",
+      "1 tsp baharat or fish spice blend",
+      "1 tsp turmeric",
+      "3 tbsp olive oil",
+      "Salt and pepper"
+    ],
+    "image": "https://feelgoodfoodie.net/wp-content/uploads/2023/04/Sayadieh-11.jpg",
+    "time": { "prep": 20, "cook": 35, "total": 55 },
+    "instructions": [
+      "Sauté onions in olive oil until deeply caramelized and set aside.",
+      "Season fish with baharat, turmeric, salt and pepper; pan-fry until cooked and golden; flake into large pieces.",
+      "Cook rice in fish or vegetable stock until tender.",
+      "Stir caramelized onions into rice and fold in flaked fish gently.",
+      "Serve hot with lemon wedges and chopped parsley."
+    ],
+    "difficulty": "medium",
+    "cuisine": "lebanese",
+    "mealType": "dinner",
+    "diet": "pescatarian",
+    "videoUrl": "https://youtu.be/tKKqpioIyag?si=KVllT7ZYBfccpHg7",
+    "nutrition": {
+      "calories_kcal": 600,
+      "fat_g": 22,
+      "protein_g": 45,
+      "carbs_g": 65
+    }
+  },
+  {
+    "id": "lebanese_app_001",
+    "name": "Classic Hummus",
+    "ingredients": [
+      "400g canned chickpeas (drained)",
+      "60g tahini",
+      "2 tbsp lemon juice",
+      "1 garlic clove",
+      "3 tbsp olive oil",
+      "1/2 tsp ground cumin",
+      "Salt to taste",
+      "Paprika and parsley to garnish"
+    ],
+    "image": "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/3/3/0/KC0109_Homemade-Hummus_s4x3.jpg.rend.hgtvcom.616.462.suffix/1417624659085.webp",
+    "time": { "prep": 10, "cook": 0, "total": 10 },
+    "instructions": [
+      "Combine chickpeas, tahini, lemon juice, garlic and cumin in a food processor.",
+      "Process until smooth, adding olive oil or a bit of water to adjust texture.",
+      "Season with salt, swirl olive oil on top and garnish with paprika and parsley.",
+      "Serve with warm pita."
+    ],
+    "difficulty": "easy",
+    "cuisine": "lebanese",
+    "mealType": "appetizer",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtube.com/shorts/hIcDIKMZ2lU?si=deSeTksmeGKXrxuV",
+    "nutrition": {
+      "calories_kcal": 420,
+      "fat_g": 22,
+      "protein_g": 12,
+      "carbs_g": 38
+    }
+  },
+  {
+    "id": "lebanese_dessert_001",
+    "name": "Knafeh (Cheese Pastry with Syrup)",
+    "ingredients": [
+      "500g kataifi (shredded phyllo) or fine semolina",
+      "300g akkawi or unsalted mozzarella",
+      "150g butter (melted)",
+      "1 cup sugar",
+      "1/2 cup water",
+      "1 tsp lemon juice",
+      "1 tbsp orange blossom water (optional)",
+      "Crushed pistachios to garnish"
+    ],
+    "image": "https://muchbutter.com/wp-content/uploads/2024/07/knaffeh-51-768x1024.jpg",
+    "time": { "prep": 25, "cook": 30, "total": 55 },
+    "instructions": [
+      "Preheat oven to 180°C (350°F).",
+      "Prepare sugar syrup by boiling sugar and water; add lemon juice, simmer 8–10 minutes; finish with orange blossom water and cool.",
+      "Spread half the shredded phyllo in a buttered pan, press down and top with shredded cheese.",
+      "Cover with remaining phyllo, drizzle with remaining butter.",
+      "Bake 25–30 minutes until golden and crisp.",
+      "Pour cooled syrup over hot knafeh, garnish with pistachios and serve warm."
+    ],
+    "difficulty": "medium",
+    "cuisine": "lebanese",
+    "mealType": "dessert",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtube.com/shorts/7kNExLQ-PNU?si=pWIF-KdW-AKux3fp",
+    "nutrition": {
+      "calories_kcal": 800,
+      "fat_g": 45,
+      "protein_g": 18,
+      "carbs_g": 90
+    }
+  },
+    {
+        "id": "mexican-1",
+        "name": "Chilaquiles Verdes",
+        "ingredients": [
+            "8 corn tortillas",
+            "1 cup salsa verde",
+            "1/2 cup sour cream",
+            "2 eggs",
+            "1/4 cup crumbled queso fresco",
+            "1/4 cup chopped cilantro",
+            "Salt and pepper"
+        ],
+        "image": "https://www.seriouseats.com/thmb/ggdm6S6rEGsTOk2p9RPlc5gWmA4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210402-chilaquiles-verdes-green-chilaquiles-j-martinez-7-4c62b9d9a7e84468b9ac3881ed7f9a45.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 15,
+            "total": 25
+        },
+        "instructions": [
+            "Cut tortillas into triangles and fry until crispy.",
+            "Heat salsa verde in a pan and add tortillas.",
+            "Fry eggs sunny-side-up separately.",
+            "Top chilaquiles with eggs, sour cream, queso fresco, and cilantro."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "breakfast",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=lxWy4WSW0OQ",
+        "nutrition": {
+            "calories_kcal": 656,
+            "fat_g": 38,
+            "protein_g": 18,
+            "carbs_g": 64
+        }
+    },
+    {
+        "id": "mexican-2",
+        "name": "Chicken Tinga Tacos",
+        "ingredients": [
+            "8 corn tortillas",
+            "2 chicken breasts",
+            "1 onion",
+            "2 tomatoes",
+            "2 chipotle peppers in adobo",
+            "1/2 cup chicken broth",
+            "Cilantro",
+            "Lime",
+            "Salt and pepper"
+        ],
+        "image": "https://www.seriouseats.com/thmb/2xgoqgxcnck1vEvqH5ozrxmS3dc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210330-chicken-tinga-tacos-j-martinez-16-9cf6b1efb4ce4b0c8e8c680116c0090d.jpg",
+        "time": {
+            "prep": 15,
+            "cook": 25,
+            "total": 40
+        },
+        "instructions": [
+            "Boil and shred chicken.",
+            "Saut\u00e9 onions and tomatoes, blend with chipotle and broth.",
+            "Simmer chicken in sauce for 10 minutes.",
+            "Serve on warm tortillas with cilantro and lime."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "lunch",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=IZfcexT-5To",
+        "nutrition": {
+            "calories_kcal": 218,
+            "fat_g": 6,
+            "protein_g": 18,
+            "carbs_g": 22
+        }
+    },
+    {
+        "id": "mexican-3",
+        "name": "Vegetarian Burrito Bowl",
+        "ingredients": [
+            "1 cup cooked rice",
+            "1/2 cup black beans",
+            "1/2 cup corn",
+            "1 avocado",
+            "1/2 cup salsa",
+            "Lime juice",
+            "Cilantro",
+            "Salt and pepper"
+        ],
+        "image": "https://www.loveandlemons.com/wp-content/uploads/2021/01/burrito-bowl.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 5,
+            "total": 15
+        },
+        "instructions": [
+            "Cook rice and season with lime juice.",
+            "Layer rice, beans, corn, avocado, and salsa.",
+            "Top with cilantro and serve."
+        ],
+        "difficulty": "easy",
+        "cuisine": "mexican",
+        "mealType": "lunch",
+        "diet": "vegan",
+        "videoUrl": "https://www.youtube.com/watch?v=tl3ZOT4S3t8",
+        "nutrition": {
+            "calories_kcal": 530,
+            "fat_g": 20,
+            "protein_g": 12,
+            "carbs_g": 68
+        }
+    },
+    {
+        "id": "mexican-4",
+        "name": "Carne Asada",
+        "ingredients": [
+            "1 lb flank steak",
+            "2 limes (juiced)",
+            "2 cloves garlic",
+            "1/4 cup cilantro",
+            "1/4 cup olive oil",
+            "1 tsp cumin",
+            "Salt and pepper"
+        ],
+        "image": "https://www.seriouseats.com/thmb/0Nbt2Zo3yvnMFK6X3QCMIEO4iEY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20200624-carne-asada-joshua-bousel-21-ec5cfd8945734825b27d1bb5b0ce3b5f.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 15,
+            "total": 35
+        },
+        "instructions": [
+            "Marinate steak with lime juice, garlic, cilantro, cumin, salt, and pepper.",
+            "Grill to desired doneness.",
+            "Rest for 5 minutes, then slice thinly."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "dinner",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=2cNmB-mGQQo",
+        "nutrition": {
+            "calories_kcal": 700,
+            "fat_g": 45,
+            "protein_g": 60,
+            "carbs_g": 1
+        }
+    },
+    {
+        "id": "mexican-5",
+        "name": "Chicken Enchiladas",
+        "ingredients": [
+            "8 corn tortillas",
+            "2 chicken breasts",
+            "1 cup enchilada sauce",
+            "1 cup shredded cheese",
+            "1/2 cup sour cream",
+            "Cilantro"
+        ],
+        "image": "https://www.simplyrecipes.com/thmb/RA7XhLHP0Qej8nndpAiZdbOXmxg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Chicken-Enchiladas-Lead-1-9db8081e8a844c3e8f037c6f7a305a69.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 25,
+            "total": 45
+        },
+        "instructions": [
+            "Shred cooked chicken and mix with sauce.",
+            "Roll chicken in tortillas and place in a baking dish.",
+            "Top with more sauce and cheese.",
+            "Bake at 180\u00b0C for 20 minutes.",
+            "Serve with sour cream and cilantro."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "dinner",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=Jb0vVQFdX5w",
+        "nutrition": {
+            "calories_kcal": 650,
+            "fat_g": 35,
+            "protein_g": 45,
+            "carbs_g": 50
+        }
+    },
+    {
+        "id": "mexican-6",
+        "name": "Shrimp Tacos",
+        "ingredients": [
+            "12 shrimp",
+            "4 corn tortillas",
+            "1/2 cup cabbage slaw",
+            "1/4 cup chipotle mayo",
+            "Lime wedges",
+            "Cilantro",
+            "Salt and pepper"
+        ],
+        "image": "https://www.cookingclassy.com/wp-content/uploads/2018/04/shrimp-tacos-4.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 10,
+            "total": 20
+        },
+        "instructions": [
+            "Season shrimp and cook until pink.",
+            "Assemble tacos with slaw, shrimp, chipotle mayo, and cilantro.",
+            "Serve with lime."
+        ],
+        "difficulty": "easy",
+        "cuisine": "mexican",
+        "mealType": "dinner",
+        "diet": "pescatarian",
+        "videoUrl": "https://www.youtube.com/watch?v=E-0zU1E4Yfs",
+        "nutrition": {
+            "calories_kcal": 400,
+            "fat_g": 18,
+            "protein_g": 25,
+            "carbs_g": 35
+        }
+    },
+    {
+        "id": "mexican-7",
+        "name": "Guacamole",
+        "ingredients": [
+            "2 avocados",
+            "1 lime",
+            "1/4 cup chopped onion",
+            "1 tomato",
+            "1 jalape\u00f1o",
+            "Cilantro",
+            "Salt"
+        ],
+        "image": "https://www.simplyrecipes.com/thmb/Wib58qLzOSJsbvgVNQ7CKhiUetg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Guacamole-LEAD-05-3d54c64b6c784d9a953f8d28e5ff785a.jpg",
+        "time": {
+            "prep": 10,
+            "cook": 0,
+            "total": 10
+        },
+        "instructions": [
+            "Mash avocados with lime juice.",
+            "Mix in onion, tomato, jalape\u00f1o, and cilantro.",
+            "Season with salt and serve."
+        ],
+        "difficulty": "easy",
+        "cuisine": "mexican",
+        "mealType": "appetizer",
+        "diet": "vegan",
+        "videoUrl": "https://www.youtube.com/watch?v=IeyGJgON4VQ",
+        "nutrition": {
+            "calories_kcal": 370,
+            "fat_g": 32,
+            "protein_g": 4,
+            "carbs_g": 20
+        }
+    },
+    {
+        "id": "mexican-8",
+        "name": "Queso Fundido",
+        "ingredients": [
+            "1 cup shredded Oaxaca cheese",
+            "1/2 cup chorizo",
+            "1 jalape\u00f1o",
+            "Corn tortillas"
+        ],
+        "image": "https://www.simplyrecipes.com/thmb/SNezZSengziLQbLt3gz0t2AN2BY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Queso-Fundido-LEAD-1-a5836f9e18b54d7292af426215cf3635.jpg",
+        "time": {
+            "prep": 5,
+            "cook": 10,
+            "total": 15
+        },
+        "instructions": [
+            "Cook chorizo and jalape\u00f1o.",
+            "Add cheese and melt.",
+            "Serve hot with tortillas."
+        ],
+        "difficulty": "easy",
+        "cuisine": "mexican",
+        "mealType": "appetizer",
+        "diet": "non-vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=ScAgDym0jMo",
+        "nutrition": {
+            "calories_kcal": 520,
+            "fat_g": 40,
+            "protein_g": 25,
+            "carbs_g": 10
+        }
+    },
+    {
+        "id": "mexican-9",
+        "name": "Churros",
+        "ingredients": [
+            "1 cup water",
+            "2 tbsp sugar",
+            "2 tbsp butter",
+            "1 cup flour",
+            "1 egg",
+            "Cinnamon sugar for coating",
+            "Oil for frying"
+        ],
+        "image": "https://www.seriouseats.com/thmb/T84h2teVFF9z5CN0vSv5nDbHXlE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20220414-churros-vicky-wasik-5-037cb0b4b5a24700b931c94e3523e730.jpg",
+        "time": {
+            "prep": 15,
+            "cook": 20,
+            "total": 35
+        },
+        "instructions": [
+            "Boil water, sugar, and butter.",
+            "Stir in flour, then add egg.",
+            "Pipe dough and fry until golden.",
+            "Coat in cinnamon sugar."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "dessert",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=U-PLPZk0nZc",
+        "nutrition": {
+            "calories_kcal": 490,
+            "fat_g": 30,
+            "protein_g": 7,
+            "carbs_g": 65
+        }
+    },
+    {
+        "id": "mexican-10",
+        "name": "Sopapillas",
+        "ingredients": [
+            "2 cups flour",
+            "1 tbsp sugar",
+            "1 tsp baking powder",
+            "1/2 cup warm water",
+            "Oil for frying",
+            "Honey"
+        ],
+        "image": "https://cravinghomecooked.com/wp-content/uploads/2021/05/sopapillas-1-10.jpg",
+        "time": {
+            "prep": 20,
+            "cook": 10,
+            "total": 30
+        },
+        "instructions": [
+            "Mix dry ingredients, add water, knead dough.",
+            "Roll and cut into squares.",
+            "Fry until puffed and golden.",
+            "Drizzle with honey."
+        ],
+        "difficulty": "medium",
+        "cuisine": "mexican",
+        "mealType": "snack",
+        "diet": "vegetarian",
+        "videoUrl": "https://www.youtube.com/watch?v=w_1SlyIkOgQ",
+        "nutrition": {
+            "calories_kcal": 833,
+            "fat_g": 41.7,
+            "protein_g": 12.5,
+            "carbs_g": 104.2
+        }
+    },
+    {
+    "id": "indian-1",
+    "name": "Masala Dosa",
+    "ingredients": [
+      "2 cups rice",
+      "1/2 cup urad dal",
+      "1 tsp fenugreek seeds",
+      "2 potatoes",
+      "1 onion",
+      "1 tsp mustard seeds",
+      "Curry leaves",
+      "Salt",
+      "Oil"
+    ],
+    "image": "https://images.pexels.com/photos/12392915/pexels-photo-12392915.jpeg",
+    "time": {
+      "prep": 480,
+      "cook": 30,
+      "total": 510
+    },
+    "instructions": [
+      "Soak rice, dal, and fenugreek seeds overnight.",
+      "Grind to a smooth batter and ferment.",
+      "Cook potatoes with onions, mustard seeds, and curry leaves for the filling.",
+      "Spread batter on a hot tawa to form thin dosa, add filling, and fold.",
+      "Serve hot with chutney and sambar."
+    ],
+    "difficulty": "hard",
+    "cuisine": "indian",
+    "mealType": "breakfast",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/mDqkxZ3UVzc?si=UU_H8gAOhdKa1_4n",
+    "nutrition": {
+      "calories_kcal": 230,
+      "fat_g": 11.0,
+      "protein_g": 6.4,
+      "carbs_g": 48.0
+    }
+  },
+  {
+    "id": "indian-2",
+    "name": "Butter Chicken",
+    "ingredients": [
+      "500g chicken",
+      "1 cup yogurt",
+      "1 tbsp garam masala",
+      "1 tsp chili powder",
+      "1 cup tomato puree",
+      "1/2 cup cream",
+      "Butter",
+      "Garlic and ginger paste",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg",
+    "time": {
+      "prep": 30,
+      "cook": 45,
+      "total": 75
+    },
+    "instructions": [
+      "Marinate chicken in yogurt and spices for 30 minutes.",
+      "Grill or sear chicken pieces.",
+      "Cook tomato puree with butter, garlic, and spices.",
+      "Add chicken and cream, simmer for 20 minutes.",
+      "Serve with naan or rice."
+    ],
+    "difficulty": "medium",
+    "cuisine": "indian",
+    "mealType": "lunch",
+    "diet": "non-vegetarian",
+    "videoUrl": "https://youtu.be/a03U45jFxOI?si=LNVIJDph1yaf_ns7",
+    "nutrition": {
+      "calories_kcal": 385,
+      "fat_g": 23.0,
+      "protein_g": 32.0,
+      "carbs_g": 12.0
+    }
+  },
+  {
+    "id": "indian-3",
+    "name": "Palak Paneer",
+    "ingredients": [
+      "250g paneer",
+      "300g spinach",
+      "1 onion",
+      "2 tomatoes",
+      "2 green chilies",
+      "Ginger garlic paste",
+      "1 tsp garam masala",
+      "1/2 cup cream",
+      "Oil",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/31249589/pexels-photo-31249589.jpeg",
+    "time": {
+      "prep": 15,
+      "cook": 25,
+      "total": 40
+    },
+    "instructions": [
+      "Blanch spinach and blend to a puree.",
+      "Saut\u00e9 onions, tomatoes, and spices.",
+      "Add spinach puree and simmer.",
+      "Add paneer cubes and cream, cook for 5 minutes.",
+      "Serve hot with roti or naan."
+    ],
+    "difficulty": "easy",
+    "cuisine": "indian",
+    "mealType": "lunch",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/a5sr50WL1DY?si=ZMTp2P_-FrJNHPU1",
+    "nutrition": {
+      "calories_kcal": 320,
+      "fat_g": 22.0,
+      "protein_g": 15.0,
+      "carbs_g": 10.0
+    }
+  },
+  {
+    "id": "indian-4",
+    "name": "Chole (Chickpea Curry)",
+    "ingredients": [
+      "2 cups chickpeas",
+      "2 onions",
+      "2 tomatoes",
+      "2 tsp chole masala",
+      "Ginger garlic paste",
+      "Green chilies",
+      "Cilantro",
+      "Oil",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/17902961/pexels-photo-17902961.jpeg",
+    "time": {
+      "prep": 360,
+      "cook": 40,
+      "total": 400
+    },
+    "instructions": [
+      "Soak chickpeas overnight and cook until soft.",
+      "Saut\u00e9 onions, tomatoes, and spices.",
+      "Add chickpeas and simmer for 20 minutes.",
+      "Garnish with cilantro and serve with bhature or rice."
+    ],
+    "difficulty": "medium",
+    "cuisine": "indian",
+    "mealType": "lunch",
+    "diet": "vegan",
+    "videoUrl": "https://youtu.be/5bsvxIDkm4g?si=qjfLlvGkp2z_DnCq",
+    "nutrition": {
+      "calories_kcal": 265,
+      "fat_g": 9.0,
+      "protein_g": 12.0,
+      "carbs_g": 35.0
+    }
+  },
+  {
+    "id": "indian-5",
+    "name": "Rogan Josh",
+    "ingredients": [
+      "500g lamb",
+      "1 cup yogurt",
+      "1 onion",
+      "1 tsp Kashmiri chili powder",
+      "Ginger garlic paste",
+      "1 cup tomato puree",
+      "Garam masala",
+      "Oil",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/12737799/pexels-photo-12737799.jpeg",
+    "time": {
+      "prep": 30,
+      "cook": 60,
+      "total": 90
+    },
+    "instructions": [
+      "Marinate lamb in yogurt and spices.",
+      "Brown onions and sear lamb.",
+      "Add tomato puree and simmer for 45 minutes.",
+      "Finish with garam masala and serve with naan."
+    ],
+    "difficulty": "hard",
+    "cuisine": "indian",
+    "mealType": "dinner",
+    "diet": "non-vegetarian",
+    "videoUrl": "https://youtu.be/g_hvkyYPAMQ?si=9t-3ezVUKG6ZCaW7",
+    "nutrition": {
+      "calories_kcal": 410,
+      "fat_g": 24.0,
+      "protein_g": 27.0,
+      "carbs_g": 8.0
+    }
+  },
+  {
+    "id": "indian-6",
+    "name": "Biryani",
+    "ingredients": [
+      "2 cups basmati rice",
+      "500g chicken",
+      "1 onion",
+      "1 cup yogurt",
+      "Spices (cardamom, cloves, bay leaf)",
+      "Saffron",
+      "Ghee",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg",
+    "time": {
+      "prep": 30,
+      "cook": 50,
+      "total": 80
+    },
+    "instructions": [
+      "Marinate chicken with yogurt and spices.",
+      "Partially cook rice with whole spices.",
+      "Layer chicken and rice, drizzle saffron milk.",
+      "Cook on low heat (dum) for 30 minutes.",
+      "Serve hot with raita."
+    ],
+    "difficulty": "medium",
+    "cuisine": "indian",
+    "mealType": "dinner",
+    "diet": "non-vegetarian",
+    "videoUrl": "https://youtu.be/95BCU1n268w?si=WtOOka2vFmFLUrqt",
+    "nutrition": {
+      "calories_kcal": 550,
+      "fat_g": 22.0,
+      "protein_g": 28.0,
+      "carbs_g": 60.0
+    }
+  },
+  {
+    "id": "indian-7",
+    "name": "Paneer Butter Masala",
+    "ingredients": [
+      "250g paneer",
+      "2 tomatoes",
+      "1 onion",
+      "2 tbsp butter",
+      "1/2 cup cream",
+      "Garam masala",
+      "Ginger garlic paste",
+      "Salt"
+    ],
+    "image": "https://images.pexels.com/photos/12737805/pexels-photo-12737805.jpeg",
+    "time": {
+      "prep": 15,
+      "cook": 25,
+      "total": 40
+    },
+    "instructions": [
+      "Saut\u00e9 onions and tomatoes, then blend to puree.",
+      "Cook puree with butter, spices, and cream.",
+      "Add paneer cubes and simmer 5 minutes.",
+      "Serve with naan or rice."
+    ],
+    "difficulty": "easy",
+    "cuisine": "indian",
+    "mealType": "dinner",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/oYZ--rdHL6I?si=JO4BpU7Gb5VgnxiP",
+    "nutrition": {
+      "calories_kcal": 420,
+      "fat_g": 26.0,
+      "protein_g": 15.0,
+      "carbs_g": 14.0
+    }
+  },
+  {
+    "id": "indian-8",
+    "name": "Samosa",
+    "ingredients": [
+      "2 cups flour",
+      "3 potatoes",
+      "1/2 cup peas",
+      "1 tsp cumin",
+      "1 tsp garam masala",
+      "Salt",
+      "Oil"
+    ],
+    "image": "https://images.pexels.com/photos/2474658/pexels-photo-2474658.jpeg",
+    "time": {
+      "prep": 30,
+      "cook": 20,
+      "total": 50
+    },
+    "instructions": [
+      "Make dough with flour and water.",
+      "Boil potatoes and peas, mash with spices.",
+      "Fill dough cones with filling and seal.",
+      "Fry until golden brown."
+    ],
+    "difficulty": "medium",
+    "cuisine": "indian",
+    "mealType": "appetizer",
+    "diet": "vegan",
+    "videoUrl": "https://youtu.be/3OZn-iCGf5s?si=p6vWsGBb4a6OGjil",
+    "nutrition": {
+      "calories_kcal": 140,
+      "fat_g": 7.0,
+      "protein_g": 3.0,
+      "carbs_g": 17.0
+    }
+  },
+  {
+    "id": "indian-9",
+    "name": "Gulab Jamun",
+    "ingredients": [
+      "1 cup khoya",
+      "1/4 cup flour",
+      "1/4 tsp baking powder",
+      "1 cup sugar",
+      "1 cup water",
+      "Cardamom",
+      "Ghee"
+    ],
+    "image": "https://images.pexels.com/photos/15014919/pexels-photo-15014919.jpeg",
+    "time": {
+      "prep": 20,
+      "cook": 30,
+      "total": 50
+    },
+    "instructions": [
+      "Make dough with khoya, flour, and baking powder.",
+      "Shape into balls and fry on low heat.",
+      "Soak in sugar syrup flavored with cardamom."
+    ],
+    "difficulty": "medium",
+    "cuisine": "indian",
+    "mealType": "dessert",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/J3O0ZEJYLFQ?si=LHiO45yFZRTFLevu",
+    "nutrition": {
+      "calories_kcal": 150,
+      "fat_g": 5.0,
+      "protein_g": 3.5,
+      "carbs_g": 22.0
+    }
+  },
+  {
+    "id": "indian-10",
+    "name": "Ladoo",
+    "ingredients": [
+      "2 cups gram flour",
+      "1 cup ghee",
+      "1 cup sugar",
+      "Cardamom powder",
+      "Nuts"
+    ],
+    "image": "https://images.pexels.com/photos/8887055/pexels-photo-8887055.jpeg",
+    "time": {
+      "prep": 15,
+      "cook": 25,
+      "total": 40
+    },
+    "instructions": [
+      "Roast gram flour in ghee until golden.",
+      "Add sugar and cardamom.",
+      "Shape into balls and garnish with nuts."
+    ],
+    "difficulty": "easy",
+    "cuisine": "indian",
+    "mealType": "snack",
+    "diet": "vegetarian",
+    "videoUrl": "https://youtu.be/lb6A_W8bxyw?si=JHnM2q8MGuoYlkSR",
+    "nutrition": {
+      "calories_kcal": 160,
+      "fat_g": 9.0,
+      "protein_g": 5.0,
+      "carbs_g": 15.0
+    }
+  }
+]

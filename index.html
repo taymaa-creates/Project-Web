@@ -1,11 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ctrl+alt+eat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 </head>
+
 <body>
-    <h1>CTRL+ALT+EAT</h1>
+    <header>
+        <nav>
+            <img src="img/ChatGPT Image Oct 25, 2025, 11_59_58 PM.png" alt="Site logo" class="logo">
+            <div class="nav" id="nav">
+                <div class="nav-links" id="nav-links">
+                    <a href="">Home</a>
+                    <a href="">All Recipes</a>
+                    <a href="">Categories</a>
+                    <a href="">About Us</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Surprise Me</a>
+                </div>
+                <div id="login">
+                    <button> log in</button>
+                </div>
+            </div>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+        </nav>
+    </header>
+
+
+
+    <main>
+        <section class="container1">
+            <div class="recipe-slider">
+                <button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
+
+                <div class="recipe-card1">
+                    <div class="recipe-image">
+                        <img id="recipe-image" src="" alt="Recipe Image" />
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-tags" id="recipe-tags"></div>
+                        <h2 class="recipe-title" id="recipe-title"></h2>
+                        <p class="recipe-desc" id="recipe-desc"></p>
+
+                        <div class="recipe-info1">
+                            <button class="read-more" id="read-more">Read More →</button>
+                            <span class="time">
+                                <i class="fa-solid fa-clock"></i>
+                                <span id="recipe-time"></span>
+                                <span>minutes</span>
+                            </span>
+
+                            <span class="difficulty">
+                                <i class="fa-solid fa-signal"></i>
+                                <span id="recipe-difficulty"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="nav-btn next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section class="container2">
+            <div class="categories-slider">
+                <button class="catg prev">&#8592;</button>
+                <div class="categories-container" id="categories-container"></div>
+                <button class="catg next">&#8594;</button>
+            </div>
+        </section>
+
+        <section class="container3">
+            <div class="newsletter">
+                <div>
+                    <h1 id="heading">Subscribe To Our Newsletter</h1>
+                    <p class="par">Get our latest recipes and cooking tips delivered straight to your inbox with our
+                        newsletter.</p>
+                </div>
+                <div>
+                    <form class="news-form" action="mailto:yasminehariri696@gmail.com" method="post"
+                        enctype="text/plain">
+                        <input type="text" name="first_name" placeholder="Your first name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <button type="submit" class="sub-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- container 4 -->
+        <section class="best-recipes-section">
+            <h2>Explore Best Recipes</h2>
+            <p class="section-description">
+                These are some of the best recipes loved by the readers. Prepare and enjoy these recipes with your
+                friends and family.
+            </p>
+
+            <div id="filter-buttons" class="filter-buttons"></div>
+
+            <div id="recipe-grid" class="recipe-grid"></div>
+        </section>
+
+        <!-- cont 5 -->
+        <section class="container5" id="search-section">
+            <div class="search-inner">
+                <small class="kicker">Not Sure what to cook?</small>
+                <h1 class="search-title">Find the Perfect Recipes</h1>
+
+                <form id="recipe-search-form" class="search-form" role="search">
+                    <label for="recipe-search-input" class="visually-hidden">Search recipes</label>
+                    <div class="search-box">
+                        <input id="recipe-search-input" type="search" name="q"
+                            placeholder="Search your favorite recipe..." autocomplete="off" />
+                        <button type="submit" class="search-btn">
+                            <!-- simple inline SVG icon (no external icon lib) -->
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 21l-4.35-4.35" stroke="#666" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="11" cy="11" r="6" stroke="#666" stroke-width="2" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="suggested-tags" class="suggested-tags"></div>
+
+                <div class="browse-row">
+                    <a id="browse-all" class="browse-link" href="categories.html">or, Browse All Recipes →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- container6 -->
+        <section class="container6">
+
+            <div class="card">
+                <div class="background_img1"></div>
+                <h3 id="card1-title">Surprise Me! 😍</h3>
+                <p>Surprise yourself with a delicious plate for today!</p>
+                <button class="card-open"><a href="">Try Now</a></button>
+            </div>
+
+            <div class="card">
+                <div class="background_img2"></div>
+                <h3 id="card2-title">About Us</h3>
+                <p>Explore more about Ctrl+alt+Eat</p>
+                <button class="card-open"><a href="">Explore More</a></button>
+            </div>
+
+            <div class="card">
+                <div class="background_img3"></div>
+                <h3 id="card3-title">Get in Touch!</h3>
+                <p>Contact Us Now and drop your suggestions!</p>
+                <button class="card-open"><a href="">Contact Us</a></button>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="foot-col footer-1">
+            <!-- Left: logo + description -->
+            <img src="img/ChatGPT Image Oct 25, 2025, 11_59_58 PM.png" alt="Site logo" class="logo">
+
+            <p class="descriptionfooter">
+                <strong>ctrl+alt+eat</strong> is a food blog featuring delicious and easy-to-follow recipes for a wide
+                range of dishes, from breakfast to dinner and everything in between. Our blog is a
+                great resource for home cooks looking for inspiration and new ideas in the kitchen.
+            </p>
+        </div>
+
+        <!-- Middle: quick links -->
+        <div class="foot-col footer-2" aria-label="Quick links">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-list">
+                <li><a href="">all Recipes</a></li>
+                <li><a href="">surprise Me</a></li>
+                <li><a href="">Categories</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <!-- Right: follow -->
+        <div class="footer-col footer-2" aria-label="Follow us">
+            <h3 class="footer-heading">Follow</h3>
+            <ul class="footer-list social">
+                <ul class="footer-list">
+                    <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"
+                                style="color:#3b5998;"></i> Facebook</a></li>
+                    <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"
+                                style="color:#E4405F;"></i> Instagram</a></li>
+                    <li><a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok" style="color:#000;"></i>
+                            TikTok</a></li>
+                    <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"
+                                style="color:#FF0000;"></i> YouTube</a></li>
+                </ul>
+            </ul>
+
+        </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p> &copy <span id="year"></span> Ctrl+Alt+Eat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
