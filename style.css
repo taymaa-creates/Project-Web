@@ -1089,13 +1089,6 @@ footer img {
     width: 18px;
     height: 18px;
     flex-shrink: 0;
-    color: var(--muted);
     transition: color 0.2s ease, transform 0.15s ease;
 }
 
-/* hover color change to accent */
-.footer-list.social a:hover svg,
-.footer-list.social a:focus svg {
-    color: var(--accent);
-    transform: translateX(2px);
-}
