@@ -439,16 +439,17 @@ nav a:hover {
 }
 
 /* FOOTER */
-footer {
+.footer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    flex-direction: column;
-    background: #000;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #96A78D;
+    padding: 20px 40px;
     color: #fff;
-    padding: 28px 16px 48px;
+    gap: 20px;
 }
+
 
 footer img {
     width: 120px;
@@ -1036,13 +1037,16 @@ footer img {
 
 /* footer bottom row */
 .footer-bottom {
-    grid-column: 1 / -1;
-    /* span all columns */
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    width: 100%;
+    border-top: 1px solid #f5f5f5;
     margin-top: 26px;
     padding-top: 18px;
-    color: #9d9d9d;
+    color: #f5f5f5;          
     font-size: 13px;
+    order: 99;   
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 /* center copyright on small screens (desktop left as-is) */
