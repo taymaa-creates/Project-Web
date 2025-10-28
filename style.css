@@ -1,0 +1,322 @@
+* {
+    margin: 5px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lobster', cursive;
+    background-color: #96A78D;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 18px 22px;
+    gap: 5px;
+    background-color: #96A78D;
+}
+
+.logo {
+    width: 100px;
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 12px rgb(40, 127, 33);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #F0F0F0;
+    color: #96A78D;
+}
+
+
+/* nav links */
+.nav {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #F0F0F0;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+#login button {
+    color: #96A78D;
+    background-color: #F0F0F0;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: "Lucida Sans", "Lucida Grande", Geneva, Verdana, sans-serif;
+}
+
+/* responsive hamburger */
+.hamburger {
+    display: none;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    background-color: #F0F0F0;
+    border-radius: 30px;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    border-radius: 50px;
+    background: #96A78D;
+}
+
+@media screen and (max-width:800px) {
+
+    .nav {
+        display: none;
+    }
+
+    nav .hamburger {
+        display: flex;
+    }
+
+    nav .nav.open {
+        display: flex;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    nav .nav {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        left: 20px;
+        background: #F0F0F0;
+        border: 1px solid #96A78D;
+        border-radius: 10px;
+        padding: 8px 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+        flex-direction: column;
+        gap: 0;
+        z-index: 1000;
+    }
+
+    .nav a {
+        padding: 12px 16px;
+        display: block;
+        color: #96A78D;
+    }
+
+    nav .nav {
+        transform-origin: top;
+        transform: scaleY(0.98);
+        opacity: 0;
+        transition: opacity .15s ease, transform .15s ease;
+    }
+
+    nav .nav.open {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+
+
+}
+
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.about-box {
+  background-color: #b6ceb4;
+  border-radius: 15px;
+  padding: 20px;
+  flex: 1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heading2 {
+    background-color: #b6ceb4;
+}
+
+.paragraph {
+    background-color: #b6ceb4;
+}
+ 
+.strong {
+    background-color: #b6ceb4;
+}
+.about-box h2 {
+  margin-top: 0;
+  color: #1f3b1f;
+}
+
+.about-box p,
+.about-box ol {
+  color: #333;
+  line-height: 1.6;
+}
+
+.about-box ol {
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .about-row {
+    flex-direction: column;
+  }
+}
+
+
+/* FOOTER CSS: */
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;           /* <- allow items to wrap to next line */
+    justify-content: space-around;
+    align-items: flex-start;
+    background-color: #96A78D;
+    padding: 20px 40px;
+    color: #fff;
+    gap: 20px;
+}
+
+.footer .footer-1 img {
+    margin-bottom: 15px;
+}
+
+
+.footer .descriptionfooter {
+    max-width: 320px;
+}
+
+.footer-heading {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    color: #f5f5f5;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* lists */
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li {
+    margin: 8px 0;
+}
+
+.footer-list a {
+    text-decoration: none;
+    font-size: 14px;
+    transition: color .15s ease, transform .12s ease;
+    display: inline-block;
+    padding: 2px 0;
+    color: #f5f5f5;
+}
+
+.footer-list a:hover,
+.footer-list a:focus {
+    color: #f5f5f5;
+    transform: translateX(4px);
+    outline: none;
+}
+
+/* social links (if you'd use icons later) */
+.footer-list a[title]::before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    /* placeholder for icons if added */
+    margin-right: 8px;
+}
+
+/* footer bottom row */
+.footer-bottom {
+    width: 100%;               /* span the whole row */
+    border-top: 1px solid #f5f5f5;
+    margin-top: 26px;
+    padding-top: 18px;
+    color: #f5f5f5;           /* ensure sufficient contrast */
+    font-size: 13px;
+    order: 99;                /* push to the bottom of the flex order */
+    display: block;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* center copyright on small screens (desktop left as-is) */
+.footer-bottom p {
+    margin: 0;
+   color: #f5f5f5;
+
+}
+
+/* Accessibility: focus styles for keyboard users */
+.footer-list a:focus {
+    box-shadow: 0 0 0 3px rgba(240, 107, 45, 0.12);
+    border-radius: 4px;
+}
+
+/* Responsive rules */
+/* Tablet */
+@media (max-width: 700px) {
+    .footer {
+        grid-template-columns: 1fr 1fr;
+        /* two columns */
+        gap: 28px;
+        padding: 36px 18px;
+    }
+
+    .footer .descriptionfooter {
+        max-width: 100%;
+        /* allow full width in smaller layout */
+    }
+
+    .footer-bottom {
+        padding-top: 16px;
+    }
+}
+
+/* make the social links inline-flex to align icon + text */
+.footer-list.social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    /* space between icon and text */
+}
+
+/* base icon size + color */
+.footer-list.social a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
