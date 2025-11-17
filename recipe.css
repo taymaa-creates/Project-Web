@@ -8,22 +8,12 @@
     --accent-title: #6f8f74;
 }
 
-.dark-mode {
-    /* Dark mode palette from darkest to lightest */
-    --accent-1: #235347;      /* Medium dark green */
-    --accent-2: #163832;      /* Dark green */
-    --muted: #0B2B26;         /* Dark muted */
-    --bg: #051F20;            /* Darkest background */
-    --card: #0B2B26;          /* Card background */
-    --text: #DAF1DE;          /* Light text */
-    --accent-title: #8EB69B;  /* Light accent */
-}
-
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     font-family: Inter, system-ui, Arial;
@@ -39,7 +29,7 @@ html, body {
     padding: 28px;
 }
 
-/* ===== HERO SECTION ===== */
+
 .hero {
     position: relative;
     padding: 36px 12px 56px;
@@ -252,7 +242,7 @@ html, body {
     height: 56px;
     border-radius: 50%;
     background: var(--muted);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     flex-shrink: 0;
 }
 
@@ -264,14 +254,13 @@ html, body {
 }
 
 .section-bar.active .thumb {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .dark-mode .section-bar.active .thumb {
     background: rgba(218, 241, 222, 0.95);
 }
 
-/* ===== MAIN CONTENT ===== */
 .content-section {
     background: transparent;
     padding: 36px 0;
@@ -302,7 +291,8 @@ html, body {
 }
 
 /* ===== CARDS & BOXES ===== */
-.box-inner, .section-box.box-inner {
+.box-inner,
+.section-box.box-inner {
     background: var(--card);
     padding: 18px;
     border-radius: 12px;
@@ -311,7 +301,7 @@ html, body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.dark-mode .box-inner, 
+.dark-mode .box-inner,
 .dark-mode .section-box.box-inner {
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
 }
@@ -445,7 +435,7 @@ html, body {
     padding: 8px 18px 10px 18px;
     background: var(--bg);
     border-radius: 28px;
-    box-shadow: 0 10px 30px rgba(150,200,150,.09);
+    box-shadow: 0 10px 30px rgba(150, 200, 150, .09);
     color: #222;
     display: flex;
     flex-direction: column;
@@ -476,17 +466,45 @@ html, body {
     margin: 6px 0 0 0;
 }
 
-.np-pill.energy { background: #d2f4e2; }
-.np-pill.sugar  { background: #e0fbe0; }
-.np-pill.fat    { background: #fff9e0; }
-.np-pill.sat    { background: #fff0e7; }
-.np-pill.salt   { background: #ffe2db; }
+.np-pill.energy {
+    background: #d2f4e2;
+}
 
-.dark-mode .np-pill.energy { background: #163832; }
-.dark-mode .np-pill.sugar  { background: #0B2B26; }
-.dark-mode .np-pill.fat    { background: #235347; }
-.dark-mode .np-pill.sat    { background: #163832; }
-.dark-mode .np-pill.salt   { background: #0B2B26; }
+.np-pill.sugar {
+    background: #e0fbe0;
+}
+
+.np-pill.fat {
+    background: #fff9e0;
+}
+
+.np-pill.sat {
+    background: #fff0e7;
+}
+
+.np-pill.salt {
+    background: #ffe2db;
+}
+
+.dark-mode .np-pill.energy {
+    background: #163832;
+}
+
+.dark-mode .np-pill.sugar {
+    background: #0B2B26;
+}
+
+.dark-mode .np-pill.fat {
+    background: #235347;
+}
+
+.dark-mode .np-pill.sat {
+    background: #163832;
+}
+
+.dark-mode .np-pill.salt {
+    background: #0B2B26;
+}
 
 /* About Card */
 .about-card {
@@ -537,7 +555,7 @@ html, body {
     margin-top: 18px;
     background: var(--card);
     border-radius: 12px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
     padding: 22px 18px;
     display: flex;
     flex-direction: column;
@@ -546,7 +564,7 @@ html, body {
 }
 
 .dark-mode .meal-info-card {
-    box-shadow: 0 8px 22px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
 }
 
 .meal-info-list {
@@ -585,7 +603,7 @@ html, body {
     padding: 18px;
     border-radius: 12px;
     background: var(--card);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
     margin-top: 18px;
     display: flex;
     flex-direction: column;
@@ -594,7 +612,7 @@ html, body {
 }
 
 .dark-mode .quick-card {
-    box-shadow: 0 8px 22px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
 }
 
 .qa-label {
@@ -611,7 +629,8 @@ html, body {
     margin-bottom: 6px;
 }
 
-#portionsInput, #qaTimerInput {
+#portionsInput,
+#qaTimerInput {
     padding: 8px;
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.08);
@@ -650,7 +669,8 @@ html, body {
     color: #8EB69B;
 }
 
-.qa-timer-btn, .accent-btn {
+.qa-timer-btn,
+.accent-btn {
     background: var(--accent-1);
     color: #fff;
     border: 0;
@@ -658,7 +678,8 @@ html, body {
     transition: background .2s;
 }
 
-.qa-timer-btn:hover, .accent-btn:hover {
+.qa-timer-btn:hover,
+.accent-btn:hover {
     background: var(--accent-2);
 }
 
@@ -675,7 +696,7 @@ html, body {
     font-weight: 600;
     margin-top: 5px;
     font-size: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .accent-btn.light {
@@ -708,7 +729,9 @@ html, body {
     transition: color .2s;
 }
 
-.qa-star.selected, .qa-star:hover, .qa-star.selected ~ .qa-star {
+.qa-star.selected,
+.qa-star:hover,
+.qa-star.selected~.qa-star {
     color: gold;
 }
 
@@ -747,12 +770,12 @@ html, body {
     padding: 8px 12px;
     border-radius: 8px;
     background: #f8f8f8;
-    box-shadow: 0 3px 10px rgba(170,180,170,.04);
+    box-shadow: 0 3px 10px rgba(170, 180, 170, .04);
 }
 
 .dark-mode .qa-comment-entry {
     background: #163832;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .qa-comment-meta {
@@ -777,7 +800,8 @@ html, body {
     gap: 6px;
 }
 
-.qa-user-name, #qaCommentInput {
+.qa-user-name,
+#qaCommentInput {
     width: 100%;
     border: 1px solid #d6d6d6;
     border-radius: 7px;
@@ -831,7 +855,7 @@ html, body {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background: none;
     border: none;
     cursor: pointer;
@@ -851,7 +875,7 @@ html, body {
     top: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0,0,0,0.48);
+    background: rgba(0, 0, 0, 0.48);
     justify-content: center;
     align-items: center;
 }
@@ -867,7 +891,7 @@ html, body {
     width: 90vw;
     max-width: 524px;
     min-width: 240px;
-    box-shadow: 0 6px 36px rgba(0,0,0,0.17);
+    box-shadow: 0 6px 36px rgba(0, 0, 0, 0.17);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -1323,9 +1347,17 @@ html, body {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -1356,11 +1388,12 @@ html, body {
         flex-direction: column;
         gap: 16px;
     }
-    
-    .main-cards-column, .col.right-col {
+
+    .main-cards-column,
+    .col.right-col {
         width: 100%;
     }
-    
+
     .main-cards-column {
         gap: 18px;
     }
@@ -1421,11 +1454,11 @@ html, body {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 20px;
     }
-    
+
     .suggestions .section-title {
         font-size: 1.7rem;
     }
-    
+
     .section-description {
         font-size: 0.9rem;
         padding: 0 10px;
@@ -1438,24 +1471,24 @@ html, body {
         margin: 10px;
         max-height: 95vh;
     }
-    
+
     .cooking-mode-title {
         font-size: 24px;
     }
-    
+
     .step-instruction {
         font-size: 18px;
     }
-    
+
     .cooking-mode-actions {
         flex-direction: column;
     }
-    
+
     .cooking-btn {
         min-width: auto;
         width: 100%;
     }
-    
+
     .timer-display {
         font-size: 28px;
     }
@@ -1466,14 +1499,18 @@ html, body {
 }
 
 @media (max-width: 700px) {
-    .video-preview-box, .video-thumb-wrap, .video-thumb-wrap img {
+
+    .video-preview-box,
+    .video-thumb-wrap,
+    .video-thumb-wrap img {
         height: 120px !important;
     }
-    
-    .meal-info-card, #videoTutorialBox {
+
+    .meal-info-card,
+    #videoTutorialBox {
         margin-top: 0;
     }
-    
+
     .video-modal-content iframe {
         height: 185px;
     }
@@ -1484,15 +1521,15 @@ html, body {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    
+
     .suggestions-inner {
         padding: 0 20px;
     }
-    
+
     .suggestions .section-title {
         font-size: 1.5rem;
     }
-    
+
     .suggestion-card-content {
         padding: 15px;
     }
@@ -1500,85 +1537,23 @@ html, body {
     .cooking-mode-card {
         padding: 15px;
     }
-    
+
     .cooking-mode-title {
         font-size: 20px;
     }
-    
+
     .step-instruction {
         font-size: 16px;
     }
-    
+
     .step-number {
         font-size: 14px;
     }
-    
+
     .video-modal-content iframe {
         height: 105px;
     }
 }
 
-/* Dark Mode Toggle Styles */
-.dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    background: var(--card);
-    border: 2px solid var(--accent-1);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
 
-.dark-mode-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.dark-mode-toggle img {
-    width: 24px;
-    height: 24px;
-    filter: invert(0);
-    transition: filter 0.3s ease;
-}
-
-.dark-mode .dark-mode-toggle img {
-    filter: invert(1);
-}
-/* Dark mode toggle button */
-        .dark-mode-toggle {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            background-color: var(--accent-primary);
-            transform: scale(1.05);
-        }
-
-        .dark-mode-toggle img {
-            width: 22px;
-            height: 22px;
-            filter: invert(0);
-            transition: filter 0.3s ease;
-        }
-
-        .dark-mode .dark-mode-toggle img {
-            filter: invert(1);
-        }
 

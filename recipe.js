@@ -896,49 +896,6 @@ $(function () {
         $("body").css("overflow", "");
     }
 
-    // Universal dark mode toggle script
-    $(document).ready(function () {
-        'use strict';
-
-        // Get the toggle button
-        var $darkModeToggle = $('#darkModeToggle');
-
-        // Check for saved theme preference or system preference
-        var prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        var currentTheme = localStorage.getItem('theme');
-
-        // Set the initial theme
-        function setInitialTheme() {
-            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-                $('body').addClass('dark-mode');
-            }
-        }
-
-        // Toggle dark mode
-        function toggleDarkMode() {
-            $('body').toggleClass('dark-mode');
-
-            // Save the preference
-            if ($('body').hasClass('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Initialize
-        setInitialTheme();
-
-        // Add event listener
-        if ($darkModeToggle.length) {
-            $darkModeToggle.on('click', toggleDarkMode);
-        }
-
-        // Make the function available globally for other pages
-        window.toggleDarkMode = toggleDarkMode;
-        window.setInitialTheme = setInitialTheme;
-    });
-
     // ===== INITIALIZE APP =====
     initApp();
 });
