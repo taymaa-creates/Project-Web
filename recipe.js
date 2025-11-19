@@ -47,36 +47,28 @@ $(function () {
     }
 
     function initEventListeners() {
-        // Navigation
         $('#prevBtn').on('click', navigateToPreviousRecipe);
         $('#nextBtn').on('click', navigateToNextRecipe);
         $('#favBtn').on('click', toggleFavorite);
 
-        // Section bars
         $('.section-bar').on('click', handleSectionBarClick);
 
-        // Portions control
         $('#portionsInput').on('input', handlePortionsChange);
 
-        // Ingredients checklist
         $('#ingredientsList').on('change', 'input[type=checkbox]', handleIngredientCheck);
 
-        // Quick Actions - Timer
         $('#qaTimerDec').on('click', decrementTimer);
         $('#qaTimerInc').on('click', incrementTimer);
         $('#qaTimerStart').on('click', startQATimer);
         $('#keepScreenOn').on('click', keepScreenAwake);
 
-        // Quick Actions - Rating
         $('#qaStars').on('click', '.qa-star', handleStarClick)
             .on('mouseenter', '.qa-star', handleStarHover)
             .on('mouseleave', handleStarLeave);
 
-        // Quick Actions - Comments
         $('#qaSubmitComment').on('click', submitComment);
         $('#qaClearComment').on('click', clearComment);
 
-        // Video
         $('#playVideoBtn').on('click', playVideo);
         $('#closeVideoModal').on('click', closeVideoModal);
         $('#videoModal').on('click', function (e) {
