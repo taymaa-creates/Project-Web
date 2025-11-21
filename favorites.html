@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style-fav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="common.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <div class="nav" id="nav">
+                <div class="nav-links" id="nav-links">
+                    <a href="home.html">Home</a>
+                    <a href="recipes.html">All Recipes</a>
+                    <a href="categories.html">Categories</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact Us</a>
+
+                </div>
+            </div>
+
+            <img src="logo\6.svg" alt="Site logo" class="logo">
+
+            <div class="nav" id="nav">
+                <div class="nav-links" id="nav-links">
+                    <a href="recipe.html">Single Recipe Page</a>
+                    <a href="favorites.html">My Recipes</a>
+                    <a href="add.html">Add A Recipe</a>
+                </div>
+
+            </div>
+
+            <div class="header-search">
+                <input type="text" id="header-search-input" placeholder="Search recipes..." />
+                <button id="header-search-btn" title="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+    </header>
+
+    <main class="favorites-container">
+        <header class="favorites-header">
+            <h1>My Favorites</h1>
+            <p class="subtitle">Recipes you’ve saved — click ❤️ to remove any</p>
+        </header>
+
+        <section class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Meal:</span>
+                <div id="mealFilters" class="filter-buttons"></div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Cuisine:</span>
+                <div id="cuisineFilters" class="filter-buttons"></div>
+            </div>
+            <button id="clearFilters" class="pill">Clear</button>
+        </section>
+
+        <section id="favoritesGrid" class="favorites-grid"></section>
+
+        <div id="emptyState" class="empty-state">
+            <p>No favorites yet 💔</p>
+            <button id="surpriseBtn" class="btn">Surprise Me</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="foot-col footer-1">
+
+            <img src="logo\6.svg" alt="Site logo" class="logo">
+
+            <p class="descriptionfooter">
+                <strong>ctrl+alt+eat</strong> is a food blog featuring delicious and easy-to-follow recipes for a wide
+                range of dishes, from breakfast to dinner and everything in between. Our blog is a
+                great resource for home cooks looking for inspiration and new ideas in the kitchen.
+            </p>
+        </div>
+        <div class="foot-col footer-2" aria-label="Quick links">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-list">
+                <li><a href="recipes.html">all Recipes</a></li>
+                <li><a href="home.html">Homepage</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-col footer-2" aria-label="Follow us">
+            <h3 class="footer-heading">Follow</h3>
+            <ul class="footer-list social">
+                <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"
+                            style="color:#3b5998;"></i> Facebook</a></li>
+                <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"
+                            style="color:#E4405F;"></i> Instagram</a></li>
+                <li><a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok" style="color:#000;"></i>
+                        TikTok</a></li>
+                <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i>
+                        YouTube</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p> &copy <span id="year"></span> Ctrl+Alt+Eat. All rights reserved.</p>
+        </div>
+    </footer>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+    </button>
+
+    <script src="common.js"></script>
+    <script src="favs.js"></script>
+</body>
+
+</html> 
