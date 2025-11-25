@@ -290,7 +290,6 @@ body {
     width: 320px;
 }
 
-/* ===== CARDS & BOXES ===== */
 .box-inner,
 .section-box.box-inner {
     background: var(--card);
@@ -322,7 +321,6 @@ body {
     color: var(--accent-title);
 }
 
-/* Ingredients */
 .ingredients-list {
     display: flex;
     flex-direction: column;
@@ -356,7 +354,6 @@ body {
     gap: 10px;
 }
 
-/* Instructions */
 .instructions-list-v2 {
     list-style: none;
     margin: 0;
@@ -421,7 +418,6 @@ body {
     padding-bottom: 0;
 }
 
-/* Nutrition Pills */
 .nutrition-pills {
     display: flex;
     flex-wrap: wrap;
@@ -506,7 +502,6 @@ body {
     background: #0B2B26;
 }
 
-/* About Card */
 .about-card {
     padding: 18px;
     border-radius: 12px;
@@ -550,7 +545,6 @@ body {
     color: var(--text);
 }
 
-/* Meal Info */
 .meal-info-card {
     margin-top: 18px;
     background: var(--card);
@@ -598,7 +592,6 @@ body {
     font-weight: 700;
 }
 
-/* Quick Actions */
 .quick-card {
     padding: 18px;
     border-radius: 12px;
@@ -823,7 +816,6 @@ body {
     gap: 10px;
 }
 
-/* Video Tutorial */
 .video-preview-box {
     position: relative;
     border-radius: 16px;
@@ -866,7 +858,6 @@ body {
     pointer-events: none;
 }
 
-/* Video Modal */
 .video-modal {
     display: none;
     position: fixed;
@@ -926,7 +917,6 @@ body {
     color: #DAF1DE;
 }
 
-/* ===== SUGGESTIONS ===== */
 .suggestions {
     margin-top: 60px;
     border-top: 1px solid #ababab;
@@ -1126,7 +1116,6 @@ body {
     color: white;
 }
 
-/* ===== COOKING MODE ===== */
 .cooking-mode-overlay {
     display: none;
     position: fixed;
@@ -1340,7 +1329,6 @@ body {
     transform: none !important;
 }
 
-/* Timer expired animation */
 .timer-expired {
     color: #ff4444 !important;
     animation: pulse 0.5s ease-in-out;
@@ -1360,7 +1348,6 @@ body {
     }
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1100px) {
     .center-block {
         flex: 0 0 420px;
@@ -1554,6 +1541,3 @@ body {
         height: 105px;
     }
 }
-
-
-

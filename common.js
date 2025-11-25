@@ -1,16 +1,49 @@
-
 function initHeader() {
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav');
+    let hamburger = document.getElementById('hamburger');
+    let nav = document.querySelector('.nav');
+
+    console.log('Hamburger element:', hamburger);
+    console.log('Nav element:', nav);
 
     if (hamburger && nav) {
-        hamburger.onclick = function () {
+        hamburger.onclick = function (e) {
+            e.stopPropagation();
             nav.classList.toggle('open');
+            const isExpanded = nav.classList.contains('open');
+            hamburger.setAttribute('aria-expanded', isExpanded);
+
+            if (!isExpanded) {
+                closeAllDropdowns();
+            }
         };
     }
 
-    const searchInput = document.getElementById("header-search-input");
-    const searchBtn = document.getElementById("header-search-btn");
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.nav') && !event.target.closest('.hamburger')) {
+            if (nav && nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                closeAllDropdowns();
+            }
+        }
+
+        if (!event.target.closest('.dropdown')) {
+            closeAllDropdowns();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            if (nav && nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+            closeAllDropdowns();
+        }
+    });
+
+    let searchInput = document.getElementById("header-search-input");
+    let searchBtn = document.getElementById("header-search-btn");
 
     if (searchInput && searchBtn) {
         function goToSearch() {
@@ -36,40 +69,211 @@ function initHeader() {
     }
 }
 
+function initDropdowns() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const button = dropdown.querySelector('.nav-link');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        if (button && menu) {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = dropdown.getAttribute('data-open') === 'true';
+
+                closeAllDropdowns();
+
+                if (!isOpen) {
+                    dropdown.setAttribute('data-open', 'true');
+                    button.setAttribute('aria-expanded', 'true');
+                    menu.setAttribute('aria-hidden', 'false');
+                }
+            });
+
+            button.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    button.click();
+                } else if (e.key === 'Escape') {
+                    closeAllDropdowns();
+                    button.focus();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const firstLink = menu.querySelector('a');
+                    if (firstLink) firstLink.focus();
+                }
+            });
+
+            const links = menu.querySelectorAll('a');
+            links.forEach((link, index) => {
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const nextLink = links[index + 1] || links[0];
+                        nextLink.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const prevLink = links[index - 1] || links[links.length - 1];
+                        prevLink.focus();
+                    } else if (e.key === 'Escape') {
+                        closeAllDropdowns();
+                        button.focus();
+                    } else if (e.key === 'Tab' && !e.shiftKey && index === links.length - 1) {
+                        closeAllDropdowns();
+                    }
+                });
+            });
+        }
+    });
+}
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        const button = dropdown.querySelector('.nav-link');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        dropdown.setAttribute('data-open', 'false');
+        if (button) button.setAttribute('aria-expanded', 'false');
+        if (menu) menu.setAttribute('aria-hidden', 'true');
+    });
+}
+
+function isValidEmail(email) {
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showNewsletterMessage(message, type) {
+    let existingMessage = document.querySelector('.newsletter-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    let messageEl = document.createElement('div');
+    messageEl.className = `newsletter-message ${type}`;
+    messageEl.textContent = message;
+    messageEl.style.cssText = `
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-align: center;
+        ${type === 'success' ?
+                'background: rgba(182, 206, 180, 0.2); color: #fff; border: 1px solid rgba(182, 206, 180, 0.5);' :
+                'background: rgba(255, 100, 100, 0.2); color: #fff; border: 1px solid rgba(255, 100, 100, 0.5);'
+            }
+    `;
+    const form = document.querySelector('.newsletter-form');
+    form.parentNode.insertBefore(messageEl, form.nextSibling);
+
+    setTimeout(() => {
+        if (messageEl.parentNode) {
+            messageEl.style.opacity = '0';
+            messageEl.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 300);
+        }
+    }, 10000);
+}
+
 function initFooter() {
-    const yearElement = document.getElementById('year');
+    let yearElement = document.getElementById('year');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+
+    const subscribedEmail = localStorage.getItem('newsletterSubscribed');
+    if (subscribedEmail) {
+        showPersistentNewsletterState(subscribedEmail);
+    }
+
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('.newsletter-input');
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                showNewsletterMessage('Please enter your email address.', 'error');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showNewsletterMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            localStorage.setItem('newsletterSubscribed', email);
+            showPersistentNewsletterState(email);
+            emailInput.value = '';
+
+            showNewsletterMessage('Welcome to our culinary family! You\'ll receive exclusive recipes soon.', 'success');
+        });
+    }
+
+    const footerLinks = document.querySelectorAll('.footer-links a[href^="#"]');
+    footerLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    initHeader();
-    initFooter();
-});
+function showPersistentNewsletterState(email) {
+    const form = document.querySelector('.newsletter-form');
+    if (!form) return;
+
+    const inputGroup = form.querySelector('.input-group');
+    if (inputGroup) {
+        inputGroup.style.display = 'none';
+    }
+
+    const existingMessage = document.querySelector('.newsletter-subscribed-message');
+    if (!existingMessage) {
+        const messageEl = document.createElement('div');
+        messageEl.className = 'newsletter-subscribed-message';
+        messageEl.innerHTML = `
+            <div style="
+                background: rgba(182, 206, 180, 0.2);
+                border: 1px solid rgba(182, 206, 180, 0.5);
+                border-radius: 8px;
+                padding: 1rem;
+                text-align: center;
+                color: #fff;
+                font-size: 0.9rem;
+            ">
+                <i class="fas fa-check-circle" style="color: #B6CEB4; margin-right: 0.5rem;"></i>
+                <strong>Subscribed!</strong><br>
+                <small>You're receiving updates at ${email}</small>
+            </div>
+        `;
+        form.appendChild(messageEl);
+    }
+}
 
 function darkmode() {
     'use strict';
-
-    // Get the toggle button
     const darkModeToggle = document.getElementById('darkModeToggle');
-
-    // Check for saved theme preference or system preference
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     const currentTheme = localStorage.getItem('theme');
 
-    // Set the initial theme
     function setInitialTheme() {
         if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
             document.body.classList.add('dark-mode');
         }
     }
 
-    // Toggle dark mode
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
-
-        // Save the preference
         if (document.body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark');
         } else {
@@ -77,16 +281,16 @@ function darkmode() {
         }
     }
 
-    // Initialize
     setInitialTheme();
 
-    // Add event listener
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', toggleDarkMode);
     }
-
-    // Make the function available globally for other pages
-    window.toggleDarkMode = toggleDarkMode;
-    window.setInitialTheme = setInitialTheme;
 }
-darkmode();
+
+document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
+    initFooter();
+    darkmode();
+    initDropdowns();
+});

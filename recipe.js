@@ -1,27 +1,22 @@
 $(function () {
-    // ===== STATE & CONSTANTS =====
     let recipes = [];
     let currentIndex = 0;
     const DEFAULT_PORTIONS = 4;
     const STORAGE_KEY = "favorites";
 
-    // Cooking Mode State
     let currentStepIndex = 0;
     let cookingSteps = [];
     let stepTimerInterval = null;
     let stepTimerRemaining = 0;
     let currentStepHasTimer = false;
 
-    // Quick Actions Constants
     const QA_TIMER_KEY = 'qa_timer_screen_awake';
     const QA_RATING_KEY = 'qa_recipe_ratings_';
     const QA_COMMENTS_KEY = 'qa_recipe_comments_';
 
-    // Timer State 
     let qaTimerInterval = null;
     let qaTimerRemaining = 0;
 
-    // ===== INITIALIZATION =====
     function initApp() {
         loadRecipes();
         initEventListeners();
@@ -56,12 +51,10 @@ $(function () {
         $('#portionsInput').on('input', handlePortionsChange);
 
         $('#ingredientsList').on('change', 'input[type=checkbox]', handleIngredientCheck);
-
         $('#qaTimerDec').on('click', decrementTimer);
         $('#qaTimerInc').on('click', incrementTimer);
         $('#qaTimerStart').on('click', startQATimer);
         $('#keepScreenOn').on('click', keepScreenAwake);
-
         $('#qaStars').on('click', '.qa-star', handleStarClick)
             .on('mouseenter', '.qa-star', handleStarHover)
             .on('mouseleave', handleStarLeave);
@@ -74,14 +67,11 @@ $(function () {
         $('#videoModal').on('click', function (e) {
             if (e.target === this) closeVideoModal();
         });
-
-        // Window events
         $(window).on('scroll', handleScroll);
         $(window).on('popstate', handlePopState);
         window.addEventListener('storage', handleStorageChange);
     }
 
-    // ===== RECIPE NAVIGATION =====
     function openRecipeFromQuery() {
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
@@ -134,21 +124,16 @@ $(function () {
         }
     }
 
-    // ===== RECIPE RENDERING =====
     function renderRecipe(index) {
         const r = recipes[index];
         if (!r) return;
-
-        // Basic info
         $('#recipeTitle').text(r.name);
         $('#recipeCuisine').text(`${capitalize(r.cuisine)} • ${capitalize(r.mealType)}`);
         $('#recipeImage').attr('src', r.image);
 
-        // Portions
         r.basePortions = r.basePortions || DEFAULT_PORTIONS;
         $('#portionsInput').val(r.basePortions);
 
-        // Render components
         renderIngredients(r, r.basePortions);
         renderInstructions(r);
         renderNutrition(r);
@@ -156,7 +141,6 @@ $(function () {
         renderMealInfo(r);
         renderVideoTutorial(r);
 
-        // Update UI states
         $('.section-bar').removeClass('active');
         $('.section-bar[data-target="#ingredientsMainBox"]').addClass('active');
         updateFavUI();
@@ -289,7 +273,6 @@ $(function () {
         });
     }
 
-    // ===== FAVORITES =====
     function loadFavoritesFromStorage() {
         return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     }
@@ -337,8 +320,6 @@ $(function () {
     function handleStorageChange(e) {
         if (e.key === STORAGE_KEY) updateFavUI();
     }
-
-    // ===== SECTION BARS =====
     function handleSectionBarClick() {
         const target = $(this).data('target');
         const y = $(target).offset().top - 18;
@@ -347,7 +328,6 @@ $(function () {
         $(this).addClass('active');
     }
 
-    // ===== PORTIONS CONTROL =====
     function handlePortionsChange() {
         let v = parseInt($(this).val(), 10);
         if (isNaN(v) || v < 1) {
@@ -361,8 +341,6 @@ $(function () {
             }
         });
     }
-
-    // ===== INGREDIENTS CHECKLIST =====
     function handleIngredientCheck() {
         const idx = $(this).data('idx');
         const key = 'checked_' + recipes[currentIndex].id;
@@ -387,7 +365,6 @@ $(function () {
         });
     }
 
-    // ===== QUICK ACTIONS =====
     function refreshQASections() {
         renderRatingForCurrent();
         renderCommentsForCurrent();
@@ -400,7 +377,6 @@ $(function () {
         }
     }
 
-    // Timer
     function decrementTimer() {
         let v = parseInt($('#qaTimerInput').val(), 10) || 1;
         v = Math.max(1, v - 1);
@@ -462,7 +438,6 @@ $(function () {
         }
     }
 
-    // Rating
     function renderRatingForCurrent() {
         const rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
@@ -501,7 +476,6 @@ $(function () {
         renderRatingForCurrent();
     }
 
-    // Comments
     function renderCommentsForCurrent() {
         const rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
@@ -549,7 +523,6 @@ $(function () {
         $('#qaCommentInput').val('');
     }
 
-    // ===== COOKING MODE =====
     function initCookingMode() {
         $('#startCookingMode').on('click', startCookingMode);
         $('#prevStepBtn').on('click', goToPreviousStep);
@@ -589,19 +562,15 @@ $(function () {
         const currentStep = cookingSteps[currentStepIndex];
         const totalSteps = cookingSteps.length;
 
-        // Update progress
         const progress = ((currentStepIndex + 1) / totalSteps) * 100;
         $('#cookingProgressFill').css('width', `${progress}%`);
         $('#cookingProgressText').text(`Step ${currentStepIndex + 1} of ${totalSteps}`);
 
-        // Update step content
         $('#cookingStepNumber').text(`Step ${currentStepIndex + 1}`);
         $('#cookingStepInstruction').text(currentStep);
 
-        // Check for timer in step
         checkStepForTimer(currentStep);
 
-        // Update navigation buttons
         $('#prevStepBtn').prop('disabled', currentStepIndex === 0);
 
         if (currentStepIndex === totalSteps - 1) {
@@ -729,7 +698,6 @@ $(function () {
         currentStepIndex = 0;
     }
 
-    // ===== SUGGESTIONS =====
     function renderSuggestions() {
         if (!recipes.length) return;
 
@@ -815,8 +783,6 @@ $(function () {
             </div>
         </div>`;
     }
-
-    // ===== UTILITY FUNCTIONS =====
     function parseQuantity(str) {
         const m = str.trim().match(/^(\d+(?:\.\d+)?)(?:\s*)(.*)$/);
         if (!m) return { number: null, rest: str, isIntegerUnit: false };
@@ -879,7 +845,7 @@ $(function () {
     }
 
     function playVideo() {
-        // Handled in renderVideoTutorial
+
     }
 
     function closeVideoModal() {
@@ -888,7 +854,5 @@ $(function () {
         $("body").css("overflow", "");
     }
 
-    // ===== INITIALIZE APP =====
     initApp();
 });
-

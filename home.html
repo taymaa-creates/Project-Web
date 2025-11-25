@@ -15,47 +15,106 @@
     <header>
         <nav>
 
-            <div class="nav" id="nav">
+            <div class="nav">
                 <div class="nav-links" id="nav-links">
-                    <a href="home.html">Home</a>
-                    <a href="recipes.html">All Recipes</a>
-                    <a href="categories.html">Categories</a>
-                    <a href="about.html">About Us</a>
-                    <a href="contact.html">Contact Us</a>
+                    <div class="dropdown">
+                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+                            Discover <span class="caret">▾</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="home.html">Home</a></li>
+                            <li><a href="recipes.html">All Recipes</a></li>
+                            <li><a href="categories.html">Categories</a></li>
+                            <li><a href="falvor.html">Flavor Lab</a></li>
+                            <li><a href="recipe.html">Single Recipe</a></li>
+                        </ul>
+                    </div>
 
+                    <div class="dropdown">
+                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+                            My Kitchen <span class="caret">▾</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="favorites.html">My Recipes</a></li>
+                            <li><a href="add.html">Add A Recipe</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+                            Info <span class="caret">▾</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
+            </div>
             <img src="logo\6.svg" alt="Site logo" class="logo">
 
-            <div class="nav" id="nav">
-                <div class="nav-links" id="nav-links">
-                    <a href="recipe.html">Single Recipe Page</a>
-                    <a href="favorites.html">My Recipes</a>
-                    <a href="add.html">Add A Recipe</a>
-                </div>
-                <div class="header-search">
-                    <input type="text" id="header-search-input" placeholder="Search recipes..." />
-                    <button id="header-search-btn" title="Search">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
+            <div class="header-search">
+                <input type="text" id="header-search-input" placeholder="Search recipes..." />
+                <button id="header-search-btn" title="Search">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
-
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
         </nav>
-
     </header>
 
     <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
         <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
     </button>
-
     <main>
+
+        <section class="homepage-welcome" aria-label="Welcome">
+            <video id="hero-video" class="hero-video" autoplay muted loop playsinline poster="homepagevideo.mp4">
+                <source src="homepagevideo.mp4" type="video/mp4">
+            </video>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <h1 class="hero-title">Welcome, hungry friend!</h1>
+                    <p class="hero-sub"> We're thrilled to have you here. Whether you're cooking for one, feeding a
+                        family, or hosting a feast; you'll find the perfect recipe for every occasion.</p>
+                    <a class="hero-cta" href="recipes.html">Explore More</a>
+                </div>
+
+                <div class="hero-card-wrap">
+                    <button class="card-nav prev" id="hero-prev" aria-label="Previous recipe"><i
+                            class="fa-solid fa-arrow-left"></i></button>
+
+                    <article class="hero-recipe-card" id="hero-recipe-card" role="region" aria-live="polite">
+                        <div class="card-media">
+                            <img id="hero-recipe-img" src="/mnt/data/0340e681-c707-4be8-8732-02e33e09cb78.png"
+                                alt="Recipe image">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-tags" id="hero-recipe-tags"></div>
+                            <h2 id="hero-recipe-title" class="card-title"></h2>
+                            <p id="hero-recipe-desc" class="card-desc"></p>
+                            <div class="card-meta">
+                                <span class="time"><i class="fa-solid fa-clock"></i> <span id="hero-recipe-time"></span>
+                                    min</span>
+                                <button id="hero-read-more" class="read-more">Read More →</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <button class="card-nav next" id="hero-next" aria-label="Next recipe"><i
+                            class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
         <section class="container1">
             <div class="recipe-slider">
                 <button class="nav-btn prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
@@ -107,7 +166,7 @@
         <section class="container3">
             <div class="newsletter">
                 <div>
-                    <h1 id="heading">Subscribe To Our Newsletter</h1>
+                    <h2 id="heading">Subscribe To Our Newsletter</h2>
                     <p class="par">Get our latest recipes and cooking tips delivered straight to your inbox with our
                         newsletter.</p>
                 </div>
@@ -147,7 +206,6 @@
                         <input id="recipe-search-input" type="search" name="q"
                             placeholder="Search your favorite recipe..." autocomplete="off" />
                         <button type="submit" class="search-btn">
-                            <!-- simple inline SVG icon (no external icon lib) -->
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                                 <path d="M21 21l-4.35-4.35" stroke="#666" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" />
@@ -162,6 +220,11 @@
                 <div class="browse-row">
                     <a id="browse-all" class="browse-link" href="categories.html">or, Browse All Recipes →</a>
                 </div>
+
+                <div class="browse-row">
+                    <p class="browse-link gmail">Got a new Recipe or Idea? Drop it in our inbox now 📩</p>
+                    <a class="browse-link gmail" href="https://accounts.google.com/servicelogin?service=mail" target="_blank">ctrlalt@eat.com</a>
+                </div>
             </div>
         </section>
 
@@ -171,66 +234,97 @@
                 <div class="background_img1"></div>
                 <h3 id="card1-title">Surprise Me! 😍</h3>
                 <p>Surprise yourself with a delicious plate for today!</p>
-                <button class="card-open">Try Now</button>
+                <button class="card-open" id="surprise-me-btn">Try Now</button>
             </div>
 
             <div class="card">
                 <div class="background_img2"></div>
                 <h3 id="card2-title">About Us</h3>
                 <p>Explore more about Ctrl+alt+Eat</p>
-                <button class="card-open">Explore More</button>
+                <button class="card-open" id="about">Explore More</button>
             </div>
 
             <div class="card">
                 <div class="background_img3"></div>
                 <h3 id="card3-title">Get in Touch!</h3>
                 <p>Contact Us Now and drop your suggestions!</p>
-                <button class="card-open">Contact Us</button>
+                <button class="card-open" id="contact">Contact Us</button>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="foot-col footer-1">
+        <div class="footer-main">
+            <div class="footer-col footer-brand">
+                <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+                <p class="footer-description">
+                    <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
+                    Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
+                </p>
+                <div class="footer-social">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
 
-            <img src="logo\6.svg" alt="Site logo" class="logo">
+            <div class="footer-col">
+                <h3 class="footer-title">Navigation</h3>
+                <ul class="footer-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="categories.html">Recipe Categories</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
 
-            <p class="descriptionfooter">
-                <strong>ctrl+alt+eat</strong> is a food blog featuring delicious and easy-to-follow recipes for a wide
-                range of dishes, from breakfast to dinner and everything in between. Our blog is a
-                great resource for home cooks looking for inspiration and new ideas in the kitchen.
-            </p>
-        </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="add.html">Add A Recipe</a></li>
+                    <li><a href="recipes.html">Explore Recipes</a></li>
+                    <li><a href="flavor.html">Flavor Lab</a></li>
+                    <li><a href="favorites.html">Your Picks</a></li>
+                </ul>
+            </div>
 
-
-        <div class="foot-col footer-2" aria-label="Quick links">
-            <h3 class="footer-heading">Quick Links</h3>
-            <ul class="footer-list">
-                <li><a href="recipes.html">all Recipes</a></li>
-                <li><a href="home.html">Homepage</a></li>
-                <li><a href="categories.html">Categories</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-col footer-2" aria-label="Follow us">
-            <h3 class="footer-heading">Follow</h3>
-            <ul class="footer-list social">
-                <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"
-                            style="color:#3b5998;"></i> Facebook</a></li>
-                <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"
-                            style="color:#E4405F;"></i> Instagram</a></li>
-                <li><a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok" style="color:#000;"></i>
-                        TikTok</a></li>
-                <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i>
-                        YouTube</a></li>
-            </ul>
-
+            <div class="footer-col footer-newsletter">
+                <h3 class="footer-title">Join Our Cooking Journey</h3>
+                <p class="newsletter-desc">Receive exclusive recipes and culinary insights</p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> + (961) 123-45687</p>
+                    <p><i class="fas fa-envelope"></i> ctrlalt@eat.com</p>
+                </div>
+            </div>
         </div>
 
         <div class="footer-bottom">
-            <p> &copy <span id="year"></span> Ctrl+Alt+Eat. All rights reserved.</p>
+            <div class="footer-bottom-content">
+                <p>&copy; <span id="year"> </span> ctrl+alt+eat. Crafted with <i class="fas fa-heart"></i> for culinary
+                    enthusiasts.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="common.js"></script>
