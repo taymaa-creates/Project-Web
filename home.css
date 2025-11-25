@@ -1,32 +1,70 @@
+<<<<<<< HEAD
 /* ===== HOME PAGE SPECIFIC STYLES ===== */
 
 /* ===== CONTAINER 1: RECIPE SLIDER ===== */
+=======
+:root {
+    --accent-1: #B6CEB4;
+    --accent-2: #96A78D;
+    --muted: #D9E9CF;
+    --bg: #F0F0F0;
+    --card: #ffffff;
+    --text: #222222;
+    --accent-title: #6f8f74;
+
+    --highlight: #f86b61;
+    --green-tag: #58b872;
+    --yellow-tag: #e9a04e;
+    --shadow-light: rgba(0, 0, 0, 0.06);
+    --shadow-medium: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.12);
+}
+
+>>>>>>> origin/yasmines
 .container1 {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 40px 0;
     width: 100%;
+<<<<<<< HEAD
     background-color: #F0F0F0;
+=======
+    background-color: var(--bg);
+>>>>>>> origin/yasmines
 }
 
 .recipe-slider {
     position: relative;
     flex-wrap: wrap;
+<<<<<<< HEAD
     background: #96A78D;
+=======
+    background: var(--accent-2);
+>>>>>>> origin/yasmines
     border-radius: 20px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+=======
+    box-shadow: 0 6px 25px var(--shadow-medium);
+>>>>>>> origin/yasmines
     width: 70%;
 }
 
 .nav-btn {
+<<<<<<< HEAD
     background-color: #96A78D;
     border: none;
     color: white;
+=======
+    background-color: var(--accent-2);
+    border: none;
+    color: var(--card);
+>>>>>>> origin/yasmines
     font-size: 22px;
     cursor: pointer;
     padding: 12px 16px;
@@ -39,12 +77,26 @@
 }
 
 .nav-btn:hover {
+<<<<<<< HEAD
     background-color: #F0F0F0;
     color: black;
 }
 
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
+=======
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+>>>>>>> origin/yasmines
 
 /* Recipe Card */
 .recipe-card1 {
@@ -77,7 +129,11 @@
 .recipe-content {
     flex: 1;
     padding: 40px 50px;
+<<<<<<< HEAD
     background-color: #fff6f2;
+=======
+    background-color: var(--card);
+>>>>>>> origin/yasmines
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,6 +149,7 @@
     border-radius: 8px;
     font-size: 13px;
     font-weight: 500;
+<<<<<<< HEAD
     color: white;
     margin-right: 8px;
 }
@@ -104,6 +161,27 @@
 .recipe-title {
     font-size: 28px;
     color: #222;
+=======
+    color: var(--card);
+    margin-right: 8px;
+}
+
+.tag.cuisine {
+    background-color: var(--highlight);
+}
+
+.tag.diet {
+    background-color: var(--green-tag);
+}
+
+.tag.mealType {
+    background-color: var(--yellow-tag);
+}
+
+.recipe-title {
+    font-size: 28px;
+    color: var(--text);
+>>>>>>> origin/yasmines
     margin-bottom: 12px;
     font-weight: 600;
 }
@@ -116,9 +194,15 @@
 }
 
 .read-more {
+<<<<<<< HEAD
     background-color: #D9E9CF;
     border: none;
     color: #222;
+=======
+    background-color: var(--muted);
+    border: none;
+    color: var(--text);
+>>>>>>> origin/yasmines
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
@@ -128,7 +212,12 @@
 }
 
 .read-more:hover {
+<<<<<<< HEAD
     background-color: #96A78D;
+=======
+    background-color: var(--accent-2);
+    color: var(--card);
+>>>>>>> origin/yasmines
 }
 
 .recipe-info1 {
@@ -143,7 +232,12 @@
 
 .recipe-info1 i {
     margin-right: 6px;
+<<<<<<< HEAD
     color: #f86b61;
+=======
+    color: var(--highlight);
+
+>>>>>>> origin/yasmines
 }
 
 /* Heart button */
@@ -182,7 +276,10 @@
     stroke: #d9534f;
 }
 
+<<<<<<< HEAD
 /* ===== CONTAINER 2: CATEGORIES SLIDER ===== */
+=======
+>>>>>>> origin/yasmines
 .container2 {
     display: flex;
     flex-wrap: wrap;
@@ -190,7 +287,11 @@
     align-items: center;
     padding: 40px 0;
     width: 100%;
+<<<<<<< HEAD
     background-color: #F0F0F0;
+=======
+    background-color: var(--bg);
+>>>>>>> origin/yasmines
 }
 
 .categories-slider {
@@ -202,7 +303,10 @@
     justify-content: center;
     align-items: center;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/yasmines
 .categories-container {
     display: flex;
     overflow: hidden;
@@ -227,19 +331,33 @@
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
+<<<<<<< HEAD
     border: 4px solid #f8d2c4;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+=======
+    border: 4px solid #f8d2c4; /* static decorative border */
+    box-shadow: 0 3px 10px var(--shadow-light);
+>>>>>>> origin/yasmines
 }
 
 .category-card p {
     margin-top: 8px;
     font-weight: 500;
+<<<<<<< HEAD
     color: #333;
 }
 
 .catg {
     background-color: #96A78D;
     color: white;
+=======
+    color: #333; /* static text */
+}
+
+.catg {
+    background-color: var(--accent-2);
+    color: var(--card);
+>>>>>>> origin/yasmines
     border: none;
     font-size: 22px;
     padding: 10px 14px;
@@ -253,7 +371,11 @@
 }
 
 .catg:hover {
+<<<<<<< HEAD
     background-color: #f89d6b;
+=======
+    background-color: var(--highlight);
+>>>>>>> origin/yasmines
 }
 
 .prev { left: 10px; }
@@ -263,10 +385,17 @@
 .container3 {
     width: 100%;
     display: flex;
+<<<<<<< HEAD
     background-color: #B6CEB4;
     flex-wrap: wrap;
     padding: 36px 18px;
     border-top: 6px solid #eee;
+=======
+    background-color: var(--accent-1);
+    flex-wrap: wrap;
+    padding: 36px 18px;
+    border-top: 6px solid #eee; /* static */
+>>>>>>> origin/yasmines
     justify-content: center;
     align-items: center;
 }
@@ -285,10 +414,14 @@
     margin-bottom: 8px;
 }
 
+<<<<<<< HEAD
 .par {
     color: #666;
     margin-bottom: 16px;
 }
+=======
+.par { color: #666; margin-bottom: 16px; }
+>>>>>>> origin/yasmines
 
 .news-form {
     display: flex;
@@ -308,7 +441,11 @@
     padding: 10px 16px;
     border-radius: 6px;
     border: 0;
+<<<<<<< HEAD
     background: #D9E9CF;
+=======
+    background: var(--muted);
+>>>>>>> origin/yasmines
     color: #333;
     cursor: pointer;
 }
@@ -316,7 +453,11 @@
 .subscription-message {
     margin-top: 10px;
     font-size: 1.1rem;
+<<<<<<< HEAD
     color: #034c22;
+=======
+    color: #034c22; /* static */
+>>>>>>> origin/yasmines
     text-align: center;
     font-weight: 500;
     padding: 6px 0;
@@ -326,7 +467,11 @@
 .best-recipes-section {
     text-align: center;
     padding: 60px 10%;
+<<<<<<< HEAD
     background-color: #fffdfb;
+=======
+    background-color: var(--card);
+>>>>>>> origin/yasmines
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -334,7 +479,11 @@
 
 .best-recipes-section h2 {
     font-size: 2rem;
+<<<<<<< HEAD
     color: #222;
+=======
+    color: var(--text);
+>>>>>>> origin/yasmines
     margin-bottom: 8px;
 }
 
@@ -344,7 +493,11 @@
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+<<<<<<< HEAD
     color: #555;
+=======
+    color: #555; /* static */
+>>>>>>> origin/yasmines
     margin-bottom: 30px;
 }
 
@@ -361,7 +514,11 @@
     display: flex;
     flex-wrap: wrap;
     padding: 10px 18px;
+<<<<<<< HEAD
     background: #f5f2f2;
+=======
+    background: #f5f2f2; /* static */
+>>>>>>> origin/yasmines
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -371,12 +528,21 @@
 }
 
 .filter-btn:hover {
+<<<<<<< HEAD
     background: #e5e3e3;
 }
 
 .filter-btn.active {
     background: #96A78D;
     color: #fff;
+=======
+    background: #e5e3e3; /* static */
+}
+
+.filter-btn.active {
+    background: var(--accent-2);
+    color: var(--card);
+>>>>>>> origin/yasmines
     position: relative;
 }
 
@@ -390,7 +556,11 @@
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
+<<<<<<< HEAD
     border-top: 8px solid #96A78D;
+=======
+    border-top: 8px solid var(--accent-2);
+>>>>>>> origin/yasmines
 }
 
 /* Recipe grid */
@@ -403,15 +573,24 @@
     margin: 0 auto;
 }
 
+<<<<<<< HEAD
 /* Recipe card design */
+=======
+>>>>>>> origin/yasmines
 .recipe-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
+<<<<<<< HEAD
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+=======
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+>>>>>>> origin/yasmines
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -422,7 +601,11 @@
 
 .recipe-card:hover {
     transform: translateY(-5px);
+<<<<<<< HEAD
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+=======
+    box-shadow: 0 8px 20px var(--shadow-dark);
+>>>>>>> origin/yasmines
 }
 
 .recipe-card img {
@@ -445,7 +628,11 @@
 .recipe-card-content h3 {
     font-size: 1.05rem;
     margin: 10px 0;
+<<<<<<< HEAD
     color: #222;
+=======
+    color: var(--text);
+>>>>>>> origin/yasmines
     line-height: 1.3;
     height: 45px;
     overflow: hidden;
@@ -461,6 +648,7 @@
 }
 
 .recipe-info i {
+<<<<<<< HEAD
     color: #B6CEB4;
     margin-right: 5px;
 }
@@ -469,6 +657,15 @@
 .container5 {
     background: #B6CEB4;
     color: #fff;
+=======
+    color: var(--accent-1);
+    margin-right: 5px;
+}
+/* ------------------------ */
+.container5 {
+    background: var(--accent-1);
+    color: var(--card);
+>>>>>>> origin/yasmines
     padding: 60px 20px;
     display: flex;
     justify-content: center;
@@ -494,7 +691,11 @@
     font-size: 42px;
     line-height: 1.02;
     margin: 6px 0 24px;
+<<<<<<< HEAD
     color: #fff;
+=======
+    color: var(--card);
+>>>>>>> origin/yasmines
     font-weight: 600;
 }
 
@@ -520,7 +721,11 @@
     border: none;
     font-size: 16px;
     outline: none;
+<<<<<<< HEAD
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+=======
+    box-shadow: 0 2px 8px var(--shadow-dark);
+>>>>>>> origin/yasmines
 }
 
 .search-btn {
@@ -547,13 +752,21 @@
 
 .tag-pill {
     background: rgba(255, 255, 255, 0.92);
+<<<<<<< HEAD
     color: #333;
+=======
+    color: var(--text);
+>>>>>>> origin/yasmines
     padding: 8px 14px;
     border-radius: 999px;
     font-size: 14px;
     border: none;
     cursor: pointer;
+<<<<<<< HEAD
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+=======
+    box-shadow: 0 2px 6px var(--shadow-dark);
+>>>>>>> origin/yasmines
     transition: transform .14s ease, box-shadow .14s ease;
     text-decoration: none;
     display: inline-flex;
@@ -565,7 +778,10 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
 }
 
+<<<<<<< HEAD
 /* Browse link */
+=======
+>>>>>>> origin/yasmines
 .browse-row {
     margin-top: 8px;
 }
@@ -576,7 +792,10 @@
     font-weight: 500;
 }
 
+<<<<<<< HEAD
 /* ===== CONTAINER 6: FEATURE CARDS ===== */
+=======
+>>>>>>> origin/yasmines
 .container6 {
     display: flex;
     flex-wrap: wrap;
@@ -589,16 +808,27 @@
 
 .card {
     width: 300px;
+<<<<<<< HEAD
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+=======
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--shadow-light);
+>>>>>>> origin/yasmines
     display: flex;
     flex-direction: column;
     overflow: hidden;
     transition: transform .15s ease;
 }
 
+<<<<<<< HEAD
 .card:focus-within, .card:hover {
+=======
+.card:focus-within,
+.card:hover {
+>>>>>>> origin/yasmines
     transform: translateY(-6px);
     outline: none;
 }
@@ -627,13 +857,21 @@
     padding: 10px 14px;
     border-radius: 8px;
     border: 1px solid #ccc;
+<<<<<<< HEAD
     background: #fff;
+=======
+    background: var(--card);
+>>>>>>> origin/yasmines
     cursor: pointer;
 }
 
 .card button.card-open a {
     text-decoration: none;
+<<<<<<< HEAD
     color: #333;
+=======
+    color: var(--text);
+>>>>>>> origin/yasmines
 }
 
 .background_img1 {
@@ -663,13 +901,21 @@
     width: 100%;
 }
 
+<<<<<<< HEAD
 /* ===== RESPONSIVE DESIGN ===== */
+=======
+>>>>>>> origin/yasmines
 @media (max-width: 850px) {
     .recipe-card1 {
         flex-direction: column;
     }
 
+<<<<<<< HEAD
     .recipe-image, .recipe-content {
+=======
+    .recipe-image,
+    .recipe-content {
+>>>>>>> origin/yasmines
         width: 100%;
     }
 
@@ -740,5 +986,9 @@
     .subscription-message {
         text-align: left;
     }
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> origin/yasmines

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Recipe</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="recipe.css">
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+
+<body>
+  <header>
+    <nav>
+
+      <div class="nav" id="nav">
+        <div class="nav-links" id="nav-links">
+          <a href="home.html">Home</a>
+          <a href="recipes.html">All Recipes</a>
+          <a href="categories.html">Categories</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+
+        </div>
+      </div>
+
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <div class="nav" id="nav">
+        <div class="nav-links" id="nav-links">
+          <a href="recipe.html">Single Recipe Page</a>
+          <a href="favorites.html">My Recipes</a>
+          <a href="add.html">Add A Recipe</a>
+        </div>
+        <div class="header-search">
+          <input type="text" id="header-search-input" placeholder="Search recipes..." />
+          <button id="header-search-btn" title="Search">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+  </header>
+
+  <main class="page-wrap">
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="left-meta">
+          <h1 class="title" id="recipeTitle">Recipe Title</h1>
+          <p class="subtitle" id="recipeCuisine">Cuisine • MealType</p>
+        </div>
+
+        <div class="center-block">
+          <div class="center-image-wrap">
+            <div class="circle-bg" aria-hidden="true"></div>
+            <div class="circle-frame" id="imageFrame">
+              <img id="recipeImage" src="" alt="recipe image">
+            </div>
+            <div class="hero-bar">
+              <button id="prevBtn" class="nav-small" aria-label="previous">&lsaquo;</button>
+              <div class="fav-pill" id="favPill">
+                <button id="favBtn" class="fav-btn" aria-pressed="false">
+                  <span class="heart" aria-hidden="true">♡</span>
+                  <span class="fav-label">Add to favorites</span>
+                </button>
+              </div>
+              <button id="nextBtn" class="nav-small" aria-label="next">&rsaquo;</button>
+            </div>
+          </div>
+
+          <div class="right-bars" id="rightBars">
+            <div class="section-bar active" data-target="#ingredientsMainBox">
+              <div class="thumb">
+                <img src="https://cdn-icons-png.flaticon.com/128/9862/9862094.png" alt="Ingredients" width="36"
+                  height="36">
+              </div>
+              <div class="bar-text">Ingredients</div>
+            </div>
+            <div class="section-bar" data-target="#instructionsMainBox">
+              <div class="thumb">
+                <img src="https://cdn-icons-png.flaticon.com/128/2618/2618595.png" alt="Instructions" width="36"
+                  height="36">
+              </div>
+              <div class="bar-text">Instructions</div>
+            </div>
+            <div class="section-bar" data-target="#nutritionMainBox">
+              <div class="thumb">
+                <img src="https://cdn-icons-png.flaticon.com/128/2224/2224150.png" alt="Nutritional Facts" width="36"
+                  height="36">
+              </div>
+              <div class="bar-text">Nutritional Facts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+      <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+    </button>
+    <section class="content-section">
+      <div class="content-inner">
+        <div class="main-cards-column">
+          <div class="section-box box-inner" id="ingredientsMainBox">
+            <div class="section-header">
+              <h2 class="section-title accent">Ingredients</h2>
+              <div class="portions-control">
+                <label for="portionsInput" class="portions-label">Portions</label>
+                <input type="number" id="portionsInput" min="1" value="4" step="1" inputmode="numeric">
+              </div>
+            </div>
+            <div id="ingredientsList" class="ingredients-list"></div>
+          </div>
+
+          <div class="section-box box-inner" id="instructionsMainBox">
+            <h2 class="section-title accent">Instructions</h2>
+            <ol id="instructionsList" class="instructions-list-v2"></ol>
+          </div>
+
+          <div class="section-box box-inner" id="nutritionMainBox">
+            <h2 class="section-title accent">Nutritional Facts</h2>
+            <div class="nutrition-pills" id="nutritionPills"></div>
+          </div>
+
+          <div class="section-box box-inner" id="videoTutorialBox">
+            <h2 class="section-title accent">Video Tutorial</h2>
+            <div class="video-preview-box">
+              <div class="video-thumb-wrap">
+                <img id="videoPreviewImg" src="" alt="Video preview">
+                <button id="playVideoBtn" class="video-play-btn" aria-label="Play video">
+                  <svg width="60" height="60" viewBox="0 0 60 60" class="video-btn-svg">
+                    <circle cx="30" cy="30" r="29" fill="rgba(0,0,0,0.32)" stroke="#fff" stroke-width="2" />
+                    <polygon points="25,20 45,30 25,40" fill="#fff" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <aside class="col right-col">
+          <div class="about-card" id="aboutRecipe">
+            <h3 class="section-title accent">About the recipe</h3>
+            <ul class="about-list" id="aboutList"></ul>
+            <div class="portions-note" id="portionsNote"></div>
+          </div>
+
+          <div class="quick-card" id="quickActionsAside">
+            <h3 class="section-title accent">Quick Actions</h3>
+
+            <div class="box-inner">
+              <div class="qa-label">Cooking Mode</div>
+              <button class="accent-btn" id="startCookingMode">Start now</button>
+            </div>
+
+            <div class="qa-timer box-inner">
+              <div class="qa-label">Set Timer</div>
+              <div class="qa-timer-row">
+                <button class="qa-timer-btn" id="qaTimerDec">–</button>
+                <input type="number" id="qaTimerInput" value="10" min="1" max="999" step="1"
+                  aria-label="Minutes to time">
+                <button class="qa-timer-btn" id="qaTimerInc">+</button>
+              </div>
+              <button class="accent-btn" id="qaTimerStart">Start Timer</button>
+              <div class="qa-timer-count" id="qaTimerCountdown"></div>
+              <button class="accent-btn light" id="keepScreenOn">Keep screen awake</button>
+            </div>
+
+            <div class="qa-rating box-inner">
+              <div class="qa-label">Rate this recipe</div>
+              <div class="qa-stars" id="qaStars"></div>
+              <div class="qa-rating-summary" id="qaRatingSummary">No ratings yet</div>
+            </div>
+
+            <div class="qa-comments box-inner">
+              <div class="qa-label">Comments</div>
+              <div class="qa-comments-list" id="qaCommentsList">
+                <div class="qa-comments-none">No comments yet — be the first.</div>
+              </div>
+              <div class="qa-comment-form">
+                <input type="text" class="qa-user-name" id="qaCommentUser" maxlength="32" placeholder="Your name">
+                <textarea id="qaCommentInput" placeholder="Write a comment…" rows="2" maxlength="280"></textarea>
+                <div class="qa-comments-actions">
+                  <button class="accent-btn" id="qaSubmitComment">Submit</button>
+                  <button class="accent-btn light" id="qaClearComment">Clear</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meal-info-card section-box box-inner" id="mealInfoCard">
+            <h3 class="section-title accent">Meal Info</h3>
+            <ul class="meal-info-list" id="mealInfoList"></ul>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Video Modal -->
+      <div id="videoModal" class="video-modal">
+        <div class="video-modal-content">
+          <button id="closeVideoModal" aria-label="Close" class="video-modal-close">&times;</button>
+          <iframe id="videoIframe" src="" title="Video Tutorial" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Suggestions Section -->
+    <section class="suggestions">
+      <div class="suggestions-inner">
+        <h2 class="section-title accent">You might also like</h2>
+        <p class="section-description">
+          These are some of the best recipes loved by the readers. Prepare and enjoy these recipes with your friends and
+          family.
+        </p>
+        <div class="suggestions-list" id="suggestionsList"></div>
+      </div>
+    </section>
+
+    <!-- Cooking Mode Overlay -->
+    <div id="cookingModeOverlay" class="cooking-mode-overlay">
+      <div class="cooking-mode-card">
+        <div class="cooking-mode-header">
+          <h2 class="cooking-mode-title" id="cookingModeRecipeTitle">Cooking Mode</h2>
+          <button id="closeCookingMode" class="cooking-mode-close" aria-label="Close cooking mode">&times;</button>
+        </div>
+
+        <div class="cooking-mode-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="cookingProgressFill"></div>
+          </div>
+          <div class="progress-text" id="cookingProgressText">Step 1 of 5</div>
+        </div>
+
+        <div class="cooking-step-content">
+          <div class="step-number" id="cookingStepNumber">Step 1</div>
+          <div class="step-instruction" id="cookingStepInstruction"></div>
+          <div class="step-timer" id="cookingStepTimer">
+            <div class="timer-display" id="stepTimerDisplay">05:00</div>
+            <button class="timer-control" id="stepTimerControl">Start Timer</button>
+          </div>
+        </div>
+
+        <div class="cooking-mode-actions">
+          <button class="cooking-btn secondary" id="prevStepBtn" disabled>Previous</button>
+          <button class="cooking-btn primary" id="nextStepBtn">Next Step</button>
+          <button class="cooking-btn finish" id="finishCookingBtn">Finish Cooking</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="foot-col footer-1">
+
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <p class="descriptionfooter">
+        <strong>ctrl+alt+eat</strong> is a food blog featuring delicious and easy-to-follow recipes for a wide
+        range of dishes, from breakfast to dinner and everything in between. Our blog is a
+        great resource for home cooks looking for inspiration and new ideas in the kitchen.
+      </p>
+    </div>
+
+    <div class="foot-col footer-2" aria-label="Quick links">
+      <h3 class="footer-heading">Quick Links</h3>
+      <ul class="footer-list">
+        <li><a href="recipes.html">all Recipes</a></li>
+        <li><a href="home.html">Homepage</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-2" aria-label="Follow us">
+      <h3 class="footer-heading">Follow</h3>
+      <ul class="footer-list social">
+        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook" style="color:#3b5998;"></i>
+            Facebook</a></li>
+        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram" style="color:#E4405F;"></i>
+            Instagram</a></li>
+        <li><a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok" style="color:#000;"></i>
+            TikTok</a></li>
+        <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i>
+            YouTube</a></li>
+      </ul>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p> &copy <span id="year"></span> Ctrl+Alt+Eat. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="recipe.js"></script>
+  <script src="common.js"></script>
+  <audio id="qaTimerSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9e6501.mp3" preload="auto"></audio>
+</body>
+
+</html>

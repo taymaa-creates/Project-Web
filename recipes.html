@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="recipes.css">
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+
+      <div class="nav" id="nav">
+        <div class="nav-links" id="nav-links">
+          <a href="home.html">Home</a>
+          <a href="recipes.html">All Recipes</a>
+          <a href="categories.html">Categories</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+
+        </div>
+      </div>
+
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <div class="nav" id="nav">
+        <div class="nav-links" id="nav-links">
+          <a href="recipe.html">Single Recipe Page</a>
+          <a href="favorites.html">My Recipes</a>
+          <a href="add.html">Add A Recipe</a>
+        </div>
+        <div class="header-search">
+          <input type="text" id="header-search-input" placeholder="Search recipes..." />
+          <button id="header-search-btn" title="Search">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+  </header>
+  <main>
+    <section class="topbar">
+      <div class="topbar-inner">
+        <img src="logo/6.svg" alt="Logo" class="top-logo" />
+        <input id="live-search" type="search" placeholder="Search your meal..." aria-label="Search recipes" />
+      </div>
+    </section>
+
+    <section class="page">
+      <!-- LEFT: sidebar with filters only -->
+      <aside class="sidebar" aria-label="Filters and search">
+        <div class="filters" aria-label="Recipe filters">
+          <div class="filter-block" data-filter="cuisine">
+            <button class="filter-toggle" type="button">Cuisines <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="mealType">
+            <button class="filter-toggle" type="button">Meal Types <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="time">
+            <button class="filter-toggle" type="button">Total Time <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true">
+              <button class="chip" data-key="time" data-value="fast">Fast &lt; 30</button>
+              <button class="chip" data-key="time" data-value="medium">Medium ≤ 60</button>
+              <button class="chip" data-key="time" data-value="long">Long &gt; 60</button>
+              <button class="chip" data-key="time" data-value="">Any</button>
+            </div>
+          </div>
+
+          <div class="filter-block" data-filter="difficulty">
+            <button class="filter-toggle" type="button">Difficulty <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="diet">
+            <button class="filter-toggle" type="button">Diet <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="clear-filters" type="button">Clear filters</button>
+          </div>
+
+          <div class="surprise-area" style="margin-top:18px;">
+            <button id="surprise-btn" type="button" aria-label="Surprise me">🎲 Surprise me — pick today's
+              recipe</button>
+            <div id="surprise-quote" aria-hidden="true" class="surprise-quote" style="display:none;"></div>
+          </div>
+
+        </div>
+      </aside>
+
+      <section class="content" aria-live="polite">
+        <header class="recipes-header">
+          <h1 id="main-title">All Recipes</h1>
+          <p id="main-sub">Find the recipe that matches your mood</p>
+        </header>
+
+        <section id="recipes-grid" class="recipes-grid" aria-label="Recipes list">
+        </section>
+
+        <div id="load-more-wrap" style="grid-column:1/-1;text-align:center;margin-top:18px;display:none;">
+          <button id="load-more" type="button">Load more</button>
+        </div>
+      </section>
+    </section>
+
+    <div id="surprise-modal" class="hidden" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="surprise-backdrop"></div>
+      <div class="surprise-panel" role="document" tabindex="-1">
+        <button id="surprise-close" class="surprise-close" aria-label="Return to recipes">←</button>
+        <div id="surprise-inner" class="surprise-inner" aria-live="polite"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="foot-col footer-1">
+
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <p class="descriptionfooter">
+        <strong>ctrl+alt+eat</strong> is a food blog featuring delicious and easy-to-follow recipes for a wide
+        range of dishes, from breakfast to dinner and everything in between. Our blog is a
+        great resource for home cooks looking for inspiration and new ideas in the kitchen.
+      </p>
+    </div>
+
+    <!-- Middle: quick links -->
+    <div class="foot-col footer-2" aria-label="Quick links">
+      <h3 class="footer-heading">Quick Links</h3>
+      <ul class="footer-list">
+        <li><a href="recipes.html">all Recipes</a></li>
+        <li><a href="home.html">Homepage</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Right: follow -->
+    <div class="footer-col footer-2" aria-label="Follow us">
+      <h3 class="footer-heading">Follow</h3>
+      <ul class="footer-list social">
+        <li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook" style="color:#3b5998;"></i>
+            Facebook</a></li>
+        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram" style="color:#E4405F;"></i>
+            Instagram</a></li>
+        <li><a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok" style="color:#000;"></i>
+            TikTok</a></li>
+        <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube" style="color:#FF0000;"></i>
+            YouTube</a></li>
+      </ul>
+
+    </div>
+
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+      <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+    </button>
+
+
+    <div class="footer-bottom">
+      <p> &copy <span id="year"></span> Ctrl+Alt+Eat. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="common.js"></script>
+  <script src="recipes.js"></script>
+
+</body>
+
+</html>

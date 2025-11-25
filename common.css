@@ -1,5 +1,8 @@
 :root {
+<<<<<<< HEAD
     /* Colors */
+=======
+>>>>>>> origin/yasmines
     --accent-1: #B6CEB4;
     --accent-2: #96A78D;
     --muted: #D9E9CF;
@@ -9,7 +12,10 @@
     --accent-title: #6f8f74;
 }
 
+<<<<<<< HEAD
 /* ===== COMMON HEADER STYLES ===== */
+=======
+>>>>>>> origin/yasmines
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +23,10 @@
     font-family: 'Lobster', cursive;
 }
 
+<<<<<<< HEAD
 /* Header */
+=======
+>>>>>>> origin/yasmines
 nav {
     display: flex;
     align-items: center;
@@ -27,7 +36,11 @@ nav {
     background: linear-gradient(50deg, var(--accent-2), var(--accent-1), var(--accent-2));
 }
 
+<<<<<<< HEAD
 body > header {
+=======
+body>header {
+>>>>>>> origin/yasmines
     position: sticky;
     top: 0;
     z-index: 999;
@@ -43,7 +56,10 @@ body > header {
     transform: scale(1.05);
 }
 
+<<<<<<< HEAD
 /* Nav links */
+=======
+>>>>>>> origin/yasmines
 .nav {
     display: flex;
     gap: 3px;
@@ -54,7 +70,11 @@ body > header {
 
 .nav a {
     text-decoration: none;
+<<<<<<< HEAD
     color: var(--bg); /* originally #F0F0F0 */
+=======
+    color: var(--bg);
+>>>>>>> origin/yasmines
     font-weight: 600;
     padding: 8px 10px;
     border-radius: 8px;
@@ -66,7 +86,10 @@ body > header {
     color: var(--accent-2);
 }
 
+<<<<<<< HEAD
 /* Header search bar */
+=======
+>>>>>>> origin/yasmines
 .header-search {
     display: flex;
     align-items: center;
@@ -96,10 +119,16 @@ body > header {
 }
 
 .header-search button:hover {
+<<<<<<< HEAD
     color: #55714c; /* this is specific hover, not variable */
 }
 
 /* Hamburger menu */
+=======
+    color: #55714c;
+}
+
+>>>>>>> origin/yasmines
 .hamburger {
     display: none;
     flex-direction: column;
@@ -120,7 +149,10 @@ body > header {
     background: var(--accent-2);
 }
 
+<<<<<<< HEAD
 /* ===== COMMON FOOTER STYLES ===== */
+=======
+>>>>>>> origin/yasmines
 .footer {
     display: flex;
     justify-content: space-between;
@@ -148,7 +180,10 @@ body > header {
     letter-spacing: 0.2px;
 }
 
+<<<<<<< HEAD
 /* Footer lists */
+=======
+>>>>>>> origin/yasmines
 .footer-list {
     list-style: none;
     padding: 0;
@@ -165,7 +200,11 @@ body > header {
     transition: color .15s ease, transform .12s ease;
     display: inline-block;
     padding: 2px 0;
+<<<<<<< HEAD
     color: #f5f5f5; /* static, does not change in dark mode */
+=======
+    color: #f5f5f5;
+>>>>>>> origin/yasmines
 }
 
 .footer-list a:hover,
@@ -175,14 +214,20 @@ body > header {
     outline: none;
 }
 
+<<<<<<< HEAD
 /* Social links */
+=======
+>>>>>>> origin/yasmines
 .footer-list.social a {
     display: inline-flex;
     align-items: center;
     gap: 10px;
 }
 
+<<<<<<< HEAD
 /* Footer bottom */
+=======
+>>>>>>> origin/yasmines
 .footer-bottom {
     width: 100%;
     border-top: 1px solid #f5f5f5;
@@ -204,8 +249,11 @@ footer .logo {
     height: auto;
 }
 
+<<<<<<< HEAD
 
 /* Accessibility */
+=======
+>>>>>>> origin/yasmines
 .visually-hidden {
     position: absolute;
     height: 1px;
@@ -218,3 +266,55 @@ footer .logo {
     box-shadow: 0 0 0 3px rgba(240, 107, 45, 0.12);
     border-radius: 4px;
 }
+<<<<<<< HEAD
+=======
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--card);
+    border: 2px solid var(--accent-1);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--accent-primary);
+    transform: scale(1.05);
+}
+
+.dark-mode-toggle img {
+    width: 22px;
+    height: 22px;
+    filter: invert(0);
+    transition: filter 0.3s ease;
+}
+
+.dark-mode .dark-mode-toggle img {
+    filter: invert(1);
+}
+
+.dark-mode {
+    --accent-1: #235347;      /* Medium dark green */
+    --accent-2: #163832;      /* Dark green */
+    --muted: #0B2B26;         /* Dark muted */
+    --bg: #051F20;            /* Darkest background */
+    --card: #0B2B26;          /* Card background */
+    --text: #DAF1DE;          /* Light text */
+    --accent-title: #8EB69B;  /* Light accent */
+}
+
+body.dark-mode {
+  background: var(--accent-1);
+  color: #f0f0f0;
+}
+>>>>>>> origin/yasmines
