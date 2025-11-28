@@ -67,6 +67,109 @@ function initHeader() {
             window.location.href = 'home.html';
         });
     }
+   const favHeart = document.getElementById('favheart');
+    if (favHeart) {
+        favHeart.addEventListener("click", (e) => {
+            e.preventDefault();
+            openFavoritesModal();
+        });
+    }
+}
+function openFavoritesModal() {
+    const favoriteIds = loadFavorites();
+    
+    if (favoriteIds.length === 0) {
+        window.location.href = 'favorites.html';
+        return;
+    }
+    createFavoritesModal(favoriteIds);
+}
+
+function loadFavorites() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+async function createFavoritesModal(favoriteIds) {
+    let allRecipes = [];
+    try {
+        let response = await fetch('recipes.json');
+        allRecipes = await response.json();
+    } catch (error) {
+        console.error('Failed to load recipes:', error);
+        return;
+    }
+
+    let favoriteRecipes = allRecipes.filter(recipe => favoriteIds.includes(recipe.id));
+    let previewRecipes = favoriteRecipes.slice(0, 3); 
+    let modalHTML = `
+        <div class="favorites-modal" id="favorites-modal">
+            <div class="favorites-modal-content">
+                <div class="favorites-modal-header">
+                    <h2>Your Favorite Recipes</h2>
+                    <button class="close-modal" id="close-favorites-modal">&times;</button>
+                </div>
+                <div class="favorites-preview">
+                    ${previewRecipes.length > 0 ? 
+                        previewRecipes.map(recipe => `
+                            <div class="favorite-preview-item" data-id="${recipe.id}">
+                                <img src="${recipe.image}" alt="${recipe.name}" />
+                                <div class="favorite-preview-info">
+                                    <h4>${recipe.name}</h4>
+                                    <p>${recipe.cuisine} · ${recipe.mealType}</p>
+                                </div>
+                            </div>
+                        `).join('') 
+                        : 
+                        '<p class="no-favorites">No favorite recipes yet</p>'
+                    }
+                </div>
+                <div class="favorites-modal-actions">
+                    <button class="btn secondary" id="see-all-favorites">
+                        See All Favorites (${favoriteRecipes.length})
+                    </button>
+                    <button class="btn primary" id="close-modal-btn">Continue Browsing</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    let modal = document.getElementById('favorites-modal');
+    let closeModal = document.getElementById('close-favorites-modal');
+    let closeModalBtn = document.getElementById('close-modal-btn');
+    let seeAllBtn = document.getElementById('see-all-favorites');
+    let closeModalHandler = () => {
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    };
+
+    closeModal.addEventListener('click', closeModalHandler);
+    closeModalBtn.addEventListener('click', closeModalHandler);
+    
+    seeAllBtn.addEventListener('click', () => {
+        window.location.href = 'favorites.html';
+    });
+    document.querySelectorAll('.favorite-preview-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const recipeId = item.dataset.id;
+            window.location.href = `recipe.html?id=${recipeId}`;
+        });
+    });
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModalHandler();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal) {
+            closeModalHandler();
+        }
+    });
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
 }
 
 function initDropdowns() {
@@ -253,6 +356,7 @@ function showPersistentNewsletterState(email) {
             ">
                 <i class="fas fa-check-circle" style="color: #B6CEB4; margin-right: 0.5rem;"></i>
                 <strong>Subscribed!</strong><br>
+                <small>Your inbox is about to get a lot more interesting!</small>
                 <small>You're receiving updates at ${email}</small>
             </div>
         `;

@@ -5,6 +5,7 @@ let searchInput = document.getElementById('live-search');
 let mainTitle = document.getElementById('main-title');
 let mainSub = document.getElementById('main-sub');
 let clearBtn = document.getElementById('clear-filters');
+let lastFilteredList = [];
 
 let allRecipes = [];
 let selectedFilters = {
@@ -12,12 +13,12 @@ let selectedFilters = {
     mealType: new Set(),
     difficulty: new Set(),
     diet: new Set(),
-    time: '' // 'fast'|'medium'|'long'|''
+    time: '',
+    nutrition: '',
 };
-let ITEMS_PER_PAGE = 10;     
+let ITEMS_PER_PAGE = 10;
 let itemsToShow = ITEMS_PER_PAGE;
 
-// ---------- Favorites persistence ----------
 function loadFavoritesArray() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
@@ -30,14 +31,11 @@ function loadFavoritesArray() {
     }
 }
 function saveFavoritesArray(arr) {
-    // normalize unique string IDs
     const unique = Array.from(new Set(arr.map(String)));
     localStorage.setItem(STORAGE_KEY, JSON.stringify(unique));
-    // some browsers fire storage event only in other tabs, but we still update this tab state below
 }
 let favoritesSet = new Set(loadFavoritesArray());
 
-// ---------- small helpers ----------
 let firstSentence = (arr) => {
     if (!arr || arr.length === 0) return '';
     const txt = arr.join(' ').trim();
@@ -53,47 +51,35 @@ function totalTime(recipe) {
 function debounce(fn, wait = 160) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
 function escapeHtml(s = '') { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]); }
 
-// ---------- URL / header / filters / rendering (unchanged logic) ----------
-// Temporary object to hold parsed incoming query params until UI chips exist
 const preSelectedQuery = {
-    searchText: '',      // q or search
-    filtersFromFilterParam: '', // whole 'filter' param (if present)
-    cuisine: '',         // ?cuisine=
-    mealType: '',        // ?mealType=
-    // note: we keep existing selectedFilters as the canonical runtime object
+    searchText: '',
+    filtersFromFilterParam: '',
+    cuisine: '',
+    mealType: '',
 };
 
 function readInitialParams() {
     const url = new URL(location.href);
-
-    // support both ?q= and ?search= (homepage uses both variants)
     const q1 = url.searchParams.get('q');
     const q2 = url.searchParams.get('search');
     preSelectedQuery.searchText = (q1 || q2 || '').trim();
 
-    // existing 'filter' param (preserve backward compat)
     preSelectedQuery.filtersFromFilterParam = url.searchParams.get('filter') || '';
-
-    // direct single-field params from tag buttons / header
     preSelectedQuery.cuisine = url.searchParams.get('cuisine') || '';
     preSelectedQuery.mealType = url.searchParams.get('mealType') || '';
 
-    // Also allow ?time=fast etc (optional)
     const timeParam = url.searchParams.get('time');
     if (timeParam) preSelectedQuery.time = timeParam;
 
-    // Do NOT mutate selectedFilters yet — we wait until chips exist in DOM
+    const nutritionParam = url.searchParams.get('nutrition');
+    if (nutritionParam) {
+        preSelectedQuery.nutrition = nutritionParam;
+    }
 }
-
-// Apply the preSelectedQuery into the UI after filters/chips are populated.
-// Call this from init() after populateFilters(...) and wireToggles().
 function applyPreselection() {
-    // 1) Prefill search input (if present) — highest priority: explicit q/search
     if (preSelectedQuery.searchText) {
         searchInput.value = decodeURIComponent(preSelectedQuery.searchText);
     }
-
-    // 2) If there is a 'filter' param (legacy multi-filter), parse and set selectedFilters
     if (preSelectedQuery.filtersFromFilterParam) {
         const parts = preSelectedQuery.filtersFromFilterParam.split('|');
         parts.forEach(p => {
@@ -104,10 +90,8 @@ function applyPreselection() {
         });
     }
 
-    // 3) Single-field params (cuisine / mealType / time) override/augment
     if (preSelectedQuery.cuisine) {
         selectedFilters.cuisine.add(preSelectedQuery.cuisine);
-        // visually select corresponding chip(s), if present
         const chip = document.querySelector(`.filter-choices .chip[data-key="cuisine"][data-value="${CSS.escape(preSelectedQuery.cuisine)}"]`);
         if (chip) chip.classList.add('selected');
     }
@@ -122,25 +106,47 @@ function applyPreselection() {
         if (tchip) tchip.classList.add('selected');
     }
 
-    // 4) For any values set from the parsed filter param, mark the matching chips too
+    if (preSelectedQuery.nutrition) {
+        selectedFilters.nutrition = preSelectedQuery.nutrition;
+        const nchip = document.querySelector(`[data-filter="nutrition"] .chip[data-value="${CSS.escape(preSelectedQuery.nutrition)}"]`);
+        if (nchip) nchip.classList.add('selected');
+    }
+
     ['cuisine', 'mealType', 'difficulty', 'diet'].forEach(k => {
         selectedFilters[k].forEach(v => {
             const btn = document.querySelector(`.filter-choices .chip[data-key="${k}"][data-value="${CSS.escape(v)}"]`);
             if (btn) btn.classList.add('selected');
         });
     });
-
-    // 5) If we have a search string, applyFilters() will apply it; otherwise still call applyFilters to reflect preselected filters
     applyFilters();
 }
 
-
 function updateHeader() {
+    console.log('Current state:', {
+        search: searchInput.value.trim(),
+        cuisine: Array.from(selectedFilters.cuisine),
+        mealType: Array.from(selectedFilters.mealType),
+        difficulty: Array.from(selectedFilters.difficulty),
+        diet: Array.from(selectedFilters.diet),
+        time: selectedFilters.time,
+        nutrition: selectedFilters.nutrition
+    });
+
     const active = [];
     for (const k of ['cuisine', 'mealType', 'difficulty', 'diet']) {
-        if (selectedFilters[k].size) active.push(...Array.from(selectedFilters[k]).map(v => `${k}: ${v}`));
+        if (selectedFilters[k] && selectedFilters[k].size > 0) {
+            active.push(...Array.from(selectedFilters[k]).map(v => `${k}: ${v}`));
+        }
     }
-    if (selectedFilters.time) active.push(`time: ${selectedFilters.time}`);
+    
+    if (selectedFilters.time && selectedFilters.time !== '') {
+        active.push(`time: ${selectedFilters.time}`);
+    }
+    
+    if (selectedFilters.nutrition && selectedFilters.nutrition !== '') {
+        active.push(`nutrition: ${selectedFilters.nutrition}`);
+    }
+
     const q = searchInput.value.trim();
     if (q && active.length === 0) {
         mainTitle.textContent = `Search: "${q}"`;
@@ -150,13 +156,17 @@ function updateHeader() {
     if (active.length > 0) {
         const label = active.join(' | ');
         mainTitle.textContent = label;
-        mainSub.textContent = `Find your ${label} recipes here.`;
+        if (q) {
+            mainSub.textContent = `Results matching "${q}" with ${label}`;
+        } else {
+            mainSub.textContent = `Find your ${label} recipes here.`;
+        }
         return;
     }
+    
     mainTitle.textContent = 'All Recipes';
     mainSub.textContent = 'Find the recipe that matches your mood';
 }
-
 function applyFilters() {
     const q = searchInput.value.trim().toLowerCase();
     const res = allRecipes.filter(r => {
@@ -168,22 +178,42 @@ function applyFilters() {
         if (selectedFilters.mealType.size && !selectedFilters.mealType.has(r.mealType)) return false;
         if (selectedFilters.difficulty.size && !selectedFilters.difficulty.has(r.difficulty)) return false;
         if (selectedFilters.diet.size && !selectedFilters.diet.has(r.diet)) return false;
+
         const tt = totalTime(r);
         if (selectedFilters.time === 'fast' && tt >= 30) return false;
         if (selectedFilters.time === 'medium' && (tt < 30 || tt > 60)) return false;
         if (selectedFilters.time === 'long' && tt <= 60) return false;
+
+        if (selectedFilters.nutrition) {
+            const nutrition = r.nutrition || {};
+            const calories = nutrition.calories_kcal || 0;
+            const protein = nutrition.protein_g || 0;
+            const carbs = nutrition.carbs_g || 0;
+
+            switch (selectedFilters.nutrition) {
+                case 'low-calorie':
+                    if (calories >= 500) return false;
+                    break;
+                case 'high-protein':
+                    if (protein < 30) return false;
+                    break;
+                case 'low-carb':
+                    if (carbs >= 20) return false;
+                    break;
+                case 'balanced':
+                    if (calories > 800 || protein < 20 || carbs > 50) return false;
+                    break;
+            }
+        }
+
         return true;
     });
-    // keep a copy of the latest filtered list for "Surprise me"
     lastFilteredList = res.slice();
     itemsToShow = ITEMS_PER_PAGE;
 
     renderRecipes(res);
     updateHeader();
 }
-
-
-// ---------- SVG helpers ----------
 function filledHeartSvg() {
     return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#d9534f" d="M12 21s-7.4-4.35-10-7.12C-0.1 11.64 2.5 6.5 6.5 7.5 8.6 8 9.6 10.5 12 12.5c2.4-2 3.4-4.5 5.5-5 4-1 6.6 4.15 4.5 6.38C19.4 16.65 12 21 12 21z"/></svg>`;
 }
@@ -191,7 +221,6 @@ function outlineHeartSvg() {
     return `<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="#d9534f" stroke-width="1.6" d="M12 21s-7.4-4.35-10-7.12C-0.1 11.64 2.5 6.5 6.5 7.5 8.6 8 9.6 10.5 12 12.5c2.4-2 3.4-4.5 5.5-5 4-1 6.6 4.15 4.5 6.38C19.4 16.65 12 21 12 21z"/></svg>`;
 }
 
-// ---------- card creation & rendering (now uses favoritesSet) ----------
 function createCard(recipe) {
     const tt = totalTime(recipe);
     const fav = favoritesSet.has(recipe.id);
@@ -238,23 +267,18 @@ function renderTag(type, value) {
 
 function renderRecipes(list) {
     grid.innerHTML = '';
-
-    // if nothing to show
     if (!list.length) {
         grid.innerHTML = `<div style="grid-column:1/-1;padding:30px;border-radius:10px;text-align:center;color:var(--muted-text)">No recipes match your search / filters.</div>`;
-        // hide load-more because nothing to page
         const wrap = document.getElementById('load-more-wrap');
         if (wrap) wrap.style.display = 'none';
         return;
     }
 
-    // ensure itemsToShow isn't larger than list
     const slice = list.slice(0, Math.max(0, itemsToShow));
     const frag = document.createDocumentFragment();
     slice.forEach(r => frag.appendChild(createCard(r)));
     grid.appendChild(frag);
 
-    // show/hide load-more
     const loadWrap = document.getElementById('load-more-wrap');
     const loadBtn = document.getElementById('load-more');
     if (list.length > slice.length) {
@@ -265,13 +289,11 @@ function renderRecipes(list) {
     }
 }
 
-// ---------- populate filters (unchanged) ----------
 function populateFilters(data) {
-    const cuisines = new Set();
-    const meals = new Set();
-    const diffs = new Set();
-    const diets = new Set();
-
+    let cuisines = new Set();
+    let meals = new Set();
+    let diffs = new Set();
+    let diets = new Set();
     data.forEach(r => {
         if (r.cuisine) cuisines.add(r.cuisine);
         if (r.mealType) meals.add(r.mealType);
@@ -279,10 +301,10 @@ function populateFilters(data) {
         if (r.diet) diets.add(r.diet);
     });
 
-    const makeChips = (containerSelector, values, key) => {
-        const container = document.querySelector(containerSelector);
+    let makeChips = (containerSelector, values, key) => {
+        let container = document.querySelector(containerSelector);
         container.innerHTML = '';
-        const sorted = Array.from(values).sort((a, b) => a.localeCompare(b));
+        let sorted = Array.from(values).sort((a, b) => a.localeCompare(b));
         sorted.forEach(v => {
             const btn = document.createElement('button');
             btn.className = 'chip';
@@ -300,17 +322,18 @@ function populateFilters(data) {
     makeChips('[data-filter="diet"] .filter-choices', diets, 'diet');
 
     document.querySelectorAll('[data-filter="time"] .chip').forEach(c => c.dataset.key = 'time');
+    document.querySelectorAll('[data-filter="nutrition"] .chip').forEach(c => c.dataset.key = 'nutrition');
 
     document.querySelectorAll('.filter-choices .chip').forEach(chip => {
         chip.addEventListener('click', (e) => {
             const key = chip.dataset.key;
             const val = chip.dataset.value ?? '';
-            if (key === 'time') {
-                selectedFilters.time = val || '';
+
+            if (key === 'time' || key === 'nutrition') {
+                selectedFilters[key] = val || '';
                 const siblings = chip.parentElement.querySelectorAll('.chip');
                 siblings.forEach(s => s.classList.remove('selected'));
                 if (val) chip.classList.add('selected');
-                else chip.classList.add('selected');
             } else {
                 if (selectedFilters[key].has(val)) {
                     selectedFilters[key].delete(val);
@@ -325,7 +348,6 @@ function populateFilters(data) {
     });
 }
 
-// ---------- UI wiring ----------
 function wireToggles() {
     document.querySelectorAll('.filter-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -339,17 +361,27 @@ function wireToggles() {
 }
 
 clearBtn.addEventListener('click', () => {
-    selectedFilters = { cuisine: new Set(), mealType: new Set(), difficulty: new Set(), diet: new Set(), time: '' };
+    selectedFilters = {
+        cuisine: new Set(),
+        mealType: new Set(),
+        difficulty: new Set(),
+        diet: new Set(),
+        time: '',
+        nutrition: '',
+    };
+    
     searchInput.value = '';
     document.querySelectorAll('.filter-choices .chip').forEach(c => c.classList.remove('selected'));
     const anyTime = document.querySelector('[data-filter="time"] .chip[data-value=""]');
     if (anyTime) anyTime.classList.add('selected');
+    const anyNutrition = document.querySelector('[data-filter="nutrition"] .chip[data-value=""]');
+    if (anyNutrition) anyNutrition.classList.add('selected');
+    
     applyFilters();
 });
 
 searchInput.addEventListener('input', debounce(() => applyFilters(), 180));
 
-// ---------- Heart toggle handler (with persistence) ----------
 grid.addEventListener('click', (e) => {
     const heartBtn = e.target.closest('.heart-btn');
     if (heartBtn && grid.contains(heartBtn)) {
@@ -358,24 +390,18 @@ grid.addEventListener('click', (e) => {
         const id = card.dataset.id;
         if (!id) return;
 
-        // toggle in-memory set
         if (favoritesSet.has(id)) {
             favoritesSet.delete(id);
         } else {
             favoritesSet.add(id);
         }
 
-        // persist
         saveFavoritesArray(Array.from(favoritesSet));
-
-        // update the button visuals
         const pressed = favoritesSet.has(id);
         heartBtn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
         heartBtn.title = pressed ? 'Remove from favorites' : 'Save to favorites';
         heartBtn.innerHTML = pressed ? filledHeartSvg() : outlineHeartSvg();
         if (pressed) heartBtn.classList.add('favorited'); else heartBtn.classList.remove('favorited');
-
-        // also update any other instance of the same card on the page (if present)
         document.querySelectorAll(`.recipe-card[data-id="${CSS.escape(id)}"] .heart-btn`).forEach(btn => {
             btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
             btn.title = pressed ? 'Remove from favorites' : 'Save to favorites';
@@ -389,15 +415,13 @@ grid.addEventListener('click', (e) => {
     const rm = e.target.closest('.read-more');
     if (rm) {
         const id = rm.dataset.id;
-        console.log('Cook now clicked for', id);
+        window.location.href = `recipe.html?id=${encodeURIComponent(id)}`;
     }
 });
 
-// ---------- storage event (sync across tabs) ----------
 window.addEventListener('storage', (ev) => {
     if (ev.key === STORAGE_KEY) {
         favoritesSet = new Set(loadFavoritesArray());
-        // update icons on page
         document.querySelectorAll('.recipe-card').forEach(card => {
             const id = card.dataset.id;
             const btn = card.querySelector('.heart-btn');
@@ -411,7 +435,6 @@ window.addEventListener('storage', (ev) => {
     }
 });
 
-// ---------- bootstrap ----------
 async function init() {
     readInitialParams();
     try {
@@ -426,10 +449,7 @@ async function init() {
 
     populateFilters(allRecipes);
     wireToggles();
-    applyPreselection(); // <-- apply URL-driven search / filter selections now that chips exist
-
-
-    // restore chip visuals
+    applyPreselection();
     if (selectedFilters.time) {
         const tchip = document.querySelector(`[data-filter="time"] .chip[data-value="${CSS.escape(selectedFilters.time)}"]`);
         if (tchip) tchip.classList.add('selected');
@@ -438,17 +458,26 @@ async function init() {
         if (anyt) anyt.classList.add('selected');
     }
 
+    if (selectedFilters.nutrition) {
+        const nchip = document.querySelector(`[data-filter="nutrition"] .chip[data-value="${CSS.escape(selectedFilters.nutrition)}"]`);
+        if (nchip) nchip.classList.add('selected');
+    } else {
+        const anyn = document.querySelector('[data-filter="nutrition"] .chip[data-value=""]');
+        if (anyn) anyn.classList.add('selected');
+    }
+
     ['cuisine', 'mealType', 'difficulty', 'diet'].forEach(k => {
-        selectedFilters[k].forEach(val => {
-            const btn = document.querySelector(`.filter-choices .chip[data-key="${k}"][data-value="${CSS.escape(val)}"]`);
-            if (btn) btn.classList.add('selected');
-        });
+        if (selectedFilters[k]) {
+            selectedFilters[k].forEach(val => {
+                const btn = document.querySelector(`.filter-choices .chip[data-key="${k}"][data-value="${CSS.escape(val)}"]`);
+                if (btn) btn.classList.add('selected');
+            });
+        }
     });
 
     applyFilters();
 }
 
-// CSS.escape polyfill if needed
 if (!window.CSS?.escape) {
     CSS.escape = function (value) {
         return String(value).replace(/[^a-zA-Z0-9\-_]/g, '-');
@@ -458,16 +487,12 @@ if (!window.CSS?.escape) {
 const loadMoreBtn = document.getElementById('load-more');
 if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
-        // expand window then re-render; prefer filtered list if present
         itemsToShow += ITEMS_PER_PAGE;
         const pool = lastFilteredList.length ? lastFilteredList : allRecipes;
         renderRecipes(pool);
-        // optionally scroll so user sees newly loaded items
-        // loadMoreBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
 
-// ---------- Surprise Me: modal rendering and wiring ----------
 const surpriseBtn = document.getElementById('surprise-btn');
 const surpriseModal = document.getElementById('surprise-modal');
 const surpriseInner = document.getElementById('surprise-inner');
@@ -477,8 +502,8 @@ const surpriseQuoteEl = document.getElementById('surprise-quote');
 const SURPRISE_QUOTES = [
     "Here’s a little culinary adventure — try this one!",
     "Feeling indecisive? This recipe has your name on it.",
-    "A tasty surprise — may your next meal be delightful!",
-    "Chef’s pick for today — bold, simple, delicious.",
+    "A tasty surprise! may your next meal be delightful!",
+    "Chef’s pick for today: bold, simple, delicious.",
     "Today’s mood: try something new. This one’s a winner."
 ];
 
@@ -496,11 +521,10 @@ function renderSurpriseModal(recipe) {
     const tt = totalTime(recipe);
     const quote = pickRandomFrom(SURPRISE_QUOTES);
 
-    // Left: big card; Right: meta
     const left = `
       <article class="surprise-card">
         <div class="recipe-image">
-          <img src="${recipe.image || 'https://via.placeholder.com/1200x800?text=No+Image'}" alt="${escapeHtml(recipe.name)}" loading="lazy" />
+          <img src="${recipe.image }" alt="${escapeHtml(recipe.name)}" loading="lazy" />
         </div>
         <div class="recipe-content">
           <div class="recipe-tags">
@@ -538,7 +562,6 @@ function renderSurpriseModal(recipe) {
 
     surpriseInner.innerHTML = left + right;
 
-    // small wiring inside modal (open full / try again)
     const tryAgain = document.getElementById('surprise-try-again');
     if (tryAgain) {
         tryAgain.addEventListener('click', (e) => {
@@ -552,18 +575,7 @@ function renderSurpriseModal(recipe) {
     if (openFull) {
         openFull.addEventListener('click', (e) => {
             const id = openFull.dataset.id;
-            // emulate "open" by scrolling to the recipe card in the grid if present
-            const target = document.querySelector(`.recipe-card[data-id="${CSS.escape(id)}"]`);
-            if (target) {
-                closeSurpriseModal();
-                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // visually highlight briefly
-                target.animate([{ boxShadow: '0 0 0 rgba(0,0,0,0)' }, { boxShadow: '0 18px 40px rgba(0,0,0,0.12)' }, { boxShadow: '0 0 0 rgba(0,0,0,0)' }], { duration: 900 });
-            } else {
-                // fallback: close and log (or you could open a detailed page)
-                closeSurpriseModal();
-                console.info('Full recipe not present in current DOM; implement full-view navigation as needed.');
-            }
+            window.location.href = `recipe.html?id=${encodeURIComponent(id)}`;
         });
     }
 }
@@ -571,38 +583,29 @@ function renderSurpriseModal(recipe) {
 function openSurpriseModalWithRecipe(recipe) {
     renderSurpriseModal(recipe);
     surpriseModal.classList.remove('hidden');
-    // small delay to trigger CSS transitions
     requestAnimationFrame(() => surpriseModal.classList.add('show'));
     surpriseModal.setAttribute('aria-hidden', 'false');
-    // show quote under button in sidebar
     if (surpriseQuoteEl) {
         surpriseQuoteEl.textContent = pickRandomFrom(SURPRISE_QUOTES);
         surpriseQuoteEl.style.display = 'block';
         surpriseQuoteEl.setAttribute('aria-hidden', 'false');
     }
-    // focus trap: focus the panel for keyboard users
-    const panel = surpriseModal.querySelector('.surprise-panel');
+    let panel = surpriseModal.querySelector('.surprise-panel');
     if (panel) panel.focus();
 }
 
 function closeSurpriseModal() {
     surpriseModal.classList.remove('show');
     surpriseModal.setAttribute('aria-hidden', 'true');
-    // wait for transition then hide entirely
     setTimeout(() => {
         surpriseModal.classList.add('hidden');
     }, 300);
-    if (surpriseQuoteEl) {
-        // leave quote visible (optional) — for now keep it
-    }
 }
 
-// wiring
 if (surpriseBtn) {
     surpriseBtn.addEventListener('click', (e) => {
         const pool = lastFilteredList.length ? lastFilteredList : allRecipes;
         if (!pool.length) {
-            // nothing loaded yet
             surpriseQuoteEl.textContent = "No recipes loaded yet. Try loading recipes first.";
             surpriseQuoteEl.style.display = 'block';
             return;
@@ -614,15 +617,12 @@ if (surpriseBtn) {
 
 if (surpriseClose) surpriseClose.addEventListener('click', closeSurpriseModal);
 if (surpriseModal) {
-    // click backdrop to close
     surpriseModal.addEventListener('click', (ev) => {
         if (ev.target.classList.contains('surprise-backdrop')) closeSurpriseModal();
     });
-    // close on ESC
     window.addEventListener('keydown', (ev) => {
         if (ev.key === 'Escape' && !surpriseModal.classList.contains('hidden')) closeSurpriseModal();
     });
 }
-
 
 init();

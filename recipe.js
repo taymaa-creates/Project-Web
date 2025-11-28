@@ -1,8 +1,8 @@
 $(function () {
     let recipes = [];
     let currentIndex = 0;
-    const DEFAULT_PORTIONS = 4;
-    const STORAGE_KEY = "favorites";
+    let DEFAULT_PORTIONS = 4;
+    let STORAGE_KEY = "favorites";
 
     let currentStepIndex = 0;
     let cookingSteps = [];
@@ -10,9 +10,9 @@ $(function () {
     let stepTimerRemaining = 0;
     let currentStepHasTimer = false;
 
-    const QA_TIMER_KEY = 'qa_timer_screen_awake';
-    const QA_RATING_KEY = 'qa_recipe_ratings_';
-    const QA_COMMENTS_KEY = 'qa_recipe_comments_';
+    let QA_TIMER_KEY = 'qa_timer_screen_awake';
+    let QA_RATING_KEY = 'qa_recipe_ratings_';
+    let QA_COMMENTS_KEY = 'qa_recipe_comments_';
 
     let qaTimerInterval = null;
     let qaTimerRemaining = 0;
@@ -73,10 +73,10 @@ $(function () {
     }
 
     function openRecipeFromQuery() {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+        let params = new URLSearchParams(window.location.search);
+        let id = params.get('id');
         if (!id) return 0;
-        const idx = recipes.findIndex(r => r.id === id);
+        let idx = recipes.findIndex(r => r.id === id);
         return idx >= 0 ? idx : 0;
     }
 
@@ -93,10 +93,10 @@ $(function () {
     }
 
     function navigateToRecipe(recipeId) {
-        const newUrl = `${window.location.pathname}?id=${recipeId}`;
+        let newUrl = `${window.location.pathname}?id=${recipeId}`;
         window.history.pushState({}, '', newUrl);
 
-        const newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
+        let newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
         if (newIndex !== -1) {
             currentIndex = newIndex;
             updateRecipeDisplay();
@@ -113,10 +113,10 @@ $(function () {
     }
 
     function handlePopState() {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+        let params = new URLSearchParams(window.location.search);
+        let id = params.get('id');
         if (id) {
-            const newIndex = recipes.findIndex(recipe => recipe.id === id);
+            let newIndex = recipes.findIndex(recipe => recipe.id === id);
             if (newIndex !== -1 && newIndex !== currentIndex) {
                 currentIndex = newIndex;
                 updateRecipeDisplay();
@@ -125,8 +125,11 @@ $(function () {
     }
 
     function renderRecipe(index) {
-        const r = recipes[index];
+        let r = recipes[index];
         if (!r) return;
+
+         document.title = `${r.name} - RecipeApp`;
+
         $('#recipeTitle').text(r.name);
         $('#recipeCuisine').text(`${capitalize(r.cuisine)} • ${capitalize(r.mealType)}`);
         $('#recipeImage').attr('src', r.image);
@@ -149,9 +152,9 @@ $(function () {
     }
 
     function renderIngredients(recipe, portions) {
-        const ratio = portions / (recipe.basePortions || DEFAULT_PORTIONS);
-        const html = (recipe.ingredients || []).map((it, i) => {
-            const parsed = parseQuantity(it);
+        let ratio = portions / (recipe.basePortions || DEFAULT_PORTIONS);
+        let html = (recipe.ingredients || []).map((it, i) => {
+            let parsed = parseQuantity(it);
             let display = it;
 
             if (parsed.number !== null) {
@@ -188,10 +191,10 @@ $(function () {
     }
 
     function renderNutrition(r) {
-        const nut = r.nutrition || {};
-        const entryList = Object.entries(nut);
+        let nut = r.nutrition || {};
+        let entryList = Object.entries(nut);
 
-        const labelMap = {
+        let labelMap = {
             calories_kcal: { label: "Calories", color: "energy" },
             energy_kj: { label: "Energy", color: "energy" },
             fat_g: { label: "Fat", color: "fat" },
@@ -204,9 +207,9 @@ $(function () {
         };
 
         $('#nutritionPills').html(entryList.map(([key, val]) => {
-            const { label, color } = labelMap[key] || getLabelAndUnit(key);
-            const rounded = (typeof val === "number" && !Number.isInteger(val)) ? val.toFixed(1) : val;
-            const unit = guessUnit(key, val);
+            let { label, color } = labelMap[key] || getLabelAndUnit(key);
+            let rounded = (typeof val === "number" && !Number.isInteger(val)) ? val.toFixed(1) : val;
+            let unit = guessUnit(key, val);
 
             return `<div class="np-pill ${color}">
                 <div class="np-label-top">${label}</div>
@@ -216,7 +219,7 @@ $(function () {
     }
 
     function renderAboutSection(r) {
-        const aboutHtml = [
+        let aboutHtml = [
             { svg: svgClock(), label: 'Prep', value: `${r.time?.prep ?? '-'} min` },
             { svg: svgFire(), label: 'Cook', value: `${r.time?.cook ?? '-'} min` },
             { svg: svgUser(), label: 'Portions', value: `${r.basePortions}` },
@@ -234,7 +237,7 @@ $(function () {
     }
 
     function renderMealInfo(recipe) {
-        const info = [
+        let info = [
             { label: "Meal Type", value: capitalize(recipe.mealType || "-") },
             { label: "Diet", value: capitalize(recipe.diet || "-") },
             { label: "Cuisine", value: capitalize(recipe.cuisine || "-") }
@@ -249,12 +252,12 @@ $(function () {
     }
 
     function renderVideoTutorial(recipe) {
-        const imageSrc = recipe.image || "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg";
+        let imageSrc = recipe.image || "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg";
         $("#videoPreviewImg").attr("src", imageSrc);
 
         let videoEmbedSrc = "";
         if (recipe.videoUrl) {
-            const match = recipe.videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            let match = recipe.videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
             if (match && match[1]) {
                 videoEmbedSrc = `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
             } else {
@@ -283,9 +286,9 @@ $(function () {
 
     function toggleFavorite() {
         if (!recipes[currentIndex]) return;
-        const id = recipes[currentIndex].id;
-        const favoriteIds = loadFavoritesFromStorage();
-        const pos = favoriteIds.indexOf(id);
+        let id = recipes[currentIndex].id;
+        let favoriteIds = loadFavoritesFromStorage();
+        let pos = favoriteIds.indexOf(id);
 
         if (pos === -1) {
             favoriteIds.push(id);
@@ -303,8 +306,8 @@ $(function () {
 
     function updateFavUI() {
         if (!recipes[currentIndex]) return;
-        const id = recipes[currentIndex].id;
-        const favoriteIds = loadFavoritesFromStorage();
+        let id = recipes[currentIndex].id;
+        let favoriteIds = loadFavoritesFromStorage();
 
         if (favoriteIds.includes(id)) {
             $('#favBtn .heart').text('♥');
@@ -321,8 +324,8 @@ $(function () {
         if (e.key === STORAGE_KEY) updateFavUI();
     }
     function handleSectionBarClick() {
-        const target = $(this).data('target');
-        const y = $(target).offset().top - 18;
+        let target = $(this).data('target');
+        let y = $(target).offset().top - 18;
         $('html,body').animate({ scrollTop: y }, 500);
         $('.section-bar').removeClass('active');
         $(this).addClass('active');
@@ -342,14 +345,14 @@ $(function () {
         });
     }
     function handleIngredientCheck() {
-        const idx = $(this).data('idx');
-        const key = 'checked_' + recipes[currentIndex].id;
-        const stored = JSON.parse(sessionStorage.getItem(key) || '[]');
+        let idx = $(this).data('idx');
+        let key = 'checked_' + recipes[currentIndex].id;
+        let stored = JSON.parse(sessionStorage.getItem(key) || '[]');
 
         if (this.checked) {
             stored.push(idx);
         } else {
-            const pos = stored.indexOf(idx);
+            let pos = stored.indexOf(idx);
             if (pos !== -1) stored.splice(pos, 1);
         }
         sessionStorage.setItem(key, JSON.stringify(stored));
@@ -357,10 +360,10 @@ $(function () {
 
     function restoreChecks() {
         if (!recipes[currentIndex]) return;
-        const key = 'checked_' + recipes[currentIndex].id;
-        const stored = JSON.parse(sessionStorage.getItem(key) || '[]');
+        let key = 'checked_' + recipes[currentIndex].id;
+        let stored = JSON.parse(sessionStorage.getItem(key) || '[]');
         $('#ingredientsList input[type=checkbox]').each(function () {
-            const idx = $(this).data('idx');
+            let idx = $(this).data('idx');
             $(this).prop('checked', stored.includes(idx));
         });
     }
@@ -409,7 +412,7 @@ $(function () {
                 if (window.navigator.vibrate) {
                     window.navigator.vibrate([400, 150, 400]);
                 }
-                const audio = document.getElementById('qaTimerSound');
+                let audio = document.getElementById('qaTimerSound');
                 if (audio) {
                     audio.currentTime = 0;
                     audio.play();
@@ -419,9 +422,9 @@ $(function () {
     }
 
     function updateQATimerCountdown() {
-        const m = Math.floor(qaTimerRemaining / 60);
-        const s = qaTimerRemaining % 60;
-        const str = m + ':' + (s < 10 ? '0' : '') + s + ' left';
+        let m = Math.floor(qaTimerRemaining / 60);
+        let s = qaTimerRemaining % 60;
+        let str = m + ':' + (s < 10 ? '0' : '') + s + ' left';
         $('#qaTimerCountdown').text(str).removeClass('expire');
         if (qaTimerRemaining <= 0) {
             $('#qaTimerCountdown').text('Time\'s up!').addClass('expire');
@@ -439,15 +442,15 @@ $(function () {
     }
 
     function renderRatingForCurrent() {
-        const rId = recipes?.[currentIndex]?.id;
+        let rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
 
-        const ratingKey = QA_RATING_KEY + rId;
-        const rate = JSON.parse(localStorage.getItem(ratingKey) || 'null');
+        let ratingKey = QA_RATING_KEY + rId;
+        let rate = JSON.parse(localStorage.getItem(ratingKey) || 'null');
         $('#qaStars').html('');
 
         for (let i = 1; i <= 5; i++) {
-            const star = $(`<span class="qa-star" data-val="${i}">&#9733;</span>`);
+            let star = $(`<span class="qa-star" data-val="${i}">&#9733;</span>`);
             if (rate?.rating >= i) star.addClass('selected');
             $('#qaStars').append(star);
         }
@@ -456,8 +459,8 @@ $(function () {
     }
 
     function handleStarClick() {
-        const v = parseInt($(this).attr('data-val'));
-        const rId = recipes?.[currentIndex]?.id;
+        let v = parseInt($(this).attr('data-val'));
+        let rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
 
         localStorage.setItem(QA_RATING_KEY + rId,
@@ -466,7 +469,7 @@ $(function () {
     }
 
     function handleStarHover() {
-        const v = parseInt($(this).attr('data-val'));
+        let v = parseInt($(this).attr('data-val'));
         $('.qa-star').each(function (i) {
             $(this).toggleClass('selected', i < v);
         });
@@ -477,11 +480,11 @@ $(function () {
     }
 
     function renderCommentsForCurrent() {
-        const rId = recipes?.[currentIndex]?.id;
+        let rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
 
-        const commentsKey = QA_COMMENTS_KEY + rId;
-        const arr = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        let commentsKey = QA_COMMENTS_KEY + rId;
+        let arr = JSON.parse(localStorage.getItem(commentsKey) || '[]');
 
         $('#qaCommentsList').html(
             !arr.length
@@ -499,19 +502,19 @@ $(function () {
     }
 
     function submitComment() {
-        const name = $('#qaCommentUser').val().trim() || "You";
-        const text = $('#qaCommentInput').val().trim();
+        let name = $('#qaCommentUser').val().trim() || "You";
+        let text = $('#qaCommentInput').val().trim();
 
         if (!text) {
             alert('Enter your comment!');
             return;
         }
 
-        const rId = recipes?.[currentIndex]?.id;
+        let rId = recipes?.[currentIndex]?.id;
         if (!rId) return;
 
-        const commentsKey = QA_COMMENTS_KEY + rId;
-        const arr = JSON.parse(localStorage.getItem(commentsKey) || '[]');
+        let commentsKey = QA_COMMENTS_KEY + rId;
+        let arr = JSON.parse(localStorage.getItem(commentsKey) || '[]');
         arr.push({ name, text, ts: Date.now() });
 
         localStorage.setItem(commentsKey, JSON.stringify(arr));
@@ -539,7 +542,7 @@ $(function () {
     }
 
     function startCookingMode() {
-        const recipe = recipes[currentIndex];
+        let recipe = recipes[currentIndex];
         if (!recipe || !recipe.instructions || recipe.instructions.length === 0) {
             alert('No instructions available for this recipe.');
             return;
@@ -559,10 +562,10 @@ $(function () {
     function updateCookingStepDisplay() {
         if (cookingSteps.length === 0) return;
 
-        const currentStep = cookingSteps[currentStepIndex];
-        const totalSteps = cookingSteps.length;
+        let currentStep = cookingSteps[currentStepIndex];
+        let totalSteps = cookingSteps.length;
 
-        const progress = ((currentStepIndex + 1) / totalSteps) * 100;
+        let progress = ((currentStepIndex + 1) / totalSteps) * 100;
         $('#cookingProgressFill').css('width', `${progress}%`);
         $('#cookingProgressText').text(`Step ${currentStepIndex + 1} of ${totalSteps}`);
 
@@ -586,7 +589,7 @@ $(function () {
         currentStepHasTimer = false;
         $('#cookingStepTimer').hide();
 
-        const timePatterns = [
+        let timePatterns = [
             /(\d+)\s*min(?:ute)?s?/gi,
             /(\d+)\s*hr(?:s)?/gi,
             /(\d+)\s*second?s?/gi,
@@ -595,10 +598,10 @@ $(function () {
         ];
 
         let foundTime = null;
-        for (const pattern of timePatterns) {
-            const matches = stepText.match(pattern);
+        for (let pattern of timePatterns) {
+            let matches = stepText.match(pattern);
             if (matches) {
-                const numberMatch = matches[0].match(/\d+/);
+                let numberMatch = matches[0].match(/\d+/);
                 if (numberMatch) {
                     foundTime = parseInt(numberMatch[0]);
                     break;
@@ -635,7 +638,7 @@ $(function () {
                 stepTimerInterval = null;
                 $('#stepTimerControl').text('Time\'s Up!');
 
-                const audio = document.getElementById('qaTimerSound');
+                let audio = document.getElementById('qaTimerSound');
                 if (audio) {
                     audio.currentTime = 0;
                     audio.play().catch(e => console.log('Audio play failed:', e));
@@ -670,8 +673,8 @@ $(function () {
     }
 
     function updateStepTimerDisplay() {
-        const minutes = Math.floor(stepTimerRemaining / 60);
-        const seconds = stepTimerRemaining % 60;
+        let minutes = Math.floor(stepTimerRemaining / 60);
+        let seconds = stepTimerRemaining % 60;
         $('#stepTimerDisplay').text(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
     }
 
@@ -701,39 +704,39 @@ $(function () {
     function renderSuggestions() {
         if (!recipes.length) return;
 
-        const currentRecipe = recipes[currentIndex];
-        const suggestions = getRelatedRecipes(currentRecipe);
+        let currentRecipe = recipes[currentIndex];
+        let suggestions = getRelatedRecipes(currentRecipe);
 
         if (suggestions.length === 0) return;
 
-        const suggestionsHTML = suggestions.map(recipe => createSuggestionCard(recipe)).join('');
+        let suggestionsHTML = suggestions.map(recipe => createSuggestionCard(recipe)).join('');
         $('#suggestionsList').html(suggestionsHTML);
 
         $('.suggestion-card').off('click').on('click', function () {
-            const recipeId = $(this).data('id');
+            let recipeId = $(this).data('id');
             navigateToRecipe(recipeId);
         });
     }
 
     function getRelatedRecipes(currentRecipe) {
-        const otherRecipes = recipes.filter(recipe => recipe.id !== currentRecipe.id);
+        let otherRecipes = recipes.filter(recipe => recipe.id !== currentRecipe.id);
         if (otherRecipes.length === 0) return [];
 
-        const sameCuisine = otherRecipes.filter(recipe => recipe.cuisine === currentRecipe.cuisine);
-        const sameMealType = otherRecipes.filter(recipe =>
+        let sameCuisine = otherRecipes.filter(recipe => recipe.cuisine === currentRecipe.cuisine);
+        let sameMealType = otherRecipes.filter(recipe =>
             recipe.mealType === currentRecipe.mealType && !sameCuisine.includes(recipe)
         );
-        const sameDifficulty = otherRecipes.filter(recipe =>
+        let sameDifficulty = otherRecipes.filter(recipe =>
             recipe.difficulty === currentRecipe.difficulty &&
             !sameCuisine.includes(recipe) &&
             !sameMealType.includes(recipe)
         );
 
-        const relatedRecipes = [...sameCuisine, ...sameMealType, ...sameDifficulty];
-        const uniqueRecipes = [];
-        const seenIds = new Set();
+        let relatedRecipes = [...sameCuisine, ...sameMealType, ...sameDifficulty];
+        let uniqueRecipes = [];
+        let seenIds = new Set();
 
-        for (const recipe of relatedRecipes) {
+        for (let recipe of relatedRecipes) {
             if (!seenIds.has(recipe.id)) {
                 seenIds.add(recipe.id);
                 uniqueRecipes.push(recipe);
@@ -741,8 +744,8 @@ $(function () {
         }
 
         if (uniqueRecipes.length < 3) {
-            const remainingRecipes = otherRecipes.filter(recipe => !seenIds.has(recipe.id));
-            const randomRecipes = getRandomRecipes(remainingRecipes, 3 - uniqueRecipes.length);
+            let remainingRecipes = otherRecipes.filter(recipe => !seenIds.has(recipe.id));
+            let randomRecipes = getRandomRecipes(remainingRecipes, 3 - uniqueRecipes.length);
             uniqueRecipes.push(...randomRecipes);
         }
 
@@ -750,13 +753,13 @@ $(function () {
     }
 
     function getRandomRecipes(recipesArray, count) {
-        const shuffled = [...recipesArray].sort(() => 0.5 - Math.random());
+        let shuffled = [...recipesArray].sort(() => 0.5 - Math.random());
         return shuffled.slice(0, count);
     }
 
     function createSuggestionCard(recipe) {
-        const totalTime = (recipe.time?.prep || 0) + (recipe.time?.cook || 0);
-        const difficultyClass = `difficulty-${recipe.difficulty || 'easy'}`;
+        let totalTime = (recipe.time?.prep || 0) + (recipe.time?.cook || 0);
+        let difficultyClass = `difficulty-${recipe.difficulty || 'easy'}`;
 
         return `<div class="suggestion-card" data-id="${recipe.id}">
             <div class="suggestion-card-image">
@@ -784,14 +787,14 @@ $(function () {
         </div>`;
     }
     function parseQuantity(str) {
-        const m = str.trim().match(/^(\d+(?:\.\d+)?)(?:\s*)(.*)$/);
+        let m = str.trim().match(/^(\d+(?:\.\d+)?)(?:\s*)(.*)$/);
         if (!m) return { number: null, rest: str, isIntegerUnit: false };
 
-        const num = parseFloat(m[1]);
-        const rest = (m[2] || '').trim();
-        const intUnits = ['egg', 'eggs', 'clove', 'cloves', 'slice', 'slices'];
-        const firstWord = rest.split(/\s+/)[0]?.toLowerCase() || '';
-        const isIntegerUnit = intUnits.includes(firstWord) || (Number.isInteger(num) && num <= 20);
+        let num = parseFloat(m[1]);
+        let rest = (m[2] || '').trim();
+        let intUnits = ['egg', 'eggs', 'clove', 'cloves', 'slice', 'slices'];
+        let firstWord = rest.split(/\s+/)[0]?.toLowerCase() || '';
+        let isIntegerUnit = intUnits.includes(firstWord) || (Number.isInteger(num) && num <= 20);
 
         return { number: num, rest: rest, isIntegerUnit: isIntegerUnit };
     }
@@ -799,8 +802,8 @@ $(function () {
     function getLabelAndUnit(key) {
         let label = key.replace(/_/g, " ").replace(/\bg\b/i, "g").replace(/\bkcal\b/i, "kcal");
         label = label.replace(/\b([a-z])([A-Z])/g, (_, a, b) => a + ' ' + b).replace(/\b\w/g, t => t.toUpperCase());
-        const defaultColors = ["energy", "protein", "fat", "carbs", "sugar", "salt", "sat"];
-        const color = defaultColors.find(c => key.toLowerCase().includes(c)) || "";
+        let defaultColors = ["energy", "protein", "fat", "carbs", "sugar", "salt", "sat"];
+        let color = defaultColors.find(c => key.toLowerCase().includes(c)) || "";
         return { label: label.charAt(0).toUpperCase() + label.slice(1), color };
     }
 
@@ -837,8 +840,8 @@ $(function () {
     }
 
     function handleScroll() {
-        const sc = $(this).scrollTop();
-        const t = Math.min(80, sc * 0.18);
+        let sc = $(this).scrollTop();
+        let t = Math.min(80, sc * 0.18);
         $('.circle-frame').css('transform', `translateY(${-t}px)`);
         $('.circle-bg').css('transform', `translateY(${-t / 1.6}px)`);
         $('.hero-inner').css('opacity', Math.max(0.48, 1 - sc / 900));
