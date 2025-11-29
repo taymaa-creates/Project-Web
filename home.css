@@ -66,7 +66,6 @@
     right: 10px;
 }
 
-/* Recipe Card */
 .recipe-card1 {
     display: flex;
     width: 100%;
@@ -302,8 +301,6 @@
     background-color: var(--accent-1);
     flex-wrap: wrap;
     padding: 36px 18px;
-    border-top: 6px solid #eee;
-    /* static */
     justify-content: center;
     align-items: center;
 }
@@ -335,7 +332,7 @@ h2 {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin-top: 6px;
+    padding-top: 6px;
 }
 
 .news-form input {
@@ -358,7 +355,6 @@ h2 {
     margin-top: 10px;
     font-size: 1.1rem;
     color: #034c22;
-    /* static */
     text-align: center;
     font-weight: 500;
     padding: 6px 0;
@@ -837,7 +833,7 @@ h2 {
   line-height: 0.92;
   letter-spacing: 2px;
   margin: 0 0 18px 0;
-  color: var(--card);
+  color: rgba(255, 255, 255, 0.95);
   text-transform: uppercase;
   font-weight: 500;
 }

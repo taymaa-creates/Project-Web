@@ -2,7 +2,7 @@
     --accent-1: #B6CEB4;
     --accent-2: #96A78D;
     --muted: #D9E9CF;
-    --bg: #F0F0F0;
+    --bg: #F0F0F0; 
     --card: #fff;
     --text: #222;
     --accent-title: #6f8f74;
@@ -23,22 +23,24 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.page-wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 28px;
-}
-
-
-.hero {
+.hero{
+    max-width: auto;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    padding: 36px 12px 56px;
+    padding-right: 50px;
+    padding-top: 90px; 
+    padding-left: 50px;
+    padding-bottom: 126px;
     overflow: visible;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-inner {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
     position: relative;
     min-height: 420px;
@@ -46,8 +48,7 @@ body {
 
 .left-meta {
     flex: 1;
-    min-width: 280px;
-    max-width: 40%;
+    width: 400px;
     padding-right: 70px;
     z-index: 2;
 }
@@ -63,10 +64,6 @@ body {
     color: #7b7b7b;
     margin-bottom: 18px;
     font-size: 14px;
-}
-
-.dark-mode .subtitle {
-    color: #8EB69B;
 }
 
 .center-block {
@@ -110,10 +107,6 @@ body {
     border: 6px solid rgba(255, 255, 255, 0.95);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.03);
     pointer-events: none;
-}
-
-.dark-mode .circle-bg::after {
-    border: 6px solid rgba(11, 43, 38, 0.95);
 }
 
 .circle-frame {
@@ -201,16 +194,12 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: rgba(255, 255, 255, 0.98);
+    background: var(--bg);
     padding: 12px;
     border-radius: 60px 12px 12px 60px;
     cursor: pointer;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
     transition: background .2s, color .2s;
-}
-
-.dark-mode .section-bar {
-    background: rgba(11, 43, 38, 0.98);
 }
 
 .section-bar.active {
@@ -224,10 +213,6 @@ body {
     font-weight: 700;
     padding-right: 14px;
     transition: color 0.2s;
-}
-
-.dark-mode .section-bar .bar-text {
-    color: #8EB69B;
 }
 
 .section-bar.active .bar-text {
@@ -254,22 +239,18 @@ body {
 }
 
 .section-bar.active .thumb {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-.dark-mode .section-bar.active .thumb {
-    background: rgba(218, 241, 222, 0.95);
+    background: var(--bg);
 }
 
 .content-section {
-    background: transparent;
+    background: var(--bg);
     padding: 36px 0;
     border-top: 1px solid rgba(0, 0, 0, 0.03);
     position: relative;
-}
-
-.dark-mode .content-section {
-    border-top: 1px solid rgba(218, 241, 222, 0.1);
+    max-width: auto;
+    padding: 28px 90px;
+    display: flex;
+    flex-direction: column;
 }
 
 .content-inner {
@@ -298,11 +279,6 @@ body {
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
     margin-top: 12px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dark-mode .box-inner,
-.dark-mode .section-box.box-inner {
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
 }
 
 .section-header {
@@ -338,10 +314,6 @@ body {
     transition: background-color 0.2s ease;
 }
 
-.dark-mode .ing-item:hover {
-    background: rgba(35, 83, 71, 0.3);
-}
-
 .ing-item input[type=checkbox] {
     width: 16px;
     height: 16px;
@@ -370,10 +342,6 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-}
-
-.dark-mode .instructions-list-v2 .step-row {
-    border-bottom: 1.2px solid #163832;
 }
 
 .step-num-circle {
@@ -407,10 +375,6 @@ body {
     margin-top: 0;
     margin-right: 6px;
     color: #333;
-}
-
-.dark-mode .step-text {
-    color: #DAF1DE;
 }
 
 .instructions-list-v2 .step-row:last-child {
@@ -482,36 +446,12 @@ body {
     background: #ffe2db;
 }
 
-.dark-mode .np-pill.energy {
-    background: #163832;
-}
-
-.dark-mode .np-pill.sugar {
-    background: #0B2B26;
-}
-
-.dark-mode .np-pill.fat {
-    background: #235347;
-}
-
-.dark-mode .np-pill.sat {
-    background: #163832;
-}
-
-.dark-mode .np-pill.salt {
-    background: #0B2B26;
-}
-
 .about-card {
     padding: 18px;
     border-radius: 12px;
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
     background: var(--card);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dark-mode .about-card {
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
 }
 
 .about-list {
@@ -557,10 +497,6 @@ body {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.dark-mode .meal-info-card {
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
-}
-
 .meal-info-list {
     list-style: none;
     margin: 10px 0 0;
@@ -583,10 +519,6 @@ body {
     margin-right: 10px;
 }
 
-.dark-mode .meal-info-label {
-    color: #8EB69B;
-}
-
 .meal-info-value {
     color: var(--text);
     font-weight: 700;
@@ -602,10 +534,6 @@ body {
     flex-direction: column;
     gap: 22px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.dark-mode .quick-card {
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
 }
 
 .qa-label {
@@ -633,11 +561,6 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark-mode #portionsInput,
-.dark-mode #qaTimerInput {
-    border: 1px solid rgba(218, 241, 222, 0.2);
-}
-
 #portionsInput {
     width: 72px;
 }
@@ -656,10 +579,6 @@ body {
 .portions-label {
     font-size: 12px;
     color: #666;
-}
-
-.dark-mode .portions-label {
-    color: #8EB69B;
 }
 
 .qa-timer-btn,
@@ -738,10 +657,6 @@ body {
     margin-bottom: 2px;
 }
 
-.dark-mode .qa-rating-summary {
-    color: #8EB69B;
-}
-
 .qa-comments-list {
     margin-bottom: 8px;
     display: flex;
@@ -755,20 +670,11 @@ body {
     font-size: 14px;
 }
 
-.dark-mode .qa-comments-none {
-    color: #8EB69B;
-}
-
 .qa-comment-entry {
     padding: 8px 12px;
     border-radius: 8px;
     background: #f8f8f8;
     box-shadow: 0 3px 10px rgba(170, 180, 170, .04);
-}
-
-.dark-mode .qa-comment-entry {
-    background: #163832;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .qa-comment-meta {
@@ -777,10 +683,6 @@ body {
     margin-bottom: 3px;
     display: flex;
     justify-content: space-between;
-}
-
-.dark-mode .qa-comment-meta {
-    color: #8EB69B;
 }
 
 .qa-comment-user {
@@ -804,11 +706,6 @@ body {
     background: var(--bg);
     color: var(--text);
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dark-mode .qa-user-name,
-.dark-mode #qaCommentInput {
-    border: 1px solid #235347;
 }
 
 .qa-comments-actions {
@@ -913,20 +810,13 @@ body {
     line-height: 1;
 }
 
-.dark-mode .video-modal-close {
-    color: #DAF1DE;
-}
-
 .suggestions {
-    margin-top: 60px;
     border-top: 1px solid #ababab;
     padding-top: 40px;
     background-color: var(--bg);
     transition: background-color 0.3s ease;
-}
-
-.dark-mode .suggestions {
-    border-top: 1px solid #235347;
+    max-width: auto;
+    padding: 28px 90px;
 }
 
 .suggestions-inner {
@@ -952,10 +842,6 @@ body {
     line-height: 1.6;
 }
 
-.dark-mode .section-description {
-    color: #8EB69B;
-}
-
 .suggestions-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -973,10 +859,6 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.dark-mode .suggestion-card {
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .suggestion-card:hover {
@@ -1025,10 +907,6 @@ body {
     gap: 8px;
 }
 
-.dark-mode .suggestion-card-meta {
-    color: #8EB69B;
-}
-
 .suggestion-card-difficulty {
     display: inline-block;
     padding: 4px 8px;
@@ -1048,19 +926,9 @@ body {
     color: #b88b00;
 }
 
-.dark-mode .difficulty-medium {
-    background: #235347;
-    color: #DAF1DE;
-}
-
 .difficulty-hard {
     background: #ffe2db;
     color: #d9534f;
-}
-
-.dark-mode .difficulty-hard {
-    background: #163832;
-    color: #ff6b6b;
 }
 
 .suggestion-card-time {
@@ -1072,10 +940,6 @@ body {
     margin-top: auto;
 }
 
-.dark-mode .suggestion-card-time {
-    color: #8EB69B;
-}
-
 .suggestion-card-footer {
     display: flex;
     justify-content: space-between;
@@ -1083,10 +947,6 @@ body {
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid #f0f0f0;
-}
-
-.dark-mode .suggestion-card-footer {
-    border-top: 1px solid #163832;
 }
 
 .suggestion-card-cuisine {
@@ -1178,10 +1038,6 @@ body {
     justify-content: center;
     border-radius: 50%;
     transition: all 0.2s;
-}
-
-.dark-mode .cooking-mode-close {
-    color: #8EB69B;
 }
 
 .cooking-mode-close:hover {
@@ -1338,33 +1194,133 @@ body {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.1);
     }
-
     100% {
         transform: scale(1);
     }
+}
+
+.dark-mode .subtitle,
+.dark-mode .section-bar .bar-text,
+.dark-mode .portions-label,
+.dark-mode .qa-rating-summary,
+.dark-mode .qa-comments-none,
+.dark-mode .section-description,
+.dark-mode .suggestion-card-meta,
+.dark-mode .suggestion-card-time,
+.dark-mode .meal-info-label,
+.dark-mode .video-modal-close,
+.dark-mode .cooking-mode-close {
+    color: #8EB69B;
+}
+
+.dark-mode .circle-bg::after {
+    border: 6px solid rgba(11, 43, 38, 0.95);
+}
+
+.dark-mode .section-bar,
+.dark-mode .box-inner,
+.dark-mode .section-box.box-inner,
+.dark-mode .about-card,
+.dark-mode .meal-info-card,
+.dark-mode .quick-card,
+.dark-mode .suggestion-card,
+.dark-mode .cooking-mode-card,
+.dark-mode .video-modal-content {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .section-bar {
+    background: rgba(11, 43, 38, 0.98);
+}
+
+.dark-mode .step-text {
+    color: #DAF1DE;
+}
+
+.dark-mode .ing-item:hover {
+    background: rgba(35, 83, 71, 0.3);
+}
+
+.dark-mode .instructions-list-v2 .step-row {
+    border-bottom: 1.2px solid #163832;
+}
+
+.dark-mode .np-pill.energy {
+    background: #163832;
+}
+
+.dark-mode .np-pill.sugar {
+    background: #0B2B26;
+}
+
+.dark-mode .np-pill.fat {
+    background: #235347;
+}
+
+.dark-mode .np-pill.sat {
+    background: #163832;
+}
+
+.dark-mode .np-pill.salt {
+    background: #0B2B26;
+}
+
+.dark-mode .section-bar.active .thumb {
+    background: rgba(218, 241, 222, 0.95);
+}
+
+.dark-mode .content-section,
+.dark-mode .suggestions {
+    border-top: 1px solid rgba(218, 241, 222, 0.1);
+}
+
+.dark-mode #portionsInput,
+.dark-mode #qaTimerInput,
+.dark-mode .qa-user-name,
+.dark-mode #qaCommentInput {
+    border: 1px solid rgba(218, 241, 222, 0.2);
+}
+
+.dark-mode .qa-comment-entry {
+    background: #163832;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .suggestions {
+    border-top: 1px solid #235347;
+}
+
+.dark-mode .suggestion-card-footer {
+    border-top: 1px solid #163832;
+}
+
+.dark-mode .difficulty-medium {
+    background: #235347;
+    color: #DAF1DE;
+}
+
+.dark-mode .difficulty-hard {
+    background: #163832;
+    color: #ff6b6b;
 }
 
 @media (max-width: 1100px) {
     .center-block {
         flex: 0 0 420px;
     }
-
     .circle-bg {
         width: 480px;
         height: 480px;
         right: -40px;
         top: -18px;
     }
-
     .circle-frame {
         width: 340px;
         height: 340px;
     }
-
     .section-bar {
         width: 260px;
     }
@@ -1375,12 +1331,10 @@ body {
         flex-direction: column;
         gap: 16px;
     }
-
     .main-cards-column,
     .col.right-col {
         width: 100%;
     }
-
     .main-cards-column {
         gap: 18px;
     }
@@ -1391,7 +1345,6 @@ body {
         flex-direction: column;
         align-items: center;
     }
-
     .left-meta {
         order: 3;
         width: 100%;
@@ -1399,53 +1352,43 @@ body {
         max-width: 100%;
         padding-right: 0;
     }
-
     .center-block {
         order: 1;
         margin: 0;
         flex: none;
     }
-
     .center-image-wrap {
         width: 100%;
         max-width: 420px;
     }
-
     .right-bars {
         position: static;
         flex-direction: row;
         gap: 10px;
         margin: 12px 0 0 0;
     }
-
     .section-bar {
         width: 100%;
         max-width: 180px;
     }
-
     .circle-bg {
         display: none;
     }
-
     .right-col {
         width: 100%;
         margin-top: 18px;
     }
-
     .quick-card {
         max-width: 420px;
         margin: 16px auto;
     }
-
     .suggestions-list {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 20px;
     }
-
     .suggestions .section-title {
         font-size: 1.7rem;
     }
-
     .section-description {
         font-size: 0.9rem;
         padding: 0 10px;
@@ -1458,46 +1401,37 @@ body {
         margin: 10px;
         max-height: 95vh;
     }
-
     .cooking-mode-title {
         font-size: 24px;
     }
-
     .step-instruction {
         font-size: 18px;
     }
-
     .cooking-mode-actions {
         flex-direction: column;
     }
-
     .cooking-btn {
         min-width: auto;
         width: 100%;
     }
-
     .timer-display {
         font-size: 28px;
     }
-
     .video-modal-content iframe {
         height: 210px;
     }
 }
 
 @media (max-width: 700px) {
-
     .video-preview-box,
     .video-thumb-wrap,
     .video-thumb-wrap img {
         height: 120px !important;
     }
-
     .meal-info-card,
     #videoTutorialBox {
         margin-top: 0;
     }
-
     .video-modal-content iframe {
         height: 185px;
     }
@@ -1508,36 +1442,288 @@ body {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-
     .suggestions-inner {
         padding: 0 20px;
     }
-
     .suggestions .section-title {
         font-size: 1.5rem;
     }
-
     .suggestion-card-content {
         padding: 15px;
     }
-
     .cooking-mode-card {
         padding: 15px;
     }
-
     .cooking-mode-title {
         font-size: 20px;
     }
-
     .step-instruction {
         font-size: 16px;
     }
-
     .step-number {
         font-size: 14px;
     }
-
     .video-modal-content iframe {
         height: 105px;
     }
 }
+
+/* Enhanced Toast Notifications */
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    max-width: 380px;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 4px solid;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.toast-notification.show {
+    transform: translateX(0);
+}
+
+.toast-success {
+    border-left-color: #4CAF50;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(76, 175, 80, 0.05) 100%);
+}
+
+.toast-error {
+    border-left-color: #f44336;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(244, 67, 54, 0.05) 100%);
+}
+
+.toast-warning {
+    border-left-color: #ff9800;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(255, 152, 0, 0.05) 100%);
+}
+
+.toast-info {
+    border-left-color: #2196F3;
+    background: linear-gradient(135deg, var(--card) 0%, rgba(33, 150, 243, 0.05) 100%);
+}
+
+.toast-content {
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.toast-message {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.toast-close:hover {
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Star rating hover fix */
+.qa-star.hover {
+    color: gold !important;
+}
+
+.qa-star.selected {
+    color: gold !important;
+}
+
+/* Dark mode adjustments for toast */
+.dark-mode .toast-notification {
+    background: rgba(11, 43, 38, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .toast-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation for new comments */
+.qa-comment-entry {
+    animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse animation for new ratings */
+@keyframes pulse-gold {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.qa-star.selected:last-child {
+    animation: pulse-gold 0.3s ease-in-out;
+}
+
+#keepScreenOn.active {
+    background: var(--accent-2) !important;
+    color: white !important;
+    box-shadow: 0 0 0 2px var(--accent-1) !important;
+}
+
+#keepScreenOn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+#keepScreenOn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#keepScreenOn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+#keepScreenOn:active::after {
+    width: 100px;
+    height: 100px;
+}
+/* Add to your CSS */
+#keepScreenOn.active {
+    background: var(--accent-2) !important;
+    color: white !important;
+    box-shadow: 0 0 0 2px var(--accent-1) !important;
+}
+
+#keepScreenOn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Optional: Add some visual feedback */
+#keepScreenOn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#keepScreenOn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+#keepScreenOn:active::after {
+    width: 100px;
+    height: 100px;
+}
+
+/* Screen Wake Lock Button States */
+#keepScreenOn.active {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent-1)) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(182, 206, 180, 0.4) !important;
+    border: 2px solid var(--accent-1) !important;
+}
+
+#keepScreenOn.inactive {
+    background: var(--muted) !important;
+    color: var(--accent-title) !important;
+    border: 2px solid transparent !important;
+}
+
+#keepScreenOn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    font-weight: 600;
+}
+
+#keepScreenOn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+#keepScreenOn:active {
+    transform: translateY(0);
+}
+
+/* Pulse animation for active state */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(182, 206, 180, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(182, 206, 180, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(182, 206, 180, 0);
+    }
+}
+
+#keepScreenOn.active {
+    animation: pulse-green 2s infinite;
+}
+
+/* Dark mode adjustments */
+.dark-mode #keepScreenOn.active {
+    animation: pulse-green 2s infinite;
+}
+
+.dark-mode #keepScreenOn.inactive {
+    background: rgba(11, 43, 38, 0.8) !important;
+    color: #8EB69B !important;
+}
+

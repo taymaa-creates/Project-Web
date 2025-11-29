@@ -16,6 +16,128 @@ $(function () {
 
     let qaTimerInterval = null;
     let qaTimerRemaining = 0;
+    
+    function showToast(message, type = 'info', duration = 3000) {
+        $('.toast-notification').remove();
+
+        let icons = {
+            success: '✓',
+            error: '✕',
+            warning: '⚠',
+            info: '💡'
+        };
+
+        let toast = $(`
+        <div class="toast-notification toast-${type}">
+            <div class="toast-content">
+                <span class="toast-message">${message}</span>
+                <button class="toast-close">&times;</button>
+            </div>
+        </div>
+    `);
+
+        $('body').append(toast);
+
+        setTimeout(() => {
+            toast.addClass('show');
+        }, 10);
+
+        const removeToast = () => {
+            toast.removeClass('show');
+            setTimeout(() => toast.remove(), 400);
+        };
+
+        toast.find('.toast-close').on('click', removeToast);
+
+        if (duration > 0) {
+            setTimeout(removeToast, duration);
+        }
+    }
+
+    let toastCSS = `
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 0;
+    max-width: 350px;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    border-left: 4px solid #6c757d;
+}
+.toast-notification.show {
+    transform: translateX(0);
+}
+.toast-success {
+    border-left-color: #28a745;
+}
+.toast-error {
+    border-left-color: #dc3545;
+}
+.toast-warning {
+    border-left-color: #ffc107;
+}
+.toast-info {
+    border-left-color: #17a2b8;
+}
+.toast-content {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.toast-message {
+    flex: 1;
+    margin-right: 12px;
+    font-weight: 500;
+    color: #333;
+}
+.toast-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toast-close:hover {
+    color: #333;
+    background: #f8f9fa;
+    border-radius: 50%;
+}
+`;
+
+    $('head').append(`<style>${toastCSS}</style>`);
+
+    function playTimerSound() {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            gainNode.gain.value = 0.3;
+
+            oscillator.start();
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+            oscillator.stop(audioContext.currentTime + 1);
+        } catch (error) {
+            console.log('Web Audio not supported');
+        }
+    }
 
     function initApp() {
         loadRecipes();
@@ -37,7 +159,7 @@ $(function () {
                 setTimeout(restoreChecks, 50);
             })
             .fail(function () {
-                console.error("Failed to load recipes.json (serve over HTTP).");
+                console.error("Failed to load recipes.json");
             });
     }
 
@@ -54,7 +176,7 @@ $(function () {
         $('#qaTimerDec').on('click', decrementTimer);
         $('#qaTimerInc').on('click', incrementTimer);
         $('#qaTimerStart').on('click', startQATimer);
-        $('#keepScreenOn').on('click', keepScreenAwake);
+        $('#keepScreenOn').on('click', toggleScreenWake);
         $('#qaStars').on('click', '.qa-star', handleStarClick)
             .on('mouseenter', '.qa-star', handleStarHover)
             .on('mouseleave', handleStarLeave);
@@ -128,7 +250,7 @@ $(function () {
         let r = recipes[index];
         if (!r) return;
 
-         document.title = `${r.name} - RecipeApp`;
+        document.title = `${r.name} - RecipeApp`;
 
         $('#recipeTitle').text(r.name);
         $('#recipeCuisine').text(`${capitalize(r.cuisine)} • ${capitalize(r.mealType)}`);
@@ -149,6 +271,7 @@ $(function () {
         updateFavUI();
         refreshQASections();
         renderSuggestions();
+        addIngredientSearch();
     }
 
     function renderIngredients(recipe, portions) {
@@ -412,11 +535,8 @@ $(function () {
                 if (window.navigator.vibrate) {
                     window.navigator.vibrate([400, 150, 400]);
                 }
-                let audio = document.getElementById('qaTimerSound');
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.play();
-                }
+                showToast('⏰ Timer finished!', 'success', 5000);
+                playTimerSound();
             }
         }, 1000);
     }
@@ -431,15 +551,72 @@ $(function () {
         }
     }
 
-    function keepScreenAwake() {
-        if ('wakeLock' in navigator) {
-            navigator.wakeLock.request('screen');
-            $(this).text('Screen will stay awake').prop('disabled', true);
-            localStorage.setItem(QA_TIMER_KEY, '1');
+    let wakeLock = null;
+
+    function toggleScreenWake() {
+        if (wakeLock) {
+            releaseWakeLock();
         } else {
-            alert('Keep awake is not supported in this browser.');
+            requestWakeLock();
         }
     }
+
+    async function requestWakeLock() {
+        if (!('wakeLock' in navigator)) {
+            showToast('❌ Screen wake lock not supported in this browser', 'warning', 4000);
+            return;
+        }
+
+        try {
+            wakeLock = await navigator.wakeLock.request('screen');
+
+            $('#keepScreenOn')
+                .html('<i class="fas fa-eye-slash" style="margin-right: 8px;"></i>Disable screen wake')
+                .removeClass('inactive')
+                .addClass('active');
+
+            showToast('🔆 Screen will stay awake', 'success', 3000);
+
+            wakeLock.addEventListener('release', () => {
+                console.log('Screen Wake Lock was released');
+                resetWakeLockButton();
+            });
+
+        } catch (err) {
+            console.error(`Failed to acquire wake lock: ${err.message}`);
+            showToast('❌ Could not keep screen awake', 'error', 4000);
+            resetWakeLockButton();
+        }
+    }
+
+    function releaseWakeLock() {
+        if (wakeLock !== null) {
+            wakeLock.release()
+                .then(() => {
+                    wakeLock = null;
+                    console.log('Screen Wake Lock released');
+                    showToast('💤 Screen sleep enabled', 'info', 3000);
+                })
+                .catch(err => {
+                    console.error('Error releasing wake lock:', err);
+                });
+        }
+
+        resetWakeLockButton();
+    }
+
+    function resetWakeLockButton() {
+        $('#keepScreenOn')
+            .html('<i class="fas fa-eye" style="margin-right: 8px;"></i>Keep screen awake')
+            .removeClass('active')
+            .addClass('inactive');
+    }
+
+    document.addEventListener('visibilitychange', async () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+            await requestWakeLock();
+        }
+    });
 
     function renderRatingForCurrent() {
         let rId = recipes?.[currentIndex]?.id;
@@ -465,17 +642,21 @@ $(function () {
 
         localStorage.setItem(QA_RATING_KEY + rId,
             JSON.stringify({ rating: v, user: 'You', ts: Date.now() }));
+
         renderRatingForCurrent();
+        showToast('⭐ Thank you for your rating!', 'success', 3000);
     }
 
     function handleStarHover() {
         let v = parseInt($(this).attr('data-val'));
         $('.qa-star').each(function (i) {
-            $(this).toggleClass('selected', i < v);
+            let starVal = parseInt($(this).attr('data-val'));
+            $(this).toggleClass('hover', starVal <= v);
         });
     }
 
     function handleStarLeave() {
+        $('.qa-star').removeClass('hover');
         renderRatingForCurrent();
     }
 
@@ -502,11 +683,11 @@ $(function () {
     }
 
     function submitComment() {
-        let name = $('#qaCommentUser').val().trim() || "You";
+        let name = $('#qaCommentUser').val().trim() || "Anonymous";
         let text = $('#qaCommentInput').val().trim();
 
         if (!text) {
-            alert('Enter your comment!');
+            showToast('✏️ Please enter your comment!', 'warning', 3000);
             return;
         }
 
@@ -520,6 +701,7 @@ $(function () {
         localStorage.setItem(commentsKey, JSON.stringify(arr));
         $('#qaCommentInput').val('');
         renderCommentsForCurrent();
+        showToast('💬 Thank you for your comment!', 'success', 3000);
     }
 
     function clearComment() {
@@ -638,11 +820,8 @@ $(function () {
                 stepTimerInterval = null;
                 $('#stepTimerControl').text('Time\'s Up!');
 
-                let audio = document.getElementById('qaTimerSound');
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.play().catch(e => console.log('Audio play failed:', e));
-                }
+                showToast('⏰ Step timer finished!', 'success', 5000);
+                playTimerSound();
 
                 $('#stepTimerDisplay').addClass('timer-expired');
                 setTimeout(() => {
@@ -699,6 +878,7 @@ $(function () {
         $('body').css('overflow', '');
         resetStepTimer();
         currentStepIndex = 0;
+        releaseWakeLock(); 
     }
 
     function renderSuggestions() {
@@ -856,6 +1036,33 @@ $(function () {
         $("#videoIframe").attr("src", "");
         $("body").css("overflow", "");
     }
+
+    function addIngredientSearch() {
+    // Remove existing search bar if any
+    $('#ingredientSearch').remove();
+    
+    // Add search bar
+    $('#ingredientsMainBox').prepend(`
+        <input type="text" id="ingredientSearch" placeholder="🔍 Search ingredients..." 
+               style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd;">
+    `);
+    
+    // Add search functionality
+    $('#ingredientSearch').on('input', function() {
+        const searchTerm = $(this).val().toLowerCase().trim();
+        
+        if (searchTerm === '') {
+            // Show all if search is empty
+            $('.ing-item').show();
+        } else {
+            // Filter ingredients
+            $('.ing-item').each(function() {
+                const text = $(this).text().toLowerCase();
+                $(this).toggle(text.includes(searchTerm));
+            });
+        }
+    });
+}
 
     initApp();
 });
