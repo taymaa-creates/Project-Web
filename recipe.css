@@ -1307,168 +1307,496 @@ body {
     color: #ff6b6b;
 }
 
-@media (max-width: 1100px) {
-    .center-block {
-        flex: 0 0 420px;
-    }
-    .circle-bg {
-        width: 480px;
-        height: 480px;
-        right: -40px;
-        top: -18px;
-    }
-    .circle-frame {
-        width: 340px;
-        height: 340px;
-    }
-    .section-bar {
-        width: 260px;
-    }
-}
-
-@media (max-width: 1000px) {
-    .content-inner {
-        flex-direction: column;
-        gap: 16px;
-    }
-    .main-cards-column,
-    .col.right-col {
-        width: 100%;
-    }
-    .main-cards-column {
-        gap: 18px;
-    }
-}
-
-@media (max-width: 860px) {
+@media (max-width: 768px) {
     .hero-inner {
+        padding: 60px 20px 80px;
+        padding-top: 70px;
+        display: flex;
         flex-direction: column;
-        align-items: center;
-    }
-    .left-meta {
-        order: 3;
         width: 100%;
-        text-align: center;
-        max-width: 100%;
-        padding-right: 0;
     }
-    .center-block {
-        order: 1;
-        margin: 0;
-        flex: none;
+    .center-block{
+        display: flex;
+        flex-direction: column;
     }
-    .center-image-wrap {
-        width: 100%;
-        max-width: 420px;
-    }
-    .right-bars {
-        position: static;
-        flex-direction: row;
+    
+    .hero-bar {
+        flex-wrap: wrap;
+        display: flex;
         gap: 10px;
-        margin: 12px 0 0 0;
+        margin-top: 15px;
     }
-    .section-bar {
+    
+    .right-bars {
+        flex-direction: column;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        margin: 15px 0 0 0;
+        gap: 12px;
         width: 100%;
-        max-width: 180px;
+        justify-content: flex-start;
     }
-    .circle-bg {
+    
+    .right-bars::-webkit-scrollbar {
         display: none;
     }
-    .right-col {
-        width: 100%;
-        margin-top: 18px;
+    
+    .section-bar {
+        min-width: 200px;
+        flex-shrink: 0;
+        border-radius: 12px;
     }
-    .quick-card {
-        max-width: 420px;
-        margin: 16px auto;
+    
+    .content-section {
+        padding: 20px;
     }
-    .suggestions-list {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    
+    .content-inner {
         gap: 20px;
     }
-    .suggestions .section-title {
-        font-size: 1.7rem;
+    
+    .main-cards-column {
+        gap: 20px;
     }
-    .section-description {
-        font-size: 0.9rem;
+    
+    .box-inner,
+    .section-box.box-inner,
+    .about-card,
+    .meal-info-card,
+    .quick-card {
+        padding: 16px;
+        margin-top: 8px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .nutrition-pills {
+        gap: 12px;
+        justify-content: center;
+    }
+    
+    .np-pill {
+        min-width: 90px;
+        min-height: 80px;
+        padding: 6px 12px 8px;
+    }
+    
+    .instructions-list-v2 .step-row {
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 20px;
+    }
+    
+    .step-num-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        margin-right: 0;
+    }
+    
+    .step-label {
+        margin-top: 0;
+    }
+    
+    .suggestions {
+        padding: 20px;
+    }
+    
+    .suggestions-inner {
         padding: 0 10px;
     }
-}
-
-@media (max-width: 768px) {
+    
+    .suggestions .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-description {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+    
+    .suggestions-list {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .suggestion-card-image {
+        height: 180px;
+    }
+    
+    .suggestion-card-content {
+        padding: 16px;
+    }
+    
+    .suggestion-card-title {
+        font-size: 1.2rem;
+    }
+    
+    .video-preview-box,
+    .video-thumb-wrap,
+    .video-thumb-wrap img {
+        height: 160px !important;
+    }
+    
+    .video-modal-content {
+        width: 95vw;
+        margin: 10px;
+    }
+    
+    .video-modal-content iframe {
+        height: 200px;
+    }
+    
     .cooking-mode-card {
         padding: 20px;
         margin: 10px;
         max-height: 95vh;
     }
+    
+    .cooking-mode-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
     .cooking-mode-title {
-        font-size: 24px;
+        font-size: 1.5rem;
     }
-    .step-instruction {
-        font-size: 18px;
-    }
+    
     .cooking-mode-actions {
         flex-direction: column;
+        gap: 12px;
     }
+    
     .cooking-btn {
-        min-width: auto;
         width: 100%;
+        min-width: auto;
     }
+    
+    .step-instruction {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+    
     .timer-display {
-        font-size: 28px;
+        font-size: 1.8rem;
     }
-    .video-modal-content iframe {
-        height: 210px;
+    .center-image-wrap{
+        padding: 20px;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-}
-
-@media (max-width: 700px) {
-    .video-preview-box,
-    .video-thumb-wrap,
-    .video-thumb-wrap img {
-        height: 120px !important;
-    }
-    .meal-info-card,
-    #videoTutorialBox {
-        margin-top: 0;
-    }
-    .video-modal-content iframe {
-        height: 185px;
+    .circle-bg{
+        display: none;
     }
 }
 
 @media (max-width: 480px) {
-    .suggestions-list {
-        grid-template-columns: 1fr;
-        gap: 15px;
+    .hero {
+        padding: 50px 15px 60px;
+        padding-top: 60px;
     }
-    .suggestions-inner {
-        padding: 0 20px;
+    
+    .title {
+        font-size: 1.8rem;
     }
-    .suggestions .section-title {
-        font-size: 1.5rem;
+    
+    .circle-frame {
+        width: 240px;
+        height: 240px;
     }
-    .suggestion-card-content {
+    
+    .center-image-wrap {
+        gap: 12px;
+    }
+    
+    .right-bars {
+        gap: 8px;
+    }
+    
+    .section-bar {
+        min-width: 160px;
+        padding: 10px;
+    }
+    
+    .thumb {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .thumb img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .bar-text {
+        font-size: 14px;
+    }
+    
+    .content-section {
         padding: 15px;
     }
+    
+    .box-inner,
+    .section-box.box-inner,
+    .about-card,
+    .meal-info-card,
+    .quick-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .nutrition-pills {
+        gap: 8px;
+    }
+    
+    .np-pill {
+        min-width: 80px;
+        min-height: 70px;
+        padding: 5px 10px 6px;
+        border-radius: 20px;
+    }
+    
+    .np-data {
+        font-size: 15px;
+    }
+    
+    .np-label-top {
+        font-size: 11px;
+        padding: 2px 8px;
+    }
+    
+    .ingredients-list,
+    .instructions-list-v2 {
+        gap: 10px;
+    }
+    
+    .ing-item {
+        padding: 6px;
+    }
+    
+    .instructions-list-v2 .step-row {
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .step-text {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    .suggestions {
+        padding: 15px;
+    }
+    
+    .suggestions-inner {
+        padding: 0;
+    }
+    
+    .suggestions .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-description {
+        font-size: 0.85rem;
+        margin-bottom: 25px;
+    }
+    
+    .suggestion-card-image {
+        height: 150px;
+    }
+    
+    .suggestion-card-content {
+        padding: 14px;
+    }
+    
+    .suggestion-card-title {
+        font-size: 1.1rem;
+    }
+    
+    .suggestion-card-meta {
+        font-size: 0.8rem;
+    }
+    
+    .suggestion-card-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .suggestion-card-button {
+        align-self: flex-end;
+    }
+    
+    .video-preview-box,
+    .video-thumb-wrap,
+    .video-thumb-wrap img {
+        height: 140px !important;
+    }
+    
+    .video-modal-content iframe {
+        height: 180px;
+    }
+    
+    .video-modal-close {
+        right: 8px;
+        top: 8px;
+        font-size: 30px;
+    }
+    
     .cooking-mode-card {
         padding: 15px;
+        border-radius: 15px;
     }
+    
     .cooking-mode-title {
-        font-size: 20px;
+        font-size: 1.3rem;
     }
+    
     .step-instruction {
-        font-size: 16px;
+        font-size: 1rem;
     }
+    
     .step-number {
         font-size: 14px;
     }
-    .video-modal-content iframe {
-        height: 105px;
+    
+    .timer-display {
+        font-size: 1.5rem;
+    }
+    
+    .timer-control {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    
+    /* Improved form elements for mobile */
+    #portionsInput,
+    #qaTimerInput,
+    .qa-user-name,
+    #qaCommentInput {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 10px;
+    }
+    
+    .qa-comments-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .accent-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    
+    /* Toast notifications for mobile */
+    .toast-notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        top: 10px;
     }
 }
 
-/* Enhanced Toast Notifications */
+@media (max-width: 360px) {
+    .hero {
+        padding: 40px 10px 50px;
+    }
+    
+    .title {
+        font-size: 1.6rem;
+    }
+    
+    .circle-frame {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .section-bar {
+        min-width: 140px;
+    }
+    
+    .content-section {
+        padding: 10px;
+    }
+    
+    .suggestions {
+        padding: 10px;
+    }
+}
+
+/* Fix for very tall mobile devices */
+@media (max-height: 700px) and (max-width: 768px) {
+    .hero {
+        padding-top: 50px;
+        padding-bottom: 40px;
+    }
+    
+    .hero-inner {
+        min-height: auto;
+    }
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 768px) {
+    .nav-small,
+    .fav-btn,
+    .section-bar,
+    .accent-btn,
+    .qa-timer-btn,
+    .cooking-btn,
+    .suggestion-card-button,
+    .video-play-btn,
+    .cooking-mode-close,
+    .video-modal-close {
+        min-height: 44px; /* Apple's recommended minimum touch target */
+    }
+    
+    .ing-item input[type=checkbox] {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .qa-star {
+        font-size: 32px;
+        padding: 5px;
+    }
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+@media (max-width: 768px) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    .step-text,
+    .ing-text,
+    .qa-comment-entry,
+    .meal-info-item {
+        line-height: 1.5;
+    }
+}
 .toast-notification {
     position: fixed;
     top: 20px;
