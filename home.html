@@ -25,7 +25,7 @@
                             <li><a href="home.html">Home</a></li>
                             <li><a href="recipes.html">All Recipes</a></li>
                             <li><a href="categories.html">Categories</a></li>
-                            <li><a href="falvor.html">Flavor Lab</a></li>
+                            <li><a href="FlavorLab.html">Flavor Lab</a></li>
                             <li><a href="recipe.html">Single Recipe</a></li>
                         </ul>
                     </div>
@@ -35,7 +35,7 @@
                             My Kitchen <span class="caret">▾</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="favorites.html">My Recipes</a></li>
+                            <li><a href="mealplanner.html">My Meal Planner</a></li>
                             <li><a href="add.html">Add A Recipe</a></li>
                         </ul>
                     </div>
@@ -54,20 +54,26 @@
             </div>
             <img src="logo\6.svg" alt="Site logo" class="logo">
 
-            <div class="header-search">
-                <input type="text" id="header-search-input" placeholder="Search recipes..." />
-                <button id="header-search-btn" title="Search">
-                    <i class="fa fa-search"></i>
+            <div class="left">
+
+                <button class="btns" id="favheart">
+                    <i class="fa fa-heart"></i>
+                </button>
+
+                <div class="header-search">
+                    <input type="text" id="header-search-input" placeholder="Search recipes..." />
+                    <button id="header-search-btn" class="btns" title="Search">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
-            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </nav>
     </header>
-
     <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
         <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
     </button>
@@ -223,7 +229,8 @@
 
                 <div class="browse-row">
                     <p class="browse-link gmail">Got a new Recipe or Idea? Drop it in our inbox now 📩</p>
-                    <a class="browse-link gmail" href="https://accounts.google.com/servicelogin?service=mail" target="_blank">ctrlalt@eat.com</a>
+                    <a class="browse-link gmail" href="https://accounts.google.com/servicelogin?service=mail"
+                        target="_blank">ctrlalt@eat.com</a>
                 </div>
             </div>
         </section>
@@ -252,6 +259,8 @@
             </div>
         </section>
     </main>
+
+
 
     <footer class="footer">
         <div class="footer-main">
@@ -292,7 +301,7 @@
                 <ul class="footer-links">
                     <li><a href="add.html">Add A Recipe</a></li>
                     <li><a href="recipes.html">Explore Recipes</a></li>
-                    <li><a href="flavor.html">Flavor Lab</a></li>
+                    <li><a href="FlavorLab.html">Flavor Lab</a></li>
                     <li><a href="favorites.html">Your Picks</a></li>
                 </ul>
             </div>

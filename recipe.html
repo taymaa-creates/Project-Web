@@ -5,7 +5,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Recipe</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="recipe.css">
   <link rel="stylesheet" href="common.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -13,63 +15,68 @@
 </head>
 
 <body>
-    <header>
-        <nav>
+  <header>
+    <nav>
 
-            <div class="nav">
-                <div class="nav-links" id="nav-links">
-                    <div class="dropdown">
-                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
-                            Discover <span class="caret">▾</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="recipes.html">All Recipes</a></li>
-                            <li><a href="categories.html">Categories</a></li>
-                            <li><a href="falvor.html">Flavor Lab</a></li>
-                            <li><a href="recipe.html">Single Recipe</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="dropdown">
-                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
-                            My Kitchen <span class="caret">▾</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="favorites.html">My Recipes</a></li>
-                            <li><a href="add.html">Add A Recipe</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="dropdown">
-                        <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
-                            Info <span class="caret">▾</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            <img src="logo\6.svg" alt="Site logo" class="logo">
-
-            <div class="header-search">
-                <input type="text" id="header-search-input" placeholder="Search recipes..." />
-                <button id="header-search-btn" title="Search">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+      <div class="nav">
+        <div class="nav-links" id="nav-links">
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Discover <span class="caret">▾</span>
             </button>
-        </nav>
-    </header>
+            <ul class="dropdown-menu">
+              <li><a href="home.html">Home</a></li>
+              <li><a href="recipes.html">All Recipes</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="FlavorLab.html">Flavor Lab</a></li>
+              <li><a href="recipe.html">Single Recipe</a></li>
+            </ul>
+          </div>
 
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              My Kitchen <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="mealplanner.html">My Meal Planner</a></li>
+              <li><a href="add.html">Add A Recipe</a></li>
+            </ul>
+          </div>
 
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Info <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <div class="left">
+
+        <button class="btns" id="favheart">
+          <i class="fa fa-heart"></i>
+        </button>
+
+        <div class="header-search">
+          <input type="text" id="header-search-input" placeholder="Search recipes..." />
+          <button id="header-search-btn" class="btns" title="Search">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
 
   <main class="page-wrap">
     <section class="hero" id="hero">
@@ -190,7 +197,16 @@
               </div>
               <button class="accent-btn" id="qaTimerStart">Start Timer</button>
               <div class="qa-timer-count" id="qaTimerCountdown"></div>
-              <button class="accent-btn light" id="keepScreenOn">Keep screen awake</button>
+
+              <div class="screen-wake-container">
+                <button class="accent-btn light" id="keepScreenOn" title="Prevents screen from sleeping during cooking">
+                  <i class="fas fa-eye" style="margin-right: 8px;"></i>
+                  Keep screen awake
+                </button>
+                <small style="display: block; margin-top: 5px; color: #666; font-size: 12px;">
+                  Click to toggle screen wake lock.
+                </small>
+              </div>
             </div>
 
             <div class="qa-rating box-inner">
@@ -276,81 +292,81 @@
     </div>
   </main>
 
-    <footer class="footer">
-        <div class="footer-main">
-            <div class="footer-col footer-brand">
-                <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
-                <p class="footer-description">
-                    <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
-                    Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
-                </p>
-                <div class="footer-social">
-                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://youtube.com" target="_blank" aria-label="YouTube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
 
-            <div class="footer-col">
-                <h3 class="footer-title">Navigation</h3>
-                <ul class="footer-links">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="categories.html">Recipe Categories</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3 class="footer-title">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="add.html">Add A Recipe</a></li>
-                    <li><a href="recipes.html">Explore Recipes</a></li>
-                    <li><a href="flavor.html">Flavor Lab</a></li>
-                    <li><a href="favorites.html">Your Picks</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col footer-newsletter">
-                <h3 class="footer-title">Join Our Cooking Journey</h3>
-                <p class="newsletter-desc">Receive exclusive recipes and culinary insights</p>
-                <form class="newsletter-form">
-                    <div class="input-group">
-                        <input type="email" placeholder="Your email address" class="newsletter-input" required>
-                        <button type="submit" class="newsletter-btn">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> + (961) 123-45687</p>
-                    <p><i class="fas fa-envelope"></i> ctrlalt@eat.com</p>
-                </div>
-            </div>
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-col footer-brand">
+        <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+        <p class="footer-description">
+          <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
+          Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
+        </p>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
         </div>
+      </div>
 
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <p>&copy; <span id="year"> </span> ctrl+alt+eat. Crafted with <i class="fas fa-heart"></i> for culinary
-                    enthusiasts.</p>
-                <div class="footer-legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-            </div>
+      <div class="footer-col">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="categories.html">Recipe Categories</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="add.html">Add A Recipe</a></li>
+          <li><a href="recipes.html">Explore Recipes</a></li>
+          <li><a href="FlavorLab.html">Flavor Lab</a></li>
+          <li><a href="favorites.html">Your Picks</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h3 class="footer-title">Join Our Cooking Journey</h3>
+        <p class="newsletter-desc">Receive exclusive recipes and culinary insights</p>
+        <form class="newsletter-form">
+          <div class="input-group">
+            <input type="email" placeholder="Your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> + (961) 123-45687</p>
+          <p><i class="fas fa-envelope"></i> ctrlalt@eat.com</p>
         </div>
-    </footer>
+      </div>
+    </div>
 
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; <span id="year"> </span> ctrl+alt+eat. Crafted with <i class="fas fa-heart"></i> for culinary
+          enthusiasts.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="recipe.js"></script>

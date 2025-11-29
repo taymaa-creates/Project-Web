@@ -25,7 +25,7 @@
               <li><a href="home.html">Home</a></li>
               <li><a href="recipes.html">All Recipes</a></li>
               <li><a href="categories.html">Categories</a></li>
-              <li><a href="falvor.html">Flavor Lab</a></li>
+              <li><a href="FlavorLab.html">Flavor Lab</a></li>
               <li><a href="recipe.html">Single Recipe</a></li>
             </ul>
           </div>
@@ -35,7 +35,7 @@
               My Kitchen <span class="caret">▾</span>
             </button>
             <ul class="dropdown-menu">
-              <li><a href="favorites.html">My Meal Planner</a></li>
+              <li><a href="mealplanner.html">My Meal Planner</a></li>
               <li><a href="add.html">Add A Recipe</a></li>
             </ul>
           </div>
@@ -84,6 +84,48 @@
       <div class="topbar-inner">
         <img src="logo/6.svg" alt="Logo" class="top-logo" />
         <input id="live-search" type="search" placeholder="Search your meal..." aria-label="Search recipes" />
+      </div>
+
+      <div class="sort-control">
+        <button class="sort-toggle" id="sortToggle" aria-expanded="false" aria-haspopup="true">
+          <i class="fas fa-sort"></i>
+          <span class="sort-label">Sort: Recommended</span>
+          <i class="fas fa-chevron-down sort-caret"></i>
+        </button>
+        <div class="sort-dropdown" id="sortDropdown" aria-hidden="true">
+          <button class="sort-option active" data-sort="recommended">
+            <i class="fas fa-star"></i>
+            Recommended
+          </button>
+          <button class="sort-option" data-sort="name-asc">
+            <i class="fas fa-sort-alpha-down"></i>
+            Name A-Z
+          </button>
+          <button class="sort-option" data-sort="name-desc">
+            <i class="fas fa-sort-alpha-up"></i>
+            Name Z-A
+          </button>
+          <button class="sort-option" data-sort="time-asc">
+            <i class="fas fa-clock"></i>
+            Time (Shortest)
+          </button>
+          <button class="sort-option" data-sort="time-desc">
+            <i class="fas fa-hourglass-end"></i>
+            Time (Longest)
+          </button>
+          <button class="sort-option" data-sort="difficulty-asc">
+            <i class="fas fa-thermometer-empty"></i>
+            Difficulty (Easy)
+          </button>
+          <button class="sort-option" data-sort="difficulty-desc">
+            <i class="fas fa-thermometer-full"></i>
+            Difficulty (Hard)
+          </button>
+          <button class="sort-option" data-sort="newest">
+            <i class="fas fa-calendar-plus"></i>
+            Newest First
+          </button>
+        </div>
       </div>
     </section>
 
@@ -207,7 +249,7 @@
         <ul class="footer-links">
           <li><a href="add.html">Add A Recipe</a></li>
           <li><a href="recipes.html">Explore Recipes</a></li>
-          <li><a href="flavor.html">Flavor Lab</a></li>
+          <li><a href="FlavorLab.html">Flavor Lab</a></li>
           <li><a href="favorites.html">Your Picks</a></li>
         </ul>
       </div>
