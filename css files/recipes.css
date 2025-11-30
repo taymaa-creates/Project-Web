@@ -15,22 +15,6 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-body{
-        background-image: url("img/backgorund.svg");
-}
-
 html {
     font-size: 100%;
 }

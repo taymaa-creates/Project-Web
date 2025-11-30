@@ -31,7 +31,6 @@
 .hero-section {
     position: relative;
     height: 95vh;
-    background: url("imgs/section1.png") center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,7 +133,6 @@
     position: relative;
     height: 60vh;
     margin: 4rem 0;
-    background: url('imgs/section5.png') center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
