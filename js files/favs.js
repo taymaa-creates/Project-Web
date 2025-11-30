@@ -9,7 +9,6 @@ let selectedCount = document.getElementById("selectedCount");
 let bulkClear = document.getElementById("bulkClear");
 let bulkRemove = document.getElementById("bulkRemove");
 let bulkExport = document.getElementById("bulkExport");
-let bulkAddToMealPlan = document.getElementById("bulkAddToMealPlan");
 let bulkMoveToCollection = document.getElementById("bulkMoveToCollection");
 let collectionsList = document.getElementById("collectionsList");
 let createCollection = document.getElementById("createCollection");
@@ -415,65 +414,12 @@ function showQuickView(recipeId) {
         </div>
         ` : ''}
         <div class="modal-actions">
-            <button onclick="addToMealPlan('${recipe.id}')" class="btn btn-primary">Add to Meal Plan</button>
             <button onclick="addToCollectionFromQuickView('${recipe.id}')" class="btn btn-secondary">Add to Collection</button>
             <button onclick="window.location.href='recipe.html?id=${recipe.id}'" class="btn btn-outline">Full Recipe</button>
         </div>
     `;
 
   quickViewModal.style.display = 'block';
-}
-
-function addToMealPlan(recipeId) {
-  let mealPlan = JSON.parse(localStorage.getItem('mealPlan')) || {};
-  let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-  let meals = ['dinner', 'lunch', 'breakfast', 'snacks'];
-
-  let slotFound = false;
-  let targetDay = '';
-  let targetMeal = '';
-
-  for (let day of days) {
-    for (let mealType of meals) {
-      if (!mealPlan[day] || mealPlan[day][mealType].length === 0) {
-        targetDay = day;
-        targetMeal = mealType;
-        slotFound = true;
-        break;
-      }
-    }
-    if (slotFound) break;
-  }
-
-  if (!slotFound) {
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    targetDay = days[tomorrow.getDay()] || 'monday';
-    targetMeal = 'dinner';
-  }
-
-  if (!mealPlan[targetDay]) {
-    mealPlan[targetDay] = { breakfast: [], lunch: [], dinner: [], snacks: [] };
-  }
-
-  let recipe = allRecipes.find(r => r.id === recipeId);
-  if (recipe && !mealPlan[targetDay][targetMeal].some(r => r.id === recipeId)) {
-    mealPlan[targetDay][targetMeal].push({
-      id: recipeId,
-      name: recipe.name,
-      image: recipe.image,
-      cuisine: recipe.cuisine,
-      mealType: recipe.mealType
-    });
-
-    localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
-    let formattedDay = targetDay.charAt(0).toUpperCase() + targetDay.slice(1);
-    showToast(`Added to ${targetMeal} on ${formattedDay}`, 'success');
-  } else {
-    showToast('Recipe already in meal plan', 'warning');
-  }
-
-  quickViewModal.style.display = 'none';
 }
 
 function toggleRecipeSelection(recipeId) {
@@ -681,11 +627,6 @@ function attachFilterListeners() {
   bulkClear.addEventListener("click", clearSelection);
   bulkRemove.addEventListener("click", bulkRemoveRecipes);
   bulkExport.addEventListener("click", showExportModal);
-  bulkAddToMealPlan.addEventListener("click", () => {
-    if (selectedRecipes.size === 0) return;
-    selectedRecipes.forEach(recipeId => addToMealPlan(recipeId));
-    clearSelection();
-  });
 }
 
 function attachCollectionListeners() {

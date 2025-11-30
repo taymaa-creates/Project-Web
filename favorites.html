@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="logo/6.svg" type="image/x-icon">
     <link rel="stylesheet" href="css files/fav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="commons/common.css">
+    <link rel="stylesheet" href="css files/common.css">
 </head>
 
 <body>
@@ -88,7 +88,6 @@
     <div id="bulkActions" class="bulk-actions hidden">
         <span id="selectedCount">0 recipes selected</span>
         <div class="bulk-buttons">
-            <button id="bulkAddToMealPlan" class="btn btn-secondary">Add to Meal Plan</button>
             <button id="bulkMoveToCollection" class="btn btn-secondary">Move to Collection</button>
             <button id="bulkExport" class="btn btn-secondary">Export Selected</button>
             <button id="bulkRemove" class="btn btn-danger">Remove</button>
@@ -144,20 +143,6 @@
         <div class="modal-actions">
             <button id="confirmCollection" class="btn btn-primary">Create</button>
             <button id="cancelCollection" class="btn btn-outline">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<!-- Delete Collection Confirmation Modal -->
-<div id="deleteCollectionModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>Delete Collection</h3>
-        <p>Are you sure you want to delete the collection "<span id="collectionToDeleteName"></span>"?</p>
-        <p class="warning-text">This action cannot be undone.</p>
-        <div class="modal-actions">
-            <button id="confirmDeleteCollection" class="btn btn-danger">Delete</button>
-            <button id="cancelDeleteCollection" class="btn btn-outline">Cancel</button>
         </div>
     </div>
 </div>
@@ -256,10 +241,7 @@
         <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
     </button>
 
-    <!-- Toast Notification -->
-    <div id="toastContainer"></div>
-
-    <script src="commons/common.js"></script>
+    <script src="js files/common.js"></script>
     <script src="js files/favs.js"></script>
 </body>
 
