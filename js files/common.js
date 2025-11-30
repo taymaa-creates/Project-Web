@@ -398,4 +398,3 @@ document.addEventListener("DOMContentLoaded", () => {
     darkmode();
     initDropdowns();
 });
-
