@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add A Recipe</title>
+  <link rel="stylesheet" href="../styles/addrecipe.css ">
+  <link rel="stylesheet" href="../styles/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css files/common.css">
+  <link rel="shortcut icon" href="../media/6.svg">
+</head>
+
+
+<body>
+  <header>
+    <nav>
+
+      <div class="nav">
+        <div class="nav-links" id="nav-links">
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Discover <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="home.html">Home</a></li>
+              <li><a href="recipes.html">All Recipes</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="FlavorLab.html">Flavor Lab</a></li>
+              <li><a href="recipe.html">Single Recipe</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              My Kitchen <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="../pages/planner.html">My Meal Planner</a></li>
+              <li><a href="../pages/addrecipe.html">Add A Recipe</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Info <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="../pages/contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <img src="../media/6.svg" alt="Site logo" class="logo">
+
+      <div class="left">
+
+        <button class="btns" id="favheart">
+          <i class="fa fa-heart"></i>
+        </button>
+
+        <div class="header-search">
+          <input type="text" id="header-search-input" placeholder="Search recipes..." />
+          <button id="header-search-btn" class="btns" title="Search">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+    <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+  </button>
+
+
+  <div id="login-page" class="login-wrapper">
+    <div class="login-info">
+      <h2>Welcome to RecipeCraft</h2>
+      <p>Your personal recipe builder and nutrition assistant</p>
+      <ul class="login-features">
+        <li>🧠 Smart nutrition estimates</li>
+        <li>📋 Step-by-step recipe builder</li>
+        <li>📸 Live preview of your dish</li>
+      </ul>
+    </div>
+
+    <div class="login-container">
+      <h3>Welcome Back, Chef!</h3>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button id="login-btn">Login</button>
+      <p id="login-error" class="error-text"></p>
+    </div>
+  </div>
+
+
+  <div id="add-recipe-page" class="page hidden">
+    <div class="container">
+      <div class="left-column">
+        <h2>Add Recipe</h2>
+
+
+        <div class="form-group">
+          <h5 class="form-title">Recipe Title</h5>
+          <input type="text" id="recipe-title" placeholder="Enter recipe title">
+        </div>
+
+        <div class="form-group">
+          <label>Cuisine</label>
+          <select id="cuisine">
+            <option value="">Select Cuisine</option>
+            <option>Italian</option>
+            <option>Chinese</option>
+            <option>Indian</option>
+            <option>Mexican</option>
+            <option>Lebanese</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Meal Type</label>
+          <select id="category">
+            <option value="">Select Meal Type</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+            <option>Dessert</option>
+            <option>Snack</option>
+            <option>Beverage</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Difficulty</label>
+          <div class="difficulty-buttons">
+            <button class="difficulty-btn" data-value="Easy">Easy</button>
+            <button class="difficulty-btn" data-value="Medium">Medium</button>
+            <button class="difficulty-btn" data-value="Hard">Hard</button>
+          </div>
+          <input type="hidden" id="difficulty">
+        </div>
+
+        <div class="form-group">
+          <label>Diet Type</label>
+          <select id="diet">
+            <option value="">Select Diet</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten-Free</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ingredients</label>
+          <div id="ingredient-suggestions">
+            <h5>Dairy</h5>
+            <button type="button" class="ingredient-btn" data-name="Milk">Milk</button>
+            <button type="button" class="ingredient-btn" data-name="Cheese">Cheese</button>
+            <button type="button" class="ingredient-btn" data-name="Butter">Butter</button>
+
+            <h5>Vegetables</h5>
+            <button type="button" class="ingredient-btn" data-name="Mushroom">Mushroom</button>
+            <button type="button" class="ingredient-btn" data-name="Carrot">Carrot</button>
+            <button type="button" class="ingredient-btn" data-name="Tomato">Tomato</button>
+
+            <h5>Protein</h5>
+            <button type="button" class="ingredient-btn" data-name="Chicken">Chicken</button>
+            <button type="button" class="ingredient-btn" data-name="Beef">Beef</button>
+            <button type="button" class="ingredient-btn" data-name="Tofu">Tofu</button>
+          </div>
+
+          <div class="custom-ingredient">
+            <input type="text" id="custom-ingredient-input" placeholder="Add custom ingredient">
+            <button type="button" id="add-custom-ingredient-btn">Add</button>
+          </div>
+
+          <div id="ingredients-list"></div>
+        </div>
+        <div class="form-group">
+          <label for="avg-time">Estimated Total Time (minutes)</label>
+          <input type="number" id="avg-time" min="0" placeholder="e.g. 25">
+        </div>
+
+
+        <div class="form-group">
+          <label>Instructions</label>
+          <div id="steps-list"></div>
+          <button type="button" id="add-step-btn">+ Add Step</button>
+        </div>
+
+        <div class="form-group">
+          <h5 class="form-title">Recipe Image</h5>
+          <input type="text" id="image-url" placeholder="Paste image link">
+        </div>
+        <div class="form-group">
+          <label>Video URL</label>
+          <input type="text" id="video-url" placeholder="Paste video link">
+          <button type="button" id="add-video-btn">Add Video</button>
+        </div>
+
+
+        <div class="form-group">
+          <h4>Nutrition Estimator</h4>
+          <div id="nutrition-result" class="nutrition-card">
+            <p>Calories: 0 kcal</p>
+            <p>Protein: 0 g</p>
+            <p>Fat: 0 g</p>
+            <p>Carbs: 0 g</p>
+            <button type="button" id="calculate-nutrition-btn">Estimate Nutrition</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="save-draft-btn">Save Draft</button>
+          <button id="save-close-btn">Save & Close</button>
+          <button id="publish-btn">Publish</button>
+          <button id="delete-draft-btn">Delete Draft</button>
+
+        </div>
+        <div class="user-recipes-section">
+          <h2>Your Recipes</h2>
+          <div id="user-recipes-container"></div>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <h3>Live Preview</h3>
+        <div id="preview-card">
+          <img id="preview-image" src="" alt="Recipe Image">
+          <h4 id="preview-title">Recipe Title</h4>
+          <p id="preview-details">Cuisine • Meal Type • Difficulty • Diet • Time</p>
+          <div>
+            <h5>Ingredients:</h5>
+            <ul id="preview-ingredients"></ul>
+          </div>
+          <div>
+            <h5>Steps:</h5>
+            <ol id="preview-steps"></ol>
+          </div>
+          <div id="preview-videos">
+            <h5>Videos:</h5>
+            <ul></ul>
+          </div>
+          <div id="preview-nutrition">
+            <h5>Nutrition:</h5>
+            <p>Calories: 0 kcal</p>
+            <p>Protein: 0 g</p>
+            <p>Fat: 0 g</p>
+            <p>Carbs: 0 g</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-col footer-brand">
+        <img src="../media/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+        <p class="footer-description">
+          <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
+          Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
+        </p>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="categories.html">Recipe Categories</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="../pages/contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="../pages/addrecipe.html">Add A Recipe</a></li>
+          <li><a href="recipes.html">Explore Recipes</a></li>
+          <li><a href="FlavorLab.html">Flavor Lab</a></li>
+          <li><a href="favorites.html">Your Picks</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h3 class="footer-title">Join Our Cooking Journey</h3>
+        <p class="newsletter-desc">Receive exclusive recipes and culinary insights</p>
+        <form class="newsletter-form">
+          <div class="input-group">
+            <input type="email" placeholder="Your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> + (961) 123-45687</p>
+          <p><i class="fas fa-envelope"></i> ctrlalt@eat.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; <span id="year"> </span> ctrl+alt+eat. Crafted with <i class="fas fa-heart"></i> for culinary
+          enthusiasts.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="../script/addrecipe.js"></script>
+  <script src="../script/common.js"></script>
+</body>
+
+</html>
