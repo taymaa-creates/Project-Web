@@ -4,7 +4,6 @@ let mealFilters = document.getElementById("mealFilters");
 let cuisineFilters = document.getElementById("cuisineFilters");
 let clearFilters = document.getElementById("clearFilters");
 let surpriseBtn = document.getElementById("surpriseBtn");
-let snackbarEl = document.getElementById("snackbar");
 let bulkActions = document.getElementById("bulkActions");
 let selectedCount = document.getElementById("selectedCount");
 let bulkClear = document.getElementById("bulkClear");
@@ -20,6 +19,10 @@ let collectionModal = document.getElementById("collectionModal");
 let collectionName = document.getElementById("collectionName");
 let confirmCollection = document.getElementById("confirmCollection");
 let cancelCollection = document.getElementById("cancelCollection");
+let deleteCollectionModal = document.getElementById("deleteCollectionModal");
+let collectionToDeleteName = document.getElementById("collectionToDeleteName");
+let confirmDeleteCollection = document.getElementById("confirmDeleteCollection");
+let cancelDeleteCollection = document.getElementById("cancelDeleteCollection");
 let exportModal = document.getElementById("exportModal");
 let confirmExport = document.getElementById("confirmExport");
 let cancelExport = document.getElementById("cancelExport");
@@ -36,6 +39,8 @@ let selectedCuisine = null;
 let pendingRemovals = new Map();
 let selectedRecipes = new Set();
 let collections = [];
+let currentCollection = null;
+let collectionToDelete = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
   favoriteIds = loadFavorites();
@@ -64,12 +69,52 @@ function saveCollections(cols) {
 }
 
 async function loadRecipes() {
-  let res = await fetch(JSON_PATH);
-  allRecipes = await res.json();
+  try {
+    let res = await fetch(JSON_PATH);
+    allRecipes = await res.json();
+  } catch (error) {
+    console.error("Failed to load recipes:", error);
+    // Fallback to sample data if JSON file is not available
+    allRecipes = [
+      {
+        id: "1",
+        name: "Vegetable Stir Fry",
+        cuisine: "Asian",
+        mealType: "Dinner",
+        image: "https://via.placeholder.com/300x200",
+        cookingTime: "20",
+        difficulty: "Easy",
+        ingredients: ["Bell peppers", "Broccoli", "Carrots", "Soy sauce", "Ginger", "Garlic"],
+        instructions: ["Chop vegetables", "Heat oil in pan", "Stir fry vegetables", "Add sauce"]
+      },
+      {
+        id: "2",
+        name: "Pasta Carbonara",
+        cuisine: "Italian",
+        mealType: "Dinner",
+        image: "https://via.placeholder.com/300x200",
+        cookingTime: "25",
+        difficulty: "Medium",
+        ingredients: ["Pasta", "Eggs", "Parmesan cheese", "Bacon", "Black pepper"],
+        instructions: ["Cook pasta", "Fry bacon", "Mix eggs and cheese", "Combine all ingredients"]
+      },
+      {
+        id: "3",
+        name: "Berry Smoothie",
+        cuisine: "American",
+        mealType: "Breakfast",
+        image: "https://via.placeholder.com/300x200",
+        cookingTime: "5",
+        difficulty: "Easy",
+        ingredients: ["Mixed berries", "Yogurt", "Honey", "Milk"],
+        instructions: ["Add all ingredients to blender", "Blend until smooth"]
+      }
+    ];
+  }
 }
 
 function renderFilters() {
-  let favRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
+  let favRecipes = getCurrentRecipes();
   let meals = [...new Set(favRecipes.map(r => r.mealType))];
   let cuisines = [...new Set(favRecipes.map(r => r.cuisine))];
 
@@ -84,6 +129,21 @@ function renderFilters() {
   attachFilterListeners();
 }
 
+function getCurrentRecipes() {
+  // Start with all favorite recipes
+  let favRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
+  
+  // If we're viewing a collection, filter by that collection's recipes
+  if (currentCollection) {
+    const collection = collections.find(c => c.id === currentCollection);
+    if (collection) {
+      favRecipes = favRecipes.filter(r => collection.recipes.includes(r.id));
+    }
+  }
+  
+  return favRecipes;
+}
+
 function renderCollections() {
   if (collections.length === 0) {
     collectionsList.innerHTML = '<p style="color: #666; font-style: italic;">No collections yet</p>';
@@ -91,8 +151,15 @@ function renderCollections() {
   }
 
   collectionsList.innerHTML = collections.map(collection => `
-        <div class="collection-card" data-id="${collection.id}">
-            <div class="collection-name">${collection.name}</div>
+        <div class="collection-card ${currentCollection === collection.id ? 'active' : ''}" data-id="${collection.id}">
+            <div class="collection-header">
+                <div class="collection-name">${collection.name}</div>
+                <div class="collection-actions">
+                    <button class="collection-delete" title="Delete collection">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
             <div class="collection-count">${collection.recipes.length} recipes</div>
         </div>
     `).join("");
@@ -101,7 +168,7 @@ function renderCollections() {
 }
 
 function renderFavorites() {
-  let favRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
+  let favRecipes = getCurrentRecipes();
   let filtered = favRecipes.filter(r => {
     return (!selectedMeal || r.mealType === selectedMeal) &&
       (!selectedCuisine || r.cuisine === selectedCuisine);
@@ -128,33 +195,68 @@ function renderFavorites() {
   attachListeners();
 }
 
-function showSnackbar(message, actionText = 'Undo', onAction = null, duration = PENDING_TTL) {
-  snackbarEl.innerHTML = '';
-  let text = document.createElement('span');
-  text.textContent = message;
-  snackbarEl.appendChild(text);
-
+function showToast(message, type = "info", duration = 4000, actionText = null, onAction = null) {
+  const toast = document.createElement("div");
+  toast.className = `toast-notification toast-${type}`;
+  
+  let actionHtml = '';
   if (actionText && onAction) {
-    let btn = document.createElement('button');
-    btn.className = 'action';
-    btn.textContent = actionText;
-    btn.onclick = () => {
+    actionHtml = `
+      <div class="toast-actions">
+        <button class="toast-action">${actionText}</button>
+        <button class="toast-close">&times;</button>
+      </div>
+    `;
+  } else {
+    actionHtml = '<button class="toast-close">&times;</button>';
+  }
+  
+  toast.innerHTML = `
+    <div class="toast-content">
+      <div class="toast-message">${message}</div>
+      ${actionHtml}
+    </div>
+  `;
+
+  document.getElementById("toastContainer").appendChild(toast);
+
+  // Trigger animation
+  setTimeout(() => {
+    toast.classList.add("show");
+  }, 10);
+
+  // Action button
+  if (actionText && onAction) {
+    const actionBtn = toast.querySelector(".toast-action");
+    actionBtn.addEventListener("click", () => {
       onAction();
-      hideSnackbar();
-    };
-    snackbarEl.appendChild(btn);
+      hideToast(toast);
+    });
   }
 
-  snackbarEl.classList.add('show');
-  let closeAfter = setTimeout(hideSnackbar, duration);
+  // Close button
+  const closeBtn = toast.querySelector(".toast-close");
+  closeBtn.addEventListener("click", () => {
+    hideToast(toast);
+  });
 
-  function hideSnackbar() {
-    snackbarEl.classList.remove('show');
-    snackbarEl.innerHTML = '';
-    clearTimeout(closeAfter);
+  // Auto hide
+  if (duration > 0) {
+    setTimeout(() => {
+      hideToast(toast);
+    }, duration);
   }
 
-  return hideSnackbar;
+  return toast;
+}
+
+function hideToast(toast) {
+  toast.classList.remove("show");
+  setTimeout(() => {
+    if (toast.parentNode) {
+      toast.parentNode.removeChild(toast);
+    }
+  }, 400);
 }
 
 function removeWithUndo(id, card) {
@@ -176,9 +278,13 @@ function removeWithUndo(id, card) {
 
   favoriteIds = favoriteIds.filter(f => String(f) !== id);
   selectedRecipes.delete(id);
+  
+  // Remove from all collections
+  collections.forEach(collection => {
+    collection.recipes = collection.recipes.filter(recipeId => recipeId !== id);
+  });
 
-  let visibleFavs = allRecipes.filter(r =>
-    favoriteIds.includes(r.id) &&
+  let visibleFavs = getCurrentRecipes().filter(r =>
     (!selectedMeal || r.mealType === selectedMeal) &&
     (!selectedCuisine || r.cuisine === selectedCuisine)
   );
@@ -190,6 +296,7 @@ function removeWithUndo(id, card) {
 
   let finalize = () => {
     saveFavorites(favoriteIds);
+    saveCollections(collections);
     pendingRemovals.delete(id);
     if (favoriteIds.length === 0) renderFavorites();
   };
@@ -197,7 +304,7 @@ function removeWithUndo(id, card) {
   let timeoutId = setTimeout(finalize, PENDING_TTL);
   pendingRemovals.set(id, { timeoutId, backupFavs });
 
-  showSnackbar('Removed from favorites', 'Undo', () => {
+  showToast('Removed from favorites', 'success', PENDING_TTL, 'Undo', () => {
     let pending = pendingRemovals.get(id);
     if (pending) {
       clearTimeout(pending.timeoutId);
@@ -206,11 +313,11 @@ function removeWithUndo(id, card) {
     favoriteIds = backupFavs.slice();
     saveFavorites(favoriteIds);
     renderFavorites();
-  }, PENDING_TTL);
+  });
 }
 
 function setupModalEvents() {
-  let modals = [quickViewModal, collectionModal, exportModal];
+  let modals = [quickViewModal, collectionModal, deleteCollectionModal, exportModal];
 
   modals.forEach(modal => {
     let closeBtn = modal.querySelector('.close');
@@ -230,6 +337,13 @@ function setupModalEvents() {
 
   confirmCollection.onclick = createNewCollection;
   cancelCollection.onclick = () => collectionModal.style.display = 'none';
+  
+  confirmDeleteCollection.onclick = deleteCollection;
+  cancelDeleteCollection.onclick = () => {
+    deleteCollectionModal.style.display = 'none';
+    collectionToDelete = null;
+  };
+  
   confirmExport.onclick = performExport;
   cancelExport.onclick = () => exportModal.style.display = 'none';
 
@@ -252,7 +366,30 @@ function createNewCollection() {
   saveCollections(collections);
   renderCollections();
   collectionModal.style.display = 'none';
-  showSnackbar(`Collection "${name}" created`);
+  showToast(`Collection "${name}" created`, 'success');
+}
+
+function deleteCollection() {
+  if (!collectionToDelete) return;
+  
+  const collection = collections.find(c => c.id === collectionToDelete);
+  if (!collection) return;
+  
+  // Remove the collection (doesn't affect favorites)
+  collections = collections.filter(c => c.id !== collectionToDelete);
+  saveCollections(collections);
+  
+  // If we were viewing this collection, clear the current collection
+  if (currentCollection === collectionToDelete) {
+    currentCollection = null;
+  }
+  
+  renderCollections();
+  renderFavorites();
+  deleteCollectionModal.style.display = 'none';
+  showToast(`Collection "${collection.name}" deleted`, 'success');
+  
+  collectionToDelete = null;
 }
 
 function showQuickView(recipeId) {
@@ -331,11 +468,9 @@ function addToMealPlan(recipeId) {
 
     localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
     let formattedDay = targetDay.charAt(0).toUpperCase() + targetDay.slice(1);
-    showSnackbar(`Added to ${targetMeal} on ${formattedDay}`, 'View Plan', () => {
-      window.location.href = 'meal-planner.html';
-    });
+    showToast(`Added to ${targetMeal} on ${formattedDay}`, 'success');
   } else {
-    showSnackbar('Recipe already in meal plan');
+    showToast('Recipe already in meal plan', 'warning');
   }
 
   quickViewModal.style.display = 'none';
@@ -371,12 +506,17 @@ function bulkRemoveRecipes() {
 
   selectedRecipes.forEach(id => {
     favoriteIds = favoriteIds.filter(f => f !== id);
+    // Remove from all collections
+    collections.forEach(collection => {
+      collection.recipes = collection.recipes.filter(recipeId => recipeId !== id);
+    });
   });
 
   saveFavorites(favoriteIds);
+  saveCollections(collections);
   selectedRecipes.clear();
   renderFavorites();
-  showSnackbar(`Removed ${removedCount} recipes`);
+  showToast(`Removed ${removedCount} recipes`, 'success');
 
   pendingRemovals.forEach(({ timeoutId }) => clearTimeout(timeoutId));
   pendingRemovals.clear();
@@ -398,7 +538,7 @@ function performExport() {
   }
 
   exportModal.style.display = 'none';
-  showSnackbar(`Exported ${recipesToExport.length} recipes as ${format.toUpperCase()}`);
+  showToast(`Exported ${recipesToExport.length} recipes as ${format.toUpperCase()}`, 'success');
 }
 
 function exportToJSON(recipes) {
@@ -516,8 +656,10 @@ function attachFilterListeners() {
   clearFilters.addEventListener("click", () => {
     selectedMeal = null;
     selectedCuisine = null;
+    currentCollection = null;
     renderFilters();
     renderFavorites();
+    renderCollections();
   });
 
   surpriseBtn.addEventListener("click", () => {
@@ -548,15 +690,44 @@ function attachFilterListeners() {
 
 function attachCollectionListeners() {
   document.querySelectorAll(".collection-card").forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      // Don't trigger collection view if clicking the delete button
+      if (e.target.closest('.collection-delete')) {
+        return;
+      }
+      
+      let collectionId = card.dataset.id;
+      
+      if (selectedRecipes.size > 0) {
+        addRecipesToCollection(collectionId, Array.from(selectedRecipes));
+      } else {
+        // Show recipes from this collection
+        currentCollection = currentCollection === collectionId ? null : collectionId;
+        renderFavorites();
+        renderCollections();
+        
+        if (currentCollection) {
+          const collection = collections.find(c => c.id === collectionId);
+          showToast(`Viewing ${collection.name} collection (${collection.recipes.length} recipes)`, 'info');
+        } else {
+          showToast('Showing all favorites', 'info');
+        }
+      }
+    });
+  });
+
+  // Add delete collection button listeners
+  document.querySelectorAll(".collection-delete").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      let card = btn.closest(".collection-card");
       let collectionId = card.dataset.id;
       let collection = collections.find(c => c.id === collectionId);
+      
       if (collection) {
-        if (selectedRecipes.size > 0) {
-          addRecipesToCollection(collectionId, Array.from(selectedRecipes));
-        } else {
-          showSnackbar(`Viewing ${collection.name} collection (${collection.recipes.length} recipes)`);
-        }
+        collectionToDelete = collectionId;
+        collectionToDeleteName.textContent = collection.name;
+        deleteCollectionModal.style.display = 'block';
       }
     });
   });
@@ -579,15 +750,15 @@ function addRecipesToCollection(collectionId, recipeIds) {
   clearSelection();
 
   if (addedCount > 0) {
-    showSnackbar(`Added ${addedCount} recipes to ${collection.name}`);
+    showToast(`Added ${addedCount} recipes to ${collection.name}`, 'success');
   } else {
-    showSnackbar(`All selected recipes are already in ${collection.name}`);
+    showToast(`All selected recipes are already in ${collection.name}`, 'warning');
   }
 }
 
 function addToCollectionFromQuickView(recipeId) {
   if (collections.length === 0) {
-    showSnackbar('Please create a collection first');
+    showToast('Please create a collection first', 'warning');
     return;
   }
 

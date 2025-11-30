@@ -22,10 +22,13 @@ html, body {
     color: var(--text);
     background: var(--bg);
     -webkit-font-smoothing: antialiased;
-    background-image: url('Untitled design.svg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+}
+
+body{
+        background-image: url("img/backgorund.svg");
 }
 
 html {
@@ -1079,26 +1082,6 @@ html {
     
     .recipe-image {
         height: 140px;
-    }
-}
-
-@media (min-width: 769px) {
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--muted);
-        border-radius: 10px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(var(--accent-1), var(--accent-2));
-        border-radius: 10px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(var(--accent-2), var(--accent-1));
     }
 }
 

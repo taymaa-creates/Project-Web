@@ -16,7 +16,7 @@ $(function () {
 
     let qaTimerInterval = null;
     let qaTimerRemaining = 0;
-    
+
     function showToast(message, type = 'info', duration = 3000) {
         $('.toast-notification').remove();
 
@@ -143,6 +143,7 @@ $(function () {
         loadRecipes();
         initEventListeners();
         initCookingMode();
+        initExportFunctionality();
     }
 
     function loadRecipes() {
@@ -192,6 +193,22 @@ $(function () {
         $(window).on('scroll', handleScroll);
         $(window).on('popstate', handlePopState);
         window.addEventListener('storage', handleStorageChange);
+
+        $('#exportPDF, #exportJSON').on('click', showExportModal);
+        $('#closeExportModal, #cancelExport').on('click', closeExportModal);
+        $('#confirmExport').on('click', performExport);
+
+        $('.export-option').on('click', function () {
+            $('.export-option').removeClass('selected');
+            $(this).addClass('selected');
+            $(this).find('input[type="radio"]').prop('checked', true);
+        });
+
+        $(document).on('keyup', function (e) {
+            if (e.key === 'Escape' && $('#exportModal').hasClass('active')) {
+                closeExportModal();
+            }
+        });
     }
 
     function openRecipeFromQuery() {
@@ -878,7 +895,7 @@ $(function () {
         $('body').css('overflow', '');
         resetStepTimer();
         currentStepIndex = 0;
-        releaseWakeLock(); 
+        releaseWakeLock();
     }
 
     function renderSuggestions() {
@@ -1038,31 +1055,283 @@ $(function () {
     }
 
     function addIngredientSearch() {
-    // Remove existing search bar if any
-    $('#ingredientSearch').remove();
-    
-    // Add search bar
-    $('#ingredientsMainBox').prepend(`
+        // Remove existing search bar if any
+        $('#ingredientSearch').remove();
+
+        // Add search bar
+        $('#ingredientsMainBox').prepend(`
         <input type="text" id="ingredientSearch" placeholder="🔍 Search ingredients..." 
                style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd;">
     `);
-    
-    // Add search functionality
-    $('#ingredientSearch').on('input', function() {
-        const searchTerm = $(this).val().toLowerCase().trim();
-        
-        if (searchTerm === '') {
-            // Show all if search is empty
-            $('.ing-item').show();
-        } else {
-            // Filter ingredients
-            $('.ing-item').each(function() {
-                const text = $(this).text().toLowerCase();
-                $(this).toggle(text.includes(searchTerm));
-            });
+
+        // Add search functionality
+        $('#ingredientSearch').on('input', function () {
+            const searchTerm = $(this).val().toLowerCase().trim();
+
+            if (searchTerm === '') {
+                // Show all if search is empty
+                $('.ing-item').show();
+            } else {
+                // Filter ingredients
+                $('.ing-item').each(function () {
+                    const text = $(this).text().toLowerCase();
+                    $(this).toggle(text.includes(searchTerm));
+                });
+            }
+        });
+    }
+
+    // Export functionality
+    function initExportFunctionality() {
+        $('#exportPDF, #exportJSON').on('click', showExportModal);
+        $('#closeExportModal, #cancelExport').on('click', closeExportModal);
+        $('#confirmExport').on('click', performExport);
+
+        $('.export-option').on('click', function () {
+            $('.export-option').removeClass('selected');
+            $(this).addClass('selected');
+            $(this).find('input[type="radio"]').prop('checked', true);
+        });
+    }
+
+    function showExportModal() {
+        $('#exportModal').addClass('active');
+        $('body').css('overflow', 'hidden');
+    }
+
+    function closeExportModal() {
+        $('#exportModal').removeClass('active');
+        $('body').css('overflow', '');
+    }
+
+    function performExport() {
+        const format = $('input[name="exportFormat"]:checked').val();
+        const recipe = recipes[currentIndex];
+
+        if (!recipe) {
+            showToast('❌ No recipe data available', 'error', 3000);
+            return;
         }
-    });
-}
+
+        if (format === 'pdf') {
+            exportToPDF(recipe);
+        } else {
+            exportToJSON(recipe);
+        }
+
+        closeExportModal();
+        showToast(`✅ Recipe exported as ${format.toUpperCase()}`, 'success', 3000);
+    }
+
+    function exportToPDF(recipe) {
+        const printWindow = window.open('', '_blank');
+        const portions = parseInt($('#portionsInput').val()) || recipe.basePortions || 4;
+        const ratio = portions / (recipe.basePortions || 4);
+
+        // Scale ingredients
+        const scaledIngredients = (recipe.ingredients || []).map(it => {
+            const parsed = parseQuantity(it);
+            if (parsed.number !== null) {
+                let scaled = parsed.number * ratio;
+                if (parsed.isIntegerUnit) scaled = Math.round(scaled);
+                else scaled = Math.round(scaled * 10) / 10;
+                return `${scaled} ${parsed.rest}`.trim();
+            }
+            return it;
+        });
+
+        const printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${recipe.name} - Recipe</title>
+            <style>
+                body { 
+                    font-family: Arial, sans-serif; 
+                    max-width: 800px; 
+                    margin: 0 auto; 
+                    padding: 40px 20px; 
+                    color: #333;
+                    line-height: 1.6;
+                }
+                .recipe-header { 
+                    text-align: center; 
+                    margin-bottom: 40px;
+                    border-bottom: 2px solid #6f8f74;
+                    padding-bottom: 20px;
+                }
+                .recipe-title { 
+                    color: #6f8f74; 
+                    font-size: 2.5em; 
+                    margin: 0 0 10px 0;
+                    font-family: 'Playfair Display', serif;
+                }
+                .recipe-meta { 
+                    color: #666; 
+                    font-size: 1.1em;
+                    margin-bottom: 20px;
+                }
+                .recipe-image {
+                    max-width: 300px;
+                    height: auto;
+                    border-radius: 50%;
+                    margin: 20px auto;
+                    display: block;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+                }
+                .section { 
+                    margin: 30px 0; 
+                    page-break-inside: avoid;
+                }
+                .section-title { 
+                    color: #6f8f74; 
+                    border-bottom: 1px solid #ddd;
+                    padding-bottom: 8px;
+                    font-family: 'Playfair Display', serif;
+                    font-size: 1.5em;
+                }
+                .ingredients-list, .instructions-list { 
+                    margin: 15px 0; 
+                    padding-left: 20px;
+                }
+                .ingredient-item, .instruction-item { 
+                    margin: 8px 0; 
+                }
+                .nutrition-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                    gap: 15px;
+                    margin: 15px 0;
+                }
+                .nutrition-item {
+                    background: #f8f9fa;
+                    padding: 15px;
+                    border-radius: 8px;
+                    text-align: center;
+                }
+                .nutrition-value {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    color: #6f8f74;
+                }
+                .nutrition-label {
+                    font-size: 0.9em;
+                    color: #666;
+                    margin-top: 5px;
+                }
+                .recipe-footer {
+                    margin-top: 40px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                    text-align: center;
+                    color: #666;
+                    font-size: 0.9em;
+                }
+                @media print {
+                    body { padding: 20px; }
+                    .recipe-header { margin-bottom: 30px; }
+                    .section { margin: 25px 0; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="recipe-header">
+                <h1 class="recipe-title">${recipe.name}</h1>
+                <div class="recipe-meta">
+                    ${recipe.cuisine} • ${recipe.mealType} • ${recipe.difficulty} • Serves ${portions}
+                </div>
+                ${recipe.image ? `<img src="${recipe.image}" alt="${recipe.name}" class="recipe-image" onerror="this.style.display='none'">` : ''}
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Ingredients</h2>
+                <ul class="ingredients-list">
+                    ${scaledIngredients.map(ing => `<li class="ingredient-item">${ing}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Instructions</h2>
+                <ol class="instructions-list">
+                    ${(recipe.instructions || []).map((step, index) =>
+            `<li class="instruction-item">${step}</li>`
+        ).join('')}
+                </ol>
+            </div>
+            
+            ${recipe.nutrition ? `
+            <div class="section">
+                <h2 class="section-title">Nutritional Information</h2>
+                <div class="nutrition-grid">
+                    ${Object.entries(recipe.nutrition).map(([key, value]) => {
+            const labelMap = {
+                calories_kcal: "Calories",
+                energy_kj: "Energy",
+                fat_g: "Fat",
+                protein_g: "Protein",
+                carbs_g: "Carbs",
+                sugar_g: "Sugar",
+                salt_g: "Salt",
+                fatsat_g: "Sat. Fat",
+                sat_g: "Sat. Fat"
+            };
+            const label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
+            return `
+                            <div class="nutrition-item">
+                                <div class="nutrition-value">${value}${unit}</div>
+                                <div class="nutrition-label">${label}</div>
+                            </div>
+                        `;
+        }).join('')}
+                </div>
+            </div>
+            ` : ''}
+            
+            <div class="recipe-footer">
+                <p>Exported from ctrl+alt+eat on ${new Date().toLocaleDateString()}</p>
+                <p>Visit our website for more delicious recipes!</p>
+            </div>
+            
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(() => {
+                        window.close();
+                    }, 1000);
+                };
+            </script>
+        </body>
+        </html>
+    `;
+
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+    }
+
+    function exportToJSON(recipe) {
+        const exportData = {
+            exportedAt: new Date().toISOString(),
+            source: "ctrl+alt+eat",
+            recipe: {
+                ...recipe,
+                currentPortions: parseInt($('#portionsInput').val()) || recipe.basePortions || 4
+            }
+        };
+
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+            type: 'application/json'
+        });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${recipe.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_recipe.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
 
     initApp();
 });

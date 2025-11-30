@@ -629,4 +629,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("contact").addEventListener("click", () => {
         window.location.href = "contact.html";
     });
+    document.getElementById("about").addEventListener("click", () => {
+        window.location.href = "about.html";
+    });
 });

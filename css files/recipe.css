@@ -1681,12 +1681,11 @@ body {
         font-size: 14px;
     }
     
-    /* Improved form elements for mobile */
     #portionsInput,
     #qaTimerInput,
     .qa-user-name,
     #qaCommentInput {
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px;
         padding: 10px;
     }
     
@@ -1700,7 +1699,6 @@ body {
         font-size: 16px;
     }
     
-    /* Toast notifications for mobile */
     .toast-notification {
         left: 10px;
         right: 10px;
@@ -1848,7 +1846,7 @@ html, body {
 .toast-message {
     flex: 1;
     font-weight: 500;
-    color: var(--text);
+    color: var(--accent-1);
     font-size: 15px;
     line-height: 1.4;
 }
@@ -2055,3 +2053,193 @@ html, body {
     color: #8EB69B !important;
 }
 
+/* Export Modal Styles */
+.export-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.export-modal.active {
+  display: flex;
+}
+
+.export-modal-content {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.export-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--muted);
+}
+
+.export-modal-title {
+  font-family: Playfair Display, serif;
+  color: var(--accent-title);
+  margin: 0;
+  font-size: 24px;
+}
+
+.export-modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.export-modal-close:hover {
+  background: var(--muted);
+  color: var(--text);
+}
+
+.export-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  border: 2px solid var(--muted);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.export-option:hover {
+  border-color: var(--accent-1);
+  background: rgba(182, 206, 180, 0.05);
+}
+
+.export-option.selected {
+  border-color: var(--accent-1);
+  background: rgba(182, 206, 180, 0.1);
+}
+
+.export-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-1);
+}
+
+.export-option-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-title);
+  font-size: 18px;
+}
+
+.export-option-content {
+  flex: 1;
+}
+
+.export-option-title {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.export-option-description {
+  font-size: 14px;
+  color: #666;
+}
+
+.export-modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.export-confirm-btn {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(182, 206, 180, 0.4);
+}
+
+.export-cancel-btn {
+  background: var(--muted);
+  color: var(--accent-title);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-cancel-btn:hover {
+  background: var(--accent-1);
+  color: white;
+}
+
+/* Dark mode adjustments for export modal */
+.dark-mode .export-modal-content {
+  background: rgba(11, 43, 38, 0.95);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .export-option {
+  border-color: rgba(218, 241, 222, 0.2);
+}
+
+.dark-mode .export-option:hover {
+  border-color: var(--accent-1);
+  background: rgba(182, 206, 180, 0.1);
+}
+
+.dark-mode .export-option.selected {
+  border-color: var(--accent-1);
+  background: rgba(182, 206, 180, 0.2);
+}
+
+.dark-mode .export-option-description {
+  color: #8EB69B;
+}

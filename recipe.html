@@ -8,8 +8,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="recipe.css">
-  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="css files/recipe.css">
+  <link rel="stylesheet" href="commons/common.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="shortcut icon" href="logo/6.svg" type="image/x-icon">
 </head>
@@ -183,6 +183,16 @@
             <h3 class="section-title accent">Quick Actions</h3>
 
             <div class="box-inner">
+              <div class="qa-label">Export Recipe</div>
+              <button class="accent-btn" id="exportPDF">
+                <i class="fas fa-file-pdf" style="margin-right: 8px;"></i>Export as PDF
+              </button>
+              <button class="accent-btn light" id="exportJSON" style="margin-top: 8px;">
+                <i class="fas fa-file-code" style="margin-right: 8px;"></i>Export as JSON
+              </button>
+            </div>
+
+            <div class="box-inner">
               <div class="qa-label">Cooking Mode</div>
               <button class="accent-btn" id="startCookingMode">Start now</button>
             </div>
@@ -292,6 +302,46 @@
     </div>
   </main>
 
+  <!-- Export Modal -->
+  <div id="exportModal" class="export-modal">
+    <div class="export-modal-content">
+      <div class="export-modal-header">
+        <h3 class="export-modal-title">Export Recipe</h3>
+        <button class="export-modal-close" id="closeExportModal">&times;</button>
+      </div>
+
+      <div class="export-options">
+        <label class="export-option selected" data-format="pdf">
+          <input type="radio" name="exportFormat" value="pdf" checked>
+          <div class="export-option-icon">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <div class="export-option-content">
+            <div class="export-option-title">PDF Document</div>
+            <div class="export-option-description">Perfect for printing and sharing. Includes ingredients, instructions,
+              and nutrition info.</div>
+          </div>
+        </label>
+
+        <label class="export-option" data-format="json">
+          <input type="radio" name="exportFormat" value="json">
+          <div class="export-option-icon">
+            <i class="fas fa-file-code"></i>
+          </div>
+          <div class="export-option-content">
+            <div class="export-option-title">JSON Data</div>
+            <div class="export-option-description">Raw recipe data for developers or importing into other applications.
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="export-modal-actions">
+        <button class="export-cancel-btn" id="cancelExport">Cancel</button>
+        <button class="export-confirm-btn" id="confirmExport">Export Recipe</button>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="footer-main">
@@ -369,8 +419,8 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="recipe.js"></script>
-  <script src="common.js"></script>
+  <script src="js files/recipe.js"></script>
+  <script src="commons/common.js"></script>
   <audio id="qaTimerSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9e6501.mp3" preload="auto"></audio>
 </body>
 
