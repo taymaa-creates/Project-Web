@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Recipes</title>
+  <link rel="shortcut icon" href="logo/6.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css files/recipes.css">
+  <link rel="stylesheet" href="css files/common.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <header>
+    <nav>
+
+      <div class="nav">
+        <div class="nav-links" id="nav-links">
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Discover <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="home.html">Home</a></li>
+              <li><a href="recipes.html">All Recipes</a></li>
+              <li><a href="categories.html">Categories</a></li>
+              <li><a href="FlavorLab.html">Flavor Lab</a></li>
+              <li><a href="recipe.html">Single Recipe</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              My Kitchen <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="mealplanner.html">My Meal Planner</a></li>
+              <li><a href="add.html">Add A Recipe</a></li>
+            </ul>
+          </div>
+
+          <div class="dropdown">
+            <button class="nav-link" aria-expanded="false" aria-controls="discover-menu">
+              Info <span class="caret">▾</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <img src="logo\6.svg" alt="Site logo" class="logo">
+
+      <div class="left">
+
+        <button class="btns" id="favheart">
+          <i class="fa fa-heart"></i>
+        </button>
+
+        <div class="header-search">
+          <input type="text" id="header-search-input" placeholder="Search recipes..." />
+          <button id="header-search-btn" class="btns" title="Search">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+    <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+  </button>
+
+  <main>
+    <section class="topbar">
+      <div class="topbar-inner">
+        <img src="logo/6.svg" alt="Logo" class="top-logo" />
+        <input id="live-search" type="search" placeholder="Search your meal..." aria-label="Search recipes" />
+      </div>
+
+      <div class="sort-control">
+        <button class="sort-toggle" id="sortToggle" aria-expanded="false" aria-haspopup="true">
+          <i class="fas fa-sort"></i>
+          <span class="sort-label">Sort: Recommended</span>
+          <i class="fas fa-chevron-down sort-caret"></i>
+        </button>
+        <div class="sort-dropdown" id="sortDropdown" aria-hidden="true">
+          <button class="sort-option active" data-sort="recommended">
+            <i class="fas fa-star"></i>
+            Recommended
+          </button>
+          <button class="sort-option" data-sort="name-asc">
+            <i class="fas fa-sort-alpha-down"></i>
+            Name A-Z
+          </button>
+          <button class="sort-option" data-sort="name-desc">
+            <i class="fas fa-sort-alpha-up"></i>
+            Name Z-A
+          </button>
+          <button class="sort-option" data-sort="time-asc">
+            <i class="fas fa-clock"></i>
+            Time (Shortest)
+          </button>
+          <button class="sort-option" data-sort="time-desc">
+            <i class="fas fa-hourglass-end"></i>
+            Time (Longest)
+          </button>
+          <button class="sort-option" data-sort="difficulty-asc">
+            <i class="fas fa-thermometer-empty"></i>
+            Difficulty (Easy)
+          </button>
+          <button class="sort-option" data-sort="difficulty-desc">
+            <i class="fas fa-thermometer-full"></i>
+            Difficulty (Hard)
+          </button>
+          <button class="sort-option" data-sort="newest">
+            <i class="fas fa-calendar-plus"></i>
+            Newest First
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <aside class="sidebar" aria-label="Filters and search">
+        <div class="filters" aria-label="Recipe filters">
+          <div class="filter-block" data-filter="cuisine">
+            <button class="filter-toggle" type="button">Cuisines <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="mealType">
+            <button class="filter-toggle" type="button">Meal Types <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="time">
+            <button class="filter-toggle" type="button">Total Time <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true">
+              <button class="chip" data-key="time" data-value="fast">Fast &lt; 30</button>
+              <button class="chip" data-key="time" data-value="medium">Medium ≤ 60</button>
+              <button class="chip" data-key="time" data-value="long">Long &gt; 60</button>
+              <button class="chip" data-key="time" data-value="">Any</button>
+            </div>
+          </div>
+
+          <div class="filter-block" data-filter="difficulty">
+            <button class="filter-toggle" type="button">Difficulty <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="diet">
+            <button class="filter-toggle" type="button">Diet <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true"></div>
+          </div>
+
+          <div class="filter-block" data-filter="nutrition">
+            <button class="filter-toggle" type="button">Nutrition <span class="caret">▾</span></button>
+            <div class="filter-choices" aria-hidden="true">
+              <button class="chip" data-key="nutrition" data-value="low-calorie">Low Calorie (&lt; 500)</button>
+              <button class="chip" data-key="nutrition" data-value="high-protein">High Protein (&gt; 30g)</button>
+              <button class="chip" data-key="nutrition" data-value="low-carb">Low Carb (&lt; 20g)</button>
+              <button class="chip" data-key="nutrition" data-value="balanced">Balanced</button>
+              <button class="chip" data-key="nutrition" data-value="">Any</button>
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="clear-filters" type="button">Clear filters</button>
+          </div>
+
+          <div class="surprise-area" style="margin-top:18px;">
+            <button id="surprise-btn" type="button" aria-label="Surprise me">🎲 Surprise me! pick today's
+              recipe</button>
+            <div id="surprise-quote" aria-hidden="true" class="surprise-quote" style="display:none;"></div>
+          </div>
+
+        </div>
+      </aside>
+
+      <section class="content" aria-live="polite">
+        <header class="recipes-header">
+          <h1 id="main-title">All Recipes</h1>
+          <p id="main-sub">Find the recipe that matches your mood</p>
+        </header>
+
+        <section id="recipes-grid" class="recipes-grid" aria-label="Recipes list">
+        </section>
+
+        <div id="load-more-wrap" style="grid-column:1/-1;text-align:center;margin-top:18px;display:none;">
+          <button id="load-more" type="button">Load more</button>
+        </div>
+      </section>
+    </section>
+
+    <div id="surprise-modal" class="hidden" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="surprise-backdrop"></div>
+      <div class="surprise-panel" role="document" tabindex="-1">
+        <button id="surprise-close" class="surprise-close" aria-label="Return to recipes">←</button>
+        <div id="surprise-inner" class="surprise-inner" aria-live="polite"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-col footer-brand">
+        <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+        <p class="footer-description">
+          <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
+          Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
+        </p>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Navigation</h3>
+        <ul class="footer-links">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="categories.html">Recipe Categories</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="add.html">Add A Recipe</a></li>
+          <li><a href="recipes.html">Explore Recipes</a></li>
+          <li><a href="FlavorLab.html">Flavor Lab</a></li>
+          <li><a href="favorites.html">Your Picks</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-newsletter">
+        <h3 class="footer-title">Join Our Cooking Journey</h3>
+        <p class="newsletter-desc">Receive exclusive recipes and culinary insights</p>
+        <form class="newsletter-form">
+          <div class="input-group">
+            <input type="email" placeholder="Your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </form>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> + (961) 123-45687</p>
+          <p><i class="fas fa-envelope"></i> ctrlalt@eat.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; <span id="year"> </span> ctrl+alt+eat. Crafted with <i class="fas fa-heart"></i> for culinary
+          enthusiasts.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js files/common.js"></script>
+  <script src="js files/recipes.js"></script>
+
+</body>
+
+</html>
