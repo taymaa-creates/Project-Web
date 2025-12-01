@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flavor Lab</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="shortcut icon" href="logo/6.svg">
+  <title>Contact Us</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css files/common.css">
+    <link rel="stylesheet" href="../css files/contact.css">
 
-  <link rel="stylesheet" href="css files/FlavorLab.css">
-  <link rel="stylesheet" href="css files/common.css">
-</head>
-<body>
+    <link rel="shortcut icon" href="../media/logo/6.svg">
+
+<body style="background-image: url('../media/imgs/bgd.png'); background-size: cover;">
  <header>
         <nav>
 
@@ -21,7 +22,7 @@
                             Discover <span class="caret">▾</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="../index.html">Home</a></li>
                             <li><a href="recipes.html">All Recipes</a></li>
                             <li><a href="categories.html">Categories</a></li>
                             <li><a href="FlavorLab.html">Flavor Lab</a></li>
@@ -51,7 +52,7 @@
                 </div>
 
             </div>
-            <img src="logo\6.svg" alt="Site logo" class="logo">
+            <img src="../media/logo/6.svg" alt="Site logo" class="logo">
 
             <div class="left">
 
@@ -73,41 +74,41 @@
             </div>
         </nav>
     </header>
-<main class="flavor-lab">
-  <h1 class="page-title">🍴 Interactive Flavor Lab</h1>
-  <p class="intro">Mix ingredients and moods to discover recipes tailored to your vibe.</p>
-
-  <div class="ingredient-grid">
-    <div class="ingredient" data-ingredient="garlic">🧄 Garlic</div>
-    <div class="ingredient" data-ingredient="tomatoes">🍅 Tomatoes</div>
-    <div class="ingredient" data-ingredient="basil">🌿 Basil</div>
-    <div class="ingredient" data-ingredient="chicken">🍗 Chicken</div>
-    <div class="ingredient" data-ingredient="beef">🥩 Beef</div>
-    <div class="ingredient" data-ingredient="vegetables">🥦 Vegetables</div>
-    <div class="ingredient" data-ingredient="sweets">🍰 Sweets</div>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
+    </button>
 
 
-  </div>
+  <section class="contact-brand-blocks">
+    <div class="contact-block">
+      <h1>CTRL</h1>
+      <h3>Take control</h3>
+      <p>Reach out to us. We’re here to help you take control of your meals, your time, and your taste.</p>
+      <a href="#contactFormContainer" class="btn-outline" data-type="contact">Contact us</a>
+    </div>
 
-<div class="mixing-bowl">
-  <h2>Your Mix</h2>
-  <div class="selected-ingredients"></div>
-  <button id="reset-btn">Reset</button>
-</div>
+    <div class="contact-block">
+      <h1>ALT</h1>
+      <h3>Find alternatives</h3>
+      <p>Looking for something different? Suggest a recipe, share feedback, or just say hi.</p>
+      <a href="#contactFormContainer" class="btn-outline" data-type="feedback">Send feedback</a>
+    </div>
+
+    <div class="contact-block">
+      <h1>EAT</h1>
+      <h3>Let’s collaborate</h3>
+      <p>Hungry to collaborate? Whether it’s content, design, or dev—let’s cook up something amazing together.</p>
+      <a href="#contactFormContainer" class="btn-outline" data-type="collaborate">Collaborate</a>
+    </div>
+  </section>
+
+  <div id="contactFormContainer"></div>
 
 
-
-
-
-  <div class="recipe-results">
-    <h2>Suggested Recipes</h2>
-    <div class="recipes-container"></div>
-  </div>
-</main>
-<footer class="footer">
+ <footer class="footer">
         <div class="footer-main">
             <div class="footer-col footer-brand">
-                <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+                <img src="../media/logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
                 <p class="footer-description">
                     <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
                     Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
@@ -131,7 +132,7 @@
             <div class="footer-col">
                 <h3 class="footer-title">Navigation</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="categories.html">Recipe Categories</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -178,15 +179,8 @@
             </div>
         </div>
     </footer>
-                      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
-            <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
-        </button>
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="js files/FlavorLab.js"></script>
-<script src="js files/common.js"></script>
+    <script src="../js files/common.js"></script>
+    <script src="../js files/contact.js"></script>
 </body>
+
 </html>

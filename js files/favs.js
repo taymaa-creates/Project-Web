@@ -28,7 +28,7 @@ let cancelExport = document.getElementById("cancelExport");
 
 let STORAGE_KEY = "favorites";
 let COLLECTIONS_KEY = "recipeCollections";
-let JSON_PATH = "recipes.json";
+let JSON_PATH = "../data/recipes.json";
 let PENDING_TTL = 5000;
 
 let allRecipes = [];

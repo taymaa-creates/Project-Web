@@ -1,0 +1,700 @@
+:root {
+  --accent-1: #B6CEB4;
+  --accent-2: #96A78D;
+  --muted: #D9E9CF;
+  --bg: #F0F0F0;
+  --card: #fff;
+  --text: #222;
+  --accent-title: #6f8f74;
+  --border-light: #ccc;
+  --border-dashed: #eee;
+  --text-muted: #555;
+  --input-bg: #fff;
+  --button-hover-text: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  background-repeat: repeat;
+  background-size: contain;
+  min-height: 100vh;
+  color: var(--text);
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ================== LOGIN PAGE ================== */
+/* Wrapper for the whole login page */
+#login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Left column: welcome + features */
+.login-info {
+  flex: 1;
+  max-width: 420px;
+  background-color: rgba(255, 255, 255, 0.85);
+  /* smooth overlay */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-info h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-info p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.login-features {
+  list-style: none;
+  padding: 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.login-features li {
+  margin-bottom: 0.5rem;
+}
+
+/* Right column: login form */
+.login-container {
+  flex: 1;
+  background-color: var(--card);
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-container input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.9rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  background-color: var(--accent-1);
+  color: var(--text);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 768px) {
+  #login-page {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .login-info,
+  .login-container {
+    max-width: 100%;
+  }
+}
+
+
+/* ================== ADD RECIPE PAGE ================== */
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  width: 95%;
+  max-width: 1200px;
+  padding: 2rem 0;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left-column,
+.right-column {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.left-column h2 {
+  margin-bottom: 1rem;
+  color: var(--accent-title);
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.recipe-card {
+  background: var(--card);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ================== FORM ELEMENTS ================== */
+.left-column input[type="text"],
+.left-column select,
+.left-column textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background-color: var(--input-bg);
+}
+/* Floating labels for inputs */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--accent-title);
+}
+
+input,
+select,
+textarea {
+  margin-bottom: 0.8rem;
+  /* extra breathing room below inputs */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  display: block;
+  color: var(--accent-title);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group h4 {
+  margin-top: 0.5rem;
+}
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 2px solid var(--accent-1);
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-2);
+  box-shadow: 0 0 6px var(--accent-2);
+}
+
+#custom-ingredient-input {
+  margin-top: 0.5rem;
+}
+
+.ingredient-icon {
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  pointer-events: none;
+}
+
+
+
+
+.difficulty-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.difficulty-buttons button {
+  flex: 1;
+  padding: 0.6rem 0;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background-color: var(--muted);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.difficulty-buttons button.active,
+.difficulty-buttons button:hover {
+  background-color: var(--accent-1);
+  color: var(--button-hover-text);
+}
+.difficulty-btn.active {
+  background-color: var(--accent-2);
+  color: white;
+}
+
+
+#ingredient-suggestions h5 {
+  margin-top: 1rem;
+  color: var(--accent-title);
+}
+
+.ingredient-btn {
+  margin: 0.3rem 0.3rem 0.3rem 0;
+  padding: 0.4rem 0.8rem;
+  background-color: var(--muted);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ingredient-btn:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+.custom-ingredient {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  /* aligns input and button vertically */
+}
+
+.custom-ingredient input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background-color: var(--input-bg);
+  height: 42px;
+  /* fixed height for consistency */
+}
+
+#add-custom-ingredient-btn {
+  padding: 0 1rem;
+  font-size: 1rem;
+  height: 42px;
+  /* match input height exactly */
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  background-color: var(--accent-1);
+  color: var(--text);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#add-custom-ingredient-btn:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+.form-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-title);
+  margin-bottom: 0.6rem;
+}
+
+.form-title.h4 {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+
+#ingredients-list .ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.3rem;
+  border: 1px dashed var(--border-dashed);
+  border-radius: 0.5rem;
+  background-color: var(--muted);
+}
+
+#ingredients-list .ingredient-item button {
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+
+
+/* ================== STEPS & VIDEOS ================== */
+#steps-list textarea,
+#videos-container input {
+  margin-bottom: 0.5rem;
+}
+
+#add-step-btn,
+#add-video-btn {
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--accent-1);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+#add-step-btn:hover,
+#add-video-btn:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+/* ================== NUTRITION ================== */
+.nutrition-card {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background-color: var(--muted);
+  border-radius: 0.8rem;
+  color: var(--text);
+}
+
+#calculate-nutrition-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--accent-1);
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 0.5rem;
+}
+
+#calculate-nutrition-btn:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+/* ================== ACTION BUTTONS ================== */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.action-buttons button {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--accent-1);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.action-buttons button:hover {
+  background-color: var(--accent-2);
+  color: var(--button-hover-text);
+}
+
+#preview-card {
+  background: linear-gradient(to bottom,
+      var(--accent-2),
+      var(--card));
+  color: var(--text);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+#preview-card img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+#preview-card h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-title);
+  margin: 0.5rem 0;
+}
+
+#preview-card p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+#preview-card ul,
+#preview-card ol {
+  padding-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+#preview-card ul li,
+#preview-card ol li {
+  margin-bottom: 0.3rem;
+}
+
+/* ================== CALORIE ESTIMATE ================== */
+#calorie-estimate {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ================== DRAGGING PLACEHOLDER ================== */
+/* ================== DRAGGING PLACEHOLDER ================== */
+.dragging {
+  background-color: var(--muted);
+  opacity: 0.8;
+  border: 1px dashed var(--accent-2);
+}
+
+/* ================== ANIMATIONS ================== */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
+
+  #preview-card {
+    max-width: 100%;
+  }
+
+  .difficulty-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+}
+#user-recipes-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  
+}
+
+#user-recipes-section {
+  margin-top: 40px;
+} 
+
+#user-recipes-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--accent-title);
+}
+
+.user-recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background-color: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+  flex: 1 1 200px;
+  max-width: 250px;
+  box-sizing:border-box;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.card-details {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card-ingredients {
+  list-style: disc;
+  padding-left: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.card-footer {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 15px;
+  justify-content: space-between;
+  color: #444;
+}
+.card-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+     transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.edit-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background: #f44336;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.delete-btn:hover {
+    background: #da190b;
+    transform: translateY(-1px);
+}
+.muted {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}

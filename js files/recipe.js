@@ -147,7 +147,7 @@ $(function () {
     }
 
     function loadRecipes() {
-        $.getJSON("recipes.json")
+        $.getJSON("../data/recipes.json")
             .done(function (data) {
                 recipes = data || [];
                 if (!recipes.length) {

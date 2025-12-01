@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About us</title>
-    <link rel="stylesheet" href="css files/about.css">
-    <link rel="stylesheet" href="css files/common.css">
+    <title>Your Favorites</title>
+
+    <link rel="shortcut icon" href="../media/logo/6.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../css files/fav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="shortcut icon" href="logo/6.svg">
+    <link rel="stylesheet" href="../css files/common.css">
 </head>
 
 <body>
-
- <header>
+    <div id="toastContainer" style="position: fixed; top: 20px; right: 20px; z-index: 10000;"></div>
+    <header>
         <nav>
 
             <div class="nav">
@@ -23,7 +24,7 @@
                             Discover <span class="caret">▾</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="../index.html">Home</a></li>
                             <li><a href="recipes.html">All Recipes</a></li>
                             <li><a href="categories.html">Categories</a></li>
                             <li><a href="FlavorLab.html">Flavor Lab</a></li>
@@ -53,7 +54,7 @@
                 </div>
 
             </div>
-            <img src="logo\6.svg" alt="Site logo" class="logo">
+            <img src="../media/logo/6.svg" alt="Site logo" class="logo">
 
             <div class="left">
 
@@ -76,110 +77,96 @@
         </nav>
     </header>
 
-    <main class="about-hero">
 
-        <section class="hero-section" style="background: url('imgs/section1.png') center/cover no-repeat;">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>More than Recipes.</h1>
-                <p>We bring global flavors to your table with passion, creativity, and connection.</p>
-            </div>
-        </section>
+<main class="favorites-container">
+    <header class="favorites-header">
+        <h1>My Favorites</h1>
+        <p class="subtitle">Recipes you've liked - organize, view, and manage your collection</p>
+    </header>
 
-        <section class="intro-section container">
-            <h2 class="title-center">Who We Are</h2>
-            <p class="subtitle-center">
-                Ctrl Alt EAT is built by food lovers, storytellers, and explorers with one mission:
-                make cooking simple, joyful, and globally inspired.
-            </p>
-        </section>
+    <!-- Bulk Actions Toolbar -->
+    <div id="bulkActions" class="bulk-actions hidden">
+        <span id="selectedCount">0 recipes selected</span>
+        <div class="bulk-buttons">
+            <button id="bulkMoveToCollection" class="btn btn-secondary">Move to Collection</button>
+            <button id="bulkExport" class="btn btn-secondary">Export Selected</button>
+            <button id="bulkRemove" class="btn btn-danger">Remove</button>
+            <button id="bulkClear" class="btn btn-outline">Clear Selection</button>
+        </div>
+    </div>
 
-        <section class="info-grid container">
-            <div class="info-card">
-                <div class="info-text">
-                    <h2>About Us</h2>
-                    <p>Welcome to Ctrl Alt EAT, your go-to destination for delicious recipes from around the world! Our goal is simple: to inspire home cooks and food lovers by sharing diverse, easy-to-follow recipes that bring global flavors to your kitchen.</p>
-                </div>
-                <div class="info-image">
-                    <img src="imgs/section2.png" alt="About Us">
-                </div>
-            </div>
+    <!-- Collections Management -->
+    <section class="collections-section">
+        <div class="section-header">
+            <h2>Collections</h2>
+            <button id="createCollection" class="btn btn-primary">+ New Collection</button>
+        </div>
+        <div id="collectionsList" class="collections-grid"></div>
+    </section>
 
-            <div class="info-card reverse">
-                <div class="info-image">
-                    <img src="imgs/section3.png" alt="Our Story">
-                </div>
-                <div class="info-text">
-                    <h2>Our Story</h2>
-                    <p>
-                        Food connects people, cultures, and memories. That's why we created Ctrl Alt EAT —
-                        to celebrate the rich variety of cuisines and make cooking exciting and accessible for everyone.
-                    </p>
-                </div>
-            </div>
-        </section>
+    <!-- Filters and Main Content -->
+    <section class="filters">
+        <div class="filter-group">
+            <span class="filter-label">Meal:</span>
+            <div id="mealFilters" class="filter-buttons"></div>
+        </div>
+        <div class="filter-group">
+            <span class="filter-label">Cuisine:</span>
+            <div id="cuisineFilters" class="filter-buttons"></div>
+        </div>
+        <button id="clearFilters" class="pill">Clear Filters</button>
+    </section>
 
-        <section class="story-banner">
-            <div class="story-left">
-                <h2>Our Story</h2>
-                <p>
-                    Ctrl Alt EAT was created from a love of cooking and a desire to share global flavors with the world.
-                    What started as a simple passion project soon became a platform that inspires thousands to cook,
-                    learn,
-                    and explore food culture.
-                </p>
-                <a href="#" class="story-btn">Read the Full Story</a>
-            </div>
+    <section id="favoritesGrid" class="favorites-grid"></section>
 
-            <div class="story-right">
-                <img src="imgs/section4.png" alt="Family Cooking Story">
-            </div>
-        </section>
+    <div id="emptyState" class="empty-state">
+        <p>No favorites yet 💔</p>
+        <p class="empty-subtitle">Click "Surprise Me" to discover a random recipe!</p>
+        <button id="surpriseBtn" class="btn btn-primary">Surprise Me</button>
+    </div>
+</main>
 
-        <section class="connection-section" style="background: url('imgs/section5.png') center/cover no-repeat;">
-            <div class="connection-overlay"></div>
-            <div class="connection-content">
-                <h2>It's not just about cooking...<br>it's about connection.</h2>
-            </div>
-        </section>
-        <section class="info-grid container">
-            <div class="info-card">
-                <div class="info-text">
-                    <h2>Our Mission & Vision</h2>
-                    <p>
-                        <strong>Mission:</strong> Bring the world’s flavors to your kitchen while making cooking simple,
-                        fun, and educational.
-                        <br><br>
-                        <strong>Vision:</strong> A global cooking community where anyone can explore cuisines, learn
-                        skills, and confidently enjoy cooking.
-                    </p>
-                </div>
-                <div class="info-image">
-                    <img src="imgs/ourmission.png" alt="Mission and Vision">
-                </div>
-            </div>
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="quickViewContent"></div>
+    </div>
+</div>
 
-            <div class="info-card reverse">
-                <div class="info-image">
-                    <img src="imgs/weoffer.png" alt="What We Offer">
-                </div>
-                <div class="info-text">
-                    <h2>What We Offer</h2>
-                    <ol>
-                        <li><strong>Global recipes:</strong> Italian pasta, Indian curries, Middle Eastern desserts, and
-                            more.</li>
-                        <li><strong>Ingredients & tips:</strong> Detailed lists and secrets for success.</li>
-                        <li><strong>Easy cooking:</strong> Step-by-step instructions for every level.</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-    </main>
+<!-- Collection Creation Modal -->
+<div id="collectionModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Create New Collection</h3>
+        <input type="text" id="collectionName" placeholder="Collection name..." maxlength="30">
+        <div class="modal-actions">
+            <button id="confirmCollection" class="btn btn-primary">Create</button>
+            <button id="cancelCollection" class="btn btn-outline">Cancel</button>
+        </div>
+    </div>
+</div>
 
- <footer class="footer">
+<!-- Export Modal -->
+<div id="exportModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Export Recipes</h3>
+        <div class="export-options">
+            <label><input type="radio" name="exportFormat" value="json" checked> JSON Format</label>
+            <label><input type="radio" name="exportFormat" value="pdf"> PDF Document</label>
+        </div>
+        <div class="modal-actions">
+            <button id="confirmExport" class="btn btn-primary">Export</button>
+            <button id="cancelExport" class="btn btn-outline">Cancel</button>
+        </div>
+    </div>
+</div>
+
+    <footer class="footer">
         <div class="footer-main">
             <div class="footer-col footer-brand">
-                <img src="logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
+                <img src="../media/logo/6.svg" alt="ctrl+alt+eat" class="footer-logo logo">
                 <p class="footer-description">
                     <strong>ctrl+alt+eat</strong> is a culinary destination for discerning home chefs.
                     Discover exquisite recipes, master techniques, and transform your kitchen into a gourmet sanctuary.
@@ -203,7 +190,7 @@
             <div class="footer-col">
                 <h3 class="footer-title">Navigation</h3>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="categories.html">Recipe Categories</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -250,14 +237,12 @@
             </div>
         </div>
     </footer>
-
     <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
         <img src="https://cdn-icons-png.flaticon.com/128/5460/5460815.png" alt="Dark mode toggle">
     </button>
 
-
-    <script src="js files/common.js"></script>
-    <script src="js files/about.js"></script>
+    <script src="../js files/common.js"></script>
+    <script src="../js files/favs.js"></script>
 </body>
 
 </html>

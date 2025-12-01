@@ -2,8 +2,6 @@ function initHeader() {
     let hamburger = document.getElementById('hamburger');
     let nav = document.querySelector('.nav');
 
-    console.log('Hamburger element:', hamburger);
-    console.log('Nav element:', nav);
 
     if (hamburger && nav) {
         hamburger.onclick = function (e) {
@@ -64,7 +62,7 @@ function initHeader() {
     const logo = document.querySelector('.logo');
     if (logo) {
         logo.addEventListener('click', () => {
-            window.location.href = 'home.html';
+            window.location.href = '../index.html';
         });
     }
    const favHeart = document.getElementById('favheart');
@@ -92,7 +90,7 @@ function loadFavorites() {
 async function createFavoritesModal(favoriteIds) {
     let allRecipes = [];
     try {
-        let response = await fetch('recipes.json');
+        let response = await fetch('../data/recipes.json');
         allRecipes = await response.json();
     } catch (error) {
         console.error('Failed to load recipes:', error);

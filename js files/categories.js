@@ -1,6 +1,6 @@
 
 (function () {
-    let RECIPES_JSON = 'recipes.json';
+    let RECIPES_JSON = '../data/recipes.json';
     let fallbackImage = 'https://via.placeholder.com/300?text=Recipe';
     let CATEGORY_TYPES = [
         { key: 'diet', title: 'Diet' },

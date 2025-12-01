@@ -2,7 +2,7 @@ $(document).ready(function() {
   let selectedIngredients = [];
   let allRecipes = [];
 
-  $.getJSON("recipes.json", function(data) {
+  $.getJSON("../data/recipes.json", function(data) {
     allRecipes = data;
   });
 

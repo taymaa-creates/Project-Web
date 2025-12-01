@@ -1,4 +1,4 @@
-let RECIPES_JSON = 'recipes.json';
+let RECIPES_JSON = '../data/recipes.json';
 let STORAGE_KEY = 'favorites';
 let grid = document.getElementById('recipes-grid');
 let searchInput = document.getElementById('live-search');
