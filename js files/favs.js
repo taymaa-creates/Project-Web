@@ -388,7 +388,7 @@ function setupModalEvents() {
             });
         }
     });
-    
+
     if (collectionName) {
         collectionName.onkeypress = (e) => {
             if (e.key === 'Enter') createNewCollection();
@@ -633,49 +633,98 @@ function exportToPDF(recipes) {
             return;
         }
 
-        let recipeContent = recipes.map(recipe => {
-            let fullRecipe = recipe;
+        let recipeContent = recipes.map((recipe, index) => {
+            let basePortions = recipe.basePortions || 4;
+            let scaledIngredients = (recipe.ingredients || []).map(it => {
+                let parsed = parseQuantity(it);
+                if (parsed.number !== null) {
+                    return `${parsed.number} ${parsed.rest}`.trim();
+                }
+                return it;
+            });
 
             let ingredientsHtml = '';
-            if (fullRecipe.ingredients && fullRecipe.ingredients.length > 0) {
+            if (scaledIngredients.length > 0) {
                 ingredientsHtml = `
-                    <h3 style="color: #555; margin-bottom: 10px;">Ingredients:</h3>
-                    <ul style="color: #333; padding-left: 20px; margin-bottom: 15px;">
-                        ${fullRecipe.ingredients.map(ingredient => `<li>${escapeHtml(ingredient)}</li>`).join('')}
-                    </ul>
+                    <div class="section">
+                        <h2 class="section-title">Ingredients</h2>
+                        <ul class="ingredients-list">
+                            ${scaledIngredients.map(ing => 
+                                `<li class="ingredient-item">${escapeHtml(ing)}</li>`
+                            ).join('')}
+                        </ul>
+                    </div>
                 `;
             }
 
             let instructionsHtml = '';
-            if (fullRecipe.instructions && Array.isArray(fullRecipe.instructions) && fullRecipe.instructions.length > 0) {
+            if (recipe.instructions && recipe.instructions.length > 0) {
                 instructionsHtml = `
-                    <h3 style="color: #555; margin-top: 15px; margin-bottom: 10px;">Instructions:</h3>
-                    <ol style="color: #333; padding-left: 20px; margin-bottom: 15px;">
-                        ${fullRecipe.instructions.map((instruction, idx) =>
-                            `<li>${escapeHtml(instruction)}</li>`
-                        ).join('')}
-                    </ol>
+                    <div class="section">
+                        <h2 class="section-title">Instructions</h2>
+                        <ol class="instructions-list">
+                            ${recipe.instructions.map((step, idx) => 
+                                `<li class="instruction-item">${escapeHtml(step)}</li>`
+                            ).join('')}
+                        </ol>
+                    </div>
                 `;
-            } else if (fullRecipe.instructions && typeof fullRecipe.instructions === 'string') {
-                instructionsHtml = `
-                    <h3 style="color: #555; margin-top: 15px; margin-bottom: 10px;">Instructions:</h3>
-                    <p style="color: #333; margin-bottom: 15px;">${escapeHtml(fullRecipe.instructions)}</p>
+            }
+
+            let nutritionHtml = '';
+            if (recipe.nutrition && Object.keys(recipe.nutrition).length > 0) {
+                const labelMap = {
+                    calories_kcal: "Calories",
+                    energy_kj: "Energy",
+                    fat_g: "Fat",
+                    protein_g: "Protein",
+                    carbs_g: "Carbs",
+                    sugar_g: "Sugar",
+                    salt_g: "Salt",
+                    fatsat_g: "Sat. Fat",
+                    sat_g: "Sat. Fat"
+                };
+
+                nutritionHtml = `
+                    <div class="section">
+                        <h2 class="section-title">Nutritional Information</h2>
+                        <div class="nutrition-grid">
+                            ${Object.entries(recipe.nutrition).map(([key, value]) => {
+                                const label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                                const unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
+                                return `
+                                    <div class="nutrition-item">
+                                        <div class="nutrition-value">${value}${unit}</div>
+                                        <div class="nutrition-label">${label}</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
                 `;
             }
 
             return `
-                <div style="margin-bottom: 40px; border-bottom: 2px solid #6f8f74; padding-bottom: 30px; page-break-inside: avoid;">
-                    <h2 style="color: #6f8f74; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">${escapeHtml(fullRecipe.name)}</h2>
-                    <p style="color: #666; margin-bottom: 15px;">
-                        <strong>Cuisine:</strong> ${escapeHtml(fullRecipe.cuisine)} | 
-                        <strong>Meal Type:</strong> ${escapeHtml(fullRecipe.mealType)} | 
-                        <strong>Difficulty:</strong> ${escapeHtml(fullRecipe.difficulty || 'N/A')} | 
-                        <strong>Time:</strong> ${fullRecipe.cookingTime ? escapeHtml(fullRecipe.cookingTime) + ' min' : 'N/A'}
-                    </p>
+                <div class="recipe-section" style="${index < recipes.length - 1 ? 'page-break-after: always;' : ''}">
+                    <div class="recipe-header">
+                        <h1 class="recipe-title">${escapeHtml(recipe.name)}</h1>
+                        <div class="recipe-meta">
+                            ${escapeHtml(recipe.cuisine)} • ${escapeHtml(recipe.mealType)} • ${escapeHtml(recipe.difficulty || 'N/A')} • Serves ${basePortions}
+                        </div>
+                        ${recipe.image ? `
+                            <div class="recipe-image-container">
+                                <img src="${recipe.image}" alt="${escapeHtml(recipe.name)}" class="recipe-image" onerror="this.style.display='none'">
+                            </div>
+                        ` : ''}
+                    </div>
+                    
                     ${ingredientsHtml}
                     ${instructionsHtml}
-                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 12px;">
-                        Exported from ctrl+alt+eat on ${new Date().toLocaleDateString()}
+                    ${nutritionHtml}
+                    
+                    <div class="recipe-footer">
+                        <p>Exported from ctrl+alt+eat favorites • ${new Date().toLocaleDateString()}</p>
+                        ${recipe.cookingTime ? `<p>⏱️ Cooking time: ${recipe.cookingTime} minutes</p>` : ''}
                     </div>
                 </div>
             `;
@@ -685,51 +734,128 @@ function exportToPDF(recipes) {
             <!DOCTYPE html>
             <html>
             <head>
-                <title>My Recipe Collection</title>
+                <title>My Favorite Recipes - ctrl+alt+eat</title>
                 <style>
                     body { 
                         font-family: Arial, sans-serif; 
-                        padding: 40px; 
-                        color: #333; 
-                        max-width: 800px;
-                        margin: 0 auto;
+                        max-width: 800px; 
+                        margin: 0 auto; 
+                        padding: 40px 20px; 
+                        color: #333;
                         line-height: 1.6;
                     }
-                    h1 { 
-                        color: #6f8f74; 
-                        text-align: center; 
-                        margin-bottom: 30px;
-                        border-bottom: 3px solid #6f8f74;
-                        padding-bottom: 20px;
-                        font-family: 'Segoe UI', sans-serif;
+                    .recipe-section {
+                        margin-bottom: 60px;
                     }
-                    .export-header {
-                        text-align: center;
-                        margin-bottom: 30px;
-                        color: #666;
+                    .recipe-header { 
+                        text-align: center; 
+                        margin-bottom: 40px;
+                        border-bottom: 2px solid #6f8f74;
+                        padding-bottom: 20px;
+                    }
+                    .recipe-title { 
+                        color: #6f8f74; 
+                        font-size: 2.5em; 
+                        margin: 0 0 10px 0;
+                        font-family: 'Playfair Display', serif;
+                    }
+                    .recipe-meta { 
+                        color: #666; 
+                        font-size: 1.1em;
+                        margin-bottom: 20px;
+                    }
+                    .recipe-image-container {
+                        display: flex;
+                        justify-content: center;
+                        border-radius: 50%;
+                        margin: 20px 0;
+                    }
+                    .recipe-image {
+                        max-width: 150px;
+                        height: 150px;
+                        border-radius: 50%;
+                        margin: 20px auto;
+                        display: block;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+                        object-fit: cover;
+                    }
+                    .section { 
+                        margin: 30px 0; 
+                        page-break-inside: avoid;
+                    }
+                    .section-title { 
+                        color: #6f8f74; 
+                        border-bottom: 1px solid #ddd;
+                        padding-bottom: 8px;
+                        font-family: 'Playfair Display', serif;
+                        font-size: 1.5em;
+                    }
+                    .ingredients-list, .instructions-list { 
+                        margin: 15px 0; 
+                        padding-left: 20px;
+                    }
+                    .ingredient-item, .instruction-item { 
+                        margin: 8px 0; 
+                    }
+                    .nutrition-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                        gap: 15px;
+                        margin: 15px 0;
+                    }
+                    .nutrition-item {
                         background: #f8f9fa;
-                        padding: 20px;
-                        border-radius: 10px;
-                        border-left: 4px solid #6f8f74;
+                        padding: 15px;
+                        border-radius: 8px;
+                        text-align: center;
+                    }
+                    .nutrition-value {
+                        font-size: 1.2em;
+                        font-weight: bold;
+                        color: #6f8f74;
+                    }
+                    .nutrition-label {
+                        font-size: 0.9em;
+                        color: #666;
+                        margin-top: 5px;
+                    }
+                    .recipe-footer {
+                        margin-top: 40px;
+                        padding-top: 20px;
+                        border-top: 1px solid #ddd;
+                        text-align: center;
+                        color: #666;
+                        font-size: 0.9em;
                     }
                     @media print {
                         body { 
                             padding: 20px !important; 
                             font-size: 14px !important;
                         }
-                        h1 { 
-                            border-bottom: 2px solid #6f8f74 !important;
+                        .recipe-section {
+                            page-break-inside: avoid;
+                        }
+                        .recipe-header { 
+                            margin-bottom: 30px !important;
+                        }
+                        .section { 
+                            margin: 25px 0 !important; 
+                        }
+                        .recipe-title { 
                             font-size: 24px !important;
                         }
+                        .recipe-image {
+                            max-width: 250px !important;
+                        }
                         .export-header {
-                            display: none;
+                            display: none !important;
                         }
                     }
                 </style>
             </head>
             <body>
-                <h1>My Recipe Collection</h1>
-                <div class="export-header">
+                <div class="export-header" style="text-align: center; margin-bottom: 40px; padding: 20px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #6f8f74;">
+                    <h1 style="color: #6f8f74; margin-bottom: 10px;">My Recipe Collection</h1>
                     <p><strong>Exported:</strong> ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</p>
                     <p><strong>Total Recipes:</strong> ${recipes.length}</p>
                     <p><strong>Collection:</strong> ${currentCollection ?
@@ -739,10 +865,13 @@ function exportToPDF(recipes) {
                         This document is ready for printing. Press Ctrl+P or use your browser's print function.
                     </p>
                 </div>
+                
                 ${recipeContent}
+                
                 <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #999; font-size: 12px;">
                     <p>Generated by ctrl+alt+eat • ${new Date().getFullYear()}</p>
                 </div>
+                
                 <script>
                     window.onload = function() {
                         setTimeout(function() {
@@ -762,6 +891,19 @@ function exportToPDF(recipes) {
         console.error('PDF export error:', error);
         showToast('Error creating PDF: ' + error.message, 'error');
     }
+}
+
+function parseQuantity(str) {
+    if (!str) return { number: null, rest: '' };
+    
+    str = str.toString().trim();
+    let m = str.match(/^(\d+(?:\.\d+)?)(?:\s*)(.*)$/);
+    if (!m) return { number: null, rest: str };
+    
+    let num = parseFloat(m[1]);
+    let rest = (m[2] || '').trim();
+    
+    return { number: num, rest: rest };
 }
 
 function attachListeners() {
@@ -921,17 +1063,26 @@ function addToCollectionFromQuickView(recipeId) {
 
     let collectionList = collections.map(collection =>
         `<div class="collection-option" onclick="addRecipesToCollection('${collection.id}', ['${recipeId}']); quickViewModal.style.display='none'">
-                <span>${collection.name}</span>
-                <small>${collection.recipes.length} recipes</small>
-            </div>`
+            <span>${collection.name}</span>
+            <small>${collection.recipes.length} recipes</small>
+        </div>`
     ).join('');
 
-    quickViewContent.innerHTML += `
-            <div class="collection-selection">
-                <h5>Add to Collection:</h5>
-                <div class="collection-options">${collectionList}</div>
+    const collectionSelectionHTML = `
+        <div class="collection-selection">
+            <h5>Add to Collection:</h5>
+            <div class="collection-options" style="max-height: 200px; overflow-y: auto; padding-right: 8px;">
+                ${collectionList}
             </div>
-        `;
+        </div>
+    `;
+    
+    quickViewContent.insertAdjacentHTML('beforeend', collectionSelectionHTML);
+    quickViewModal.style.overflowY = 'auto';
+    const collectionSection = quickViewContent.querySelector('.collection-selection');
+    if (collectionSection) {
+        collectionSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 window.addEventListener("storage", event => {

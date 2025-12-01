@@ -674,7 +674,6 @@ $(function () {
 
     function handleStarLeave() {
         $('.qa-star').removeClass('hover');
-        renderRatingForCurrent();
     }
 
     function renderCommentsForCurrent() {
@@ -1055,24 +1054,18 @@ $(function () {
     }
 
     function addIngredientSearch() {
-        // Remove existing search bar if any
         $('#ingredientSearch').remove();
 
-        // Add search bar
         $('#ingredientsMainBox').prepend(`
         <input type="text" id="ingredientSearch" placeholder="🔍 Search ingredients..." 
                style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd;">
     `);
-
-        // Add search functionality
         $('#ingredientSearch').on('input', function () {
             const searchTerm = $(this).val().toLowerCase().trim();
 
             if (searchTerm === '') {
-                // Show all if search is empty
                 $('.ing-item').show();
             } else {
-                // Filter ingredients
                 $('.ing-item').each(function () {
                     const text = $(this).text().toLowerCase();
                     $(this).toggle(text.includes(searchTerm));
@@ -1080,8 +1073,6 @@ $(function () {
             }
         });
     }
-
-    // Export functionality
     function initExportFunctionality() {
         $('#exportPDF, #exportJSON').on('click', showExportModal);
         $('#closeExportModal, #cancelExport').on('click', closeExportModal);
@@ -1124,12 +1115,10 @@ $(function () {
     }
 
     function exportToPDF(recipe) {
-        const printWindow = window.open('', '_blank');
-        const portions = parseInt($('#portionsInput').val()) || recipe.basePortions || 4;
-        const ratio = portions / (recipe.basePortions || 4);
-
-        // Scale ingredients
-        const scaledIngredients = (recipe.ingredients || []).map(it => {
+        let printWindow = window.open('', '_blank');
+        let portions = parseInt($('#portionsInput').val()) || recipe.basePortions || 4;
+        let ratio = portions / (recipe.basePortions || 4);
+        let scaledIngredients = (recipe.ingredients || []).map(it => {
             const parsed = parseQuantity(it);
             if (parsed.number !== null) {
                 let scaled = parsed.number * ratio;
@@ -1172,8 +1161,8 @@ $(function () {
                     margin-bottom: 20px;
                 }
                 .recipe-image {
-                    max-width: 300px;
-                    height: auto;
+                    max-width: 150px;
+                    height: 150px;
                     border-radius: 50%;
                     margin: 20px auto;
                     display: block;

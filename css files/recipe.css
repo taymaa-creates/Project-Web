@@ -642,8 +642,11 @@ body {
 }
 
 .qa-star.selected,
-.qa-star:hover,
-.qa-star.selected~.qa-star {
+.qa-star.hover {
+    color: gold;
+}
+
+.qa-star:hover {
     color: gold;
 }
 
