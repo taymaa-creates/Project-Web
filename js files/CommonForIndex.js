@@ -138,13 +138,7 @@ function initHeader() {
         });
     }
 
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.addEventListener('click', () => {
-            window.location.href = 'index.html';
-        });
-    }
-    const favHeart = document.getElementById('favheart');
+    let favHeart = document.getElementById('favheart');
     if (favHeart) {
         favHeart.addEventListener("click", (e) => {
             e.preventDefault();
