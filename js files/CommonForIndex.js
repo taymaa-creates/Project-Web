@@ -47,7 +47,7 @@ function initHeader() {
         function goToSearch() {
             const query = searchInput.value.trim();
             if (query) {
-                window.location.href = `recipes.html?search=${encodeURIComponent(query)}`;
+                window.location.href = `pages/recipes.html?search=${encodeURIComponent(query)}`;
             }
         }
 
@@ -77,7 +77,7 @@ function openFavoritesModal() {
     const favoriteIds = loadFavorites();
     
     if (favoriteIds.length === 0) {
-        window.location.href = 'favorites.html';
+        window.location.href = 'pages/favorites.html';
         return;
     }
     createFavoritesModal(favoriteIds);
@@ -147,7 +147,7 @@ async function createFavoritesModal(favoriteIds) {
     closeModalBtn.addEventListener('click', closeModalHandler);
     
     seeAllBtn.addEventListener('click', () => {
-        window.location.href = 'favorites.html';
+        window.location.href = 'pages/favorites.html';
     });
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {

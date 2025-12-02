@@ -458,13 +458,12 @@ body {
     height: 100%;
     background-color: rgba(0,0,0,0.6);
     backdrop-filter: blur(8px);
+    overflow-y: auto;
 }
 
 .modal-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: var(--card);
     margin: 5% auto;
     padding: 0;
@@ -474,6 +473,8 @@ body {
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    max-height: 85vh; 
+    overflow: hidden; 
 }
 
 @keyframes modalSlideIn {
@@ -512,6 +513,10 @@ body {
 
 #quickViewContent {
     padding: 24px;
+    max-height: calc(85vh - 140px); 
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-1) var(--muted);
 }
 
 .quick-view-header {
@@ -926,5 +931,71 @@ body {
     .pill {
         padding: 6px 12px;
         font-size: 12px;
+    }
+}
+
+#quickViewContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+#quickViewContent::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 3px;
+}
+
+#quickViewContent::-webkit-scrollbar-thumb {
+    background: var(--accent-1);
+    border-radius: 3px;
+}
+
+#quickViewContent::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-2);
+}
+
+.collection-options {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 10px;
+}
+
+.collection-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.collection-options::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 3px;
+}
+
+.collection-options::-webkit-scrollbar-thumb {
+    background: var(--accent-1);
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 10% auto;
+        max-height: 90vh;
+    }
+    
+    #quickViewContent {
+        max-height: calc(90vh - 140px);
+    }
+    
+    .collection-options {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    #quickViewContent {
+        padding: 16px;
+        max-height: calc(90vh - 120px);
     }
 }

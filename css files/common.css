@@ -1110,3 +1110,7 @@ html {
         background: linear-gradient(var(--accent-2), var(--accent-1));
     }
 }
+
+.favorites-modal-actions .btn.secondary:hover {
+    background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
+}

@@ -1,4 +1,4 @@
-let RECIPES_JSON = 'recipes.json';
+let RECIPES_JSON = '../data/recipes.json';
 let STORAGE_KEY = 'favorites';
 let grid = document.getElementById('recipes-grid');
 let searchInput = document.getElementById('live-search');
@@ -59,7 +59,6 @@ let sortFunctions = {
         let difficultyOrder = { 'easy': 1, 'medium': 2, 'hard': 3 };
         return (difficultyOrder[b.difficulty] || 0) - (difficultyOrder[a.difficulty] || 0);
     },
-    'newest': (a, b) => (b.id || '').localeCompare(a.id || '')
 };
 
 let SURPRISE_QUOTES = [
