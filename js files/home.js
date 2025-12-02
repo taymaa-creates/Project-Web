@@ -483,7 +483,7 @@ function initNewsletter() {
     if (form) {
         let savedName = localStorage.getItem(namesaved);
         if (savedName) {
-            messageEl.innerHTML = `Welcome <strong>${escapeHtml(savedName)}</strong>, Thanks for your subscription! ❤️`;
+            messageEl.innerHTML = `Welcome ${escapeHtml(savedName)}, Thanks for your subscription! ❤️`;
         }
 
         form.addEventListener("submit", (e) => {
@@ -497,7 +497,7 @@ function initNewsletter() {
             }
 
             localStorage.setItem(namesaved, name);
-            messageEl.innerHTML = `Welcome <strong>${escapeHtml(name)}</strong>, Thanks for your subscription! ❤️`;
+            messageEl.innerHTML = `Welcome ${escapeHtml(name)}, Thanks for your subscription! ❤️`;
 
             form.reset();
         });

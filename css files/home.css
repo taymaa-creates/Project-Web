@@ -789,6 +789,7 @@ h2 {
   min-height: 640px;
   overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   color: var(--card);

@@ -1,6 +1,88 @@
 function initHeader() {
     let hamburger = document.getElementById('hamburger');
     let nav = document.querySelector('.nav');
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+
+    if (searchBtn && searchInput && window.innerWidth <= 768) {
+        let isSearchExpanded = false;
+
+        searchBtn.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (!isSearchExpanded) {
+                    headerSearch.classList.add('expanded');
+                    searchInput.style.display = 'block';
+                    setTimeout(() => {
+                        searchInput.focus();
+                        searchInput.style.opacity = '1';
+                    }, 50);
+                    isSearchExpanded = true;
+
+                    if (nav && nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+
+                    document.body.classList.add('search-expanded');
+                } else {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        goToSearch(query);
+                    } else {
+                        collapseSearch();
+                    }
+                }
+            } else {
+                goToSearch();
+            }
+        });
+
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    goToSearch(query);
+                }
+            }
+        });
+        document.addEventListener('click', function (event) {
+            if (isSearchExpanded &&
+                !headerSearch.contains(event.target) &&
+                !searchBtn.contains(event.target)) {
+                collapseSearch();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isSearchExpanded) {
+                collapseSearch();
+            }
+        });
+
+        function collapseSearch() {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.opacity = '0';
+            setTimeout(() => {
+                searchInput.style.display = 'none';
+                searchInput.blur();
+            }, 300);
+            isSearchExpanded = false;
+            document.body.classList.remove('search-expanded');
+        }
+
+        function goToSearch(query) {
+            if (!query) {
+                query = searchInput.value.trim();
+            }
+            if (query) {
+                window.location.href = `pages/recipes.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+    }
 
 
     if (hamburger && nav) {
@@ -40,9 +122,6 @@ function initHeader() {
         }
     });
 
-    let searchInput = document.getElementById("header-search-input");
-    let searchBtn = document.getElementById("header-search-btn");
-
     if (searchInput && searchBtn) {
         function goToSearch() {
             const query = searchInput.value.trim();
@@ -62,10 +141,10 @@ function initHeader() {
     const logo = document.querySelector('.logo');
     if (logo) {
         logo.addEventListener('click', () => {
-            window.location.href = '../index.html';
+            window.location.href = 'index.html';
         });
     }
-   const favHeart = document.getElementById('favheart');
+    const favHeart = document.getElementById('favheart');
     if (favHeart) {
         favHeart.addEventListener("click", (e) => {
             e.preventDefault();
@@ -73,9 +152,29 @@ function initHeader() {
         });
     }
 }
+
+function handleResize() {
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+
+    if (window.innerWidth > 768) {
+        if (headerSearch) {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.display = 'block';
+            searchInput.style.opacity = '1';
+        }
+    } else {
+        if (searchInput && headerSearch) {
+            searchInput.style.display = 'none';
+            searchInput.style.opacity = '0';
+        }
+    }
+}
+
 function openFavoritesModal() {
     const favoriteIds = loadFavorites();
-    
+
     if (favoriteIds.length === 0) {
         window.location.href = 'pages/favorites.html';
         return;
@@ -98,7 +197,7 @@ async function createFavoritesModal(favoriteIds) {
     }
 
     let favoriteRecipes = allRecipes.filter(recipe => favoriteIds.includes(recipe.id));
-    let previewRecipes = favoriteRecipes.slice(0, 3); 
+    let previewRecipes = favoriteRecipes.slice(0, 3);
     let modalHTML = `
         <div class="favorites-modal" id="favorites-modal">
             <div class="favorites-modal-content">
@@ -107,8 +206,8 @@ async function createFavoritesModal(favoriteIds) {
                     <button class="close-modal" id="close-favorites-modal">&times;</button>
                 </div>
                 <div class="favorites-preview">
-                    ${previewRecipes.length > 0 ? 
-                        previewRecipes.map(recipe => `
+                    ${previewRecipes.length > 0 ?
+            previewRecipes.map(recipe => `
                             <div class="favorite-preview-item" data-id="${recipe.id}">
                                 <img src="${recipe.image}" alt="${recipe.name}" />
                                 <div class="favorite-preview-info">
@@ -116,10 +215,10 @@ async function createFavoritesModal(favoriteIds) {
                                     <p>${recipe.cuisine} · ${recipe.mealType}</p>
                                 </div>
                             </div>
-                        `).join('') 
-                        : 
-                        '<p class="no-favorites">No favorite recipes yet</p>'
-                    }
+                        `).join('')
+            :
+            '<p class="no-favorites">No favorite recipes yet</p>'
+        }
                 </div>
                 <div class="favorites-modal-actions">
                     <button class="btn secondary" id="see-all-favorites">
@@ -145,14 +244,14 @@ async function createFavoritesModal(favoriteIds) {
 
     closeModal.addEventListener('click', closeModalHandler);
     closeModalBtn.addEventListener('click', closeModalHandler);
-    
+
     seeAllBtn.addEventListener('click', () => {
         window.location.href = 'pages/favorites.html';
     });
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const recipeId = item.dataset.id;
-            window.location.href = `recipe.html?id=${recipeId}`;
+            window.location.href = `pages/recipe.html?id=${recipeId}`;
         });
     });
     modal.addEventListener('click', (e) => {
@@ -257,9 +356,9 @@ function showNewsletterMessage(message, type) {
         font-size: 0.9rem;
         text-align: center;
         ${type === 'success' ?
-                'background: rgba(182, 206, 180, 0.2); color: #fff; border: 1px solid rgba(182, 206, 180, 0.5);' :
-                'background: rgba(255, 100, 100, 0.2); color: #fff; border: 1px solid rgba(255, 100, 100, 0.5);'
-            }
+            'background: rgba(182, 206, 180, 0.2); color: #fff; border: 1px solid rgba(182, 206, 180, 0.5);' :
+            'background: rgba(255, 100, 100, 0.2); color: #fff; border: 1px solid rgba(255, 100, 100, 0.5);'
+        }
     `;
     const form = document.querySelector('.newsletter-form');
     form.parentNode.insertBefore(messageEl, form.nextSibling);
@@ -395,4 +494,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initFooter();
     darkmode();
     initDropdowns();
+    window.addEventListener('resize', handleResize);
+    handleResize();
 });

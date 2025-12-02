@@ -1,6 +1,88 @@
 function initHeader() {
     let hamburger = document.getElementById('hamburger');
     let nav = document.querySelector('.nav');
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+    
+    if (searchBtn && searchInput && window.innerWidth <= 768) {
+        let isSearchExpanded = false;
+        
+        searchBtn.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (!isSearchExpanded) {
+                    headerSearch.classList.add('expanded');
+                    searchInput.style.display = 'block';
+                    setTimeout(() => {
+                        searchInput.focus();
+                        searchInput.style.opacity = '1';
+                    }, 50);
+                    isSearchExpanded = true;
+                    
+                    if (nav && nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                    
+                    document.body.classList.add('search-expanded');
+                } else {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        goToSearch(query);
+                    } else {
+                        collapseSearch();
+                    }
+                }
+            } else {
+                goToSearch();
+            }
+        });
+        
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    goToSearch(query);
+                }
+            }
+        });
+        document.addEventListener('click', function(event) {
+            if (isSearchExpanded && 
+                !headerSearch.contains(event.target) && 
+                !searchBtn.contains(event.target)) {
+                collapseSearch();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isSearchExpanded) {
+                collapseSearch();
+            }
+        });
+        
+        function collapseSearch() {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.opacity = '0';
+            setTimeout(() => {
+                searchInput.style.display = 'none';
+                searchInput.blur();
+            }, 300);
+            isSearchExpanded = false;
+            document.body.classList.remove('search-expanded');
+        }
+        
+        function goToSearch(query) {
+            if (!query) {
+                query = searchInput.value.trim();
+            }
+            if (query) {
+                window.location.href = `recipes.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+    }
 
 
     if (hamburger && nav) {
@@ -40,9 +122,6 @@ function initHeader() {
         }
     });
 
-    let searchInput = document.getElementById("header-search-input");
-    let searchBtn = document.getElementById("header-search-btn");
-
     if (searchInput && searchBtn) {
         function goToSearch() {
             const query = searchInput.value.trim();
@@ -73,6 +152,26 @@ function initHeader() {
         });
     }
 }
+
+function handleResize() {
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+    
+    if (window.innerWidth > 768) {
+        if (headerSearch) {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.display = 'block';
+            searchInput.style.opacity = '1';
+        }
+    } else {
+        if (searchInput && headerSearch) {
+            searchInput.style.display = 'none';
+            searchInput.style.opacity = '0';
+        }
+    }
+}
+
 function openFavoritesModal() {
     const favoriteIds = loadFavorites();
     
@@ -395,4 +494,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initFooter();
     darkmode();
     initDropdowns();
+    window.addEventListener('resize', handleResize);
+    handleResize();
 });

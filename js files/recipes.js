@@ -123,6 +123,9 @@ function readInitialParams() {
     if (timeParam) preSelectedQuery.time = timeParam;
     let nutritionParam = url.searchParams.get('nutrition');
     if (nutritionParam) preSelectedQuery.nutrition = nutritionParam;
+
+    preSelectedQuery.categoryType = url.searchParams.get('categoryType') || '';
+    preSelectedQuery.categoryValue = url.searchParams.get('categoryValue') || '';
 }
 
 function applyPreselection() {
@@ -159,6 +162,18 @@ function applyPreselection() {
         let nchip = document.querySelector(`[data-filter="nutrition"] .chip[data-value="${CSS.escape(preSelectedQuery.nutrition)}"]`);
         if (nchip) nchip.classList.add('selected');
     }
+    
+    if (preSelectedQuery.categoryType && preSelectedQuery.categoryValue) {
+        let categoryType = decodeURIComponent(preSelectedQuery.categoryType);
+        let categoryValue = decodeURIComponent(preSelectedQuery.categoryValue);
+        if (!preSelectedQuery.cuisine && !preSelectedQuery.mealType) {
+            if (selectedFilters[categoryType] && categoryValue) {
+                selectedFilters[categoryType].add(categoryValue);
+                let chip = document.querySelector(`.filter-choices .chip[data-key="${categoryType}"][data-value="${CSS.escape(categoryValue)}"]`);
+                if (chip) chip.classList.add('selected');
+            }
+        }
+    }
 
     ['cuisine', 'mealType', 'difficulty', 'diet'].forEach(k => {
         selectedFilters[k].forEach(v => {
@@ -168,7 +183,6 @@ function applyPreselection() {
     });
     applyFilters();
 }
-
 function updateHeader() {
     let active = [];
     for (let k of ['cuisine', 'mealType', 'difficulty', 'diet']) {
@@ -186,11 +200,7 @@ function updateHeader() {
     }
 
     let q = searchInput.value.trim();
-    if (q && active.length === 0) {
-        mainTitle.textContent = `Search: "${q}"`;
-        mainSub.textContent = `Results matching "${q}"`;
-        return;
-    }
+    
     if (active.length > 0) {
         let label = active.join(' | ');
         mainTitle.textContent = label;
@@ -202,10 +212,33 @@ function updateHeader() {
         return;
     }
     
+    if (q) {
+        mainTitle.textContent = `Search: "${q}"`;
+        mainSub.textContent = `Results matching "${q}"`;
+        return;
+    }
+    
+    if (preSelectedQuery.categoryType && preSelectedQuery.categoryValue) {
+        let categoryType = decodeURIComponent(preSelectedQuery.categoryType);
+        let categoryValue = decodeURIComponent(preSelectedQuery.categoryValue);
+        if (categoryType === 'cuisine') {
+            mainTitle.textContent = `${categoryValue} Recipes`;
+            mainSub.textContent = `Explore our collection of ${categoryValue} dishes`;
+            return;
+        } else if (categoryType === 'mealType') {
+            mainTitle.textContent = `${categoryValue} Recipes`;
+            mainSub.textContent = `Delicious ${categoryValue.toLowerCase()} ideas for every occasion`;
+            return;
+        } else if (categoryType === 'diet') {
+            mainTitle.textContent = `${categoryValue} Recipes`;
+            mainSub.textContent = `Healthy and delicious ${categoryValue.toLowerCase()} options`;
+            return;
+        }
+    }
+    
     mainTitle.textContent = 'All Recipes';
     mainSub.textContent = 'Find the recipe that matches your mood';
 }
-
 function applyFilters() {
     let q = searchInput.value.trim().toLowerCase();
     let res = allRecipes.filter(r => {
@@ -573,6 +606,13 @@ function initEventListeners() {
         if (anyTime) anyTime.classList.add('selected');
         let anyNutrition = document.querySelector('[data-filter="nutrition"] .chip[data-value=""]');
         if (anyNutrition) anyNutrition.classList.add('selected');
+        const url = new URL(window.location);
+        url.searchParams.delete('categoryType');
+        url.searchParams.delete('categoryValue');
+        window.history.replaceState({}, '', url);
+        
+        preSelectedQuery.categoryType = '';
+        preSelectedQuery.categoryValue = '';
         
         applyFilters();
     });

@@ -1114,3 +1114,141 @@ html {
 .favorites-modal-actions .btn.secondary:hover {
     background: linear-gradient(90deg, var(--accent-2), var(--accent-1));
 }
+
+
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+        gap: 10px;
+        padding-right: 30px;
+    }
+    
+    .logo {
+        width: 60px;
+        order: 1;
+    }
+    
+    .left {
+        order: 2;
+        margin-left: auto;
+        gap: 10px;
+    }
+    
+    .header-search {
+        display: flex;
+        align-items: center;
+        width: auto;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        gap: 0;
+        margin-right: 0;
+    }
+    
+    .header-search input {
+        display: none;
+        width: 0;
+        padding: 0;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .header-search.expanded {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card);
+        border: 1px solid var(--nav-border);
+        border-top: none;
+        border-radius: 0 0 14px 14px;
+        padding: 15px;
+        margin: 0;
+        box-shadow: 0 8px 30px var(--nav-glow);
+        display: flex;
+        gap: 10px;
+        z-index: 999;
+    }
+    
+    .header-search.expanded input {
+        display: block;
+        width: 100%;
+        opacity: 1;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--accent-1);
+        background: var(--bg);
+    }
+    
+    #header-search-btn {
+        margin: 0;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .hamburger {
+        margin-right: 0;
+    }
+    
+    .nav {
+        order: 3;
+        width: 100%;
+        display: none;
+    }
+    
+    .nav.open {
+        display: flex;
+    }
+    
+    #favheart {
+        order: 1;
+    }
+    
+    #header-search-btn {
+        order: 2;
+    }
+    
+    .hamburger {
+        order: 3;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 8px 10px;
+        padding-right: 60px;
+    }
+    
+    .logo {
+        width: 50px;
+    }
+    
+    #favheart,
+    #header-search-btn,
+    .hamburger {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .header-search.expanded {
+        padding: 12px;
+    }
+    
+    .header-search.expanded input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    body.search-expanded .nav {
+        display: none !important;
+    }
+    
+    body.search-expanded .hamburger {
+        display: none;
+    }
+}
