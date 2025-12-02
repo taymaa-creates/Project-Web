@@ -29,53 +29,53 @@ $(document).ready(function() {
     container.empty();
 
     if (selectedIngredients.length === 0) {
-      container.append("<p>Please select ingredients!</p>");
-      return;
+        container.append("<p>Please select ingredients!</p>");
+        return;
     }
 
     let ingredientSynonyms = {
-      beef: ["beef", "veal", "steak", "shank", "beef broth"],
-      chicken: ["chicken", "drumstick", "breast", "thigh"],
-      garlic: ["garlic", "clove"],
-      tomatoes: ["tomato", "tomatoes", "cherry tomatoes"],
-      basil: ["basil"],
-      vegetables: ["vegetable", "zucchini", "pepper", "bell pepper", "cabbage", "carrot", "onion"]
+        beef: ["beef", "veal", "steak", "shank", "beef broth"],
+        chicken: ["chicken", "drumstick", "breast", "thigh"],
+        garlic: ["garlic", "clove"],
+        tomatoes: ["tomato", "tomatoes", "cherry tomatoes"],
+        basil: ["basil"],
+        vegetables: ["vegetable", "zucchini", "pepper", "bell pepper", "cabbage", "carrot", "onion"]
     };
 
     let filtered = allRecipes.filter(recipe => {
-      return selectedIngredients.every(sel => {
-        if (sel === "sweets") {
-          return recipe.mealType.toLowerCase() === "dessert";  
-        }
-        let synonyms = ingredientSynonyms[sel] || [sel];
-        return recipe.ingredients.some(ing =>
-          synonyms.some(syn => ing.toLowerCase().includes(syn.toLowerCase()))
-        );
-      });
+        return selectedIngredients.every(sel => {
+            if (sel === "sweets") {
+                return recipe.mealType.toLowerCase() === "dessert";  
+            }
+            let synonyms = ingredientSynonyms[sel] || [sel];
+            return recipe.ingredients.some(ing =>
+                synonyms.some(syn => ing.toLowerCase().includes(syn.toLowerCase()))
+            );
+        });
     });
 
     if (filtered.length === 0) {
-      container.append("<p>No recipes match your selection.</p>");
-      return;
+        container.append("<p>No recipes match your selection.</p>");
+        return;
     }
 
     filtered.forEach(recipe => {
-      let card = `
-        <div class="recipe-card">
-          <img src="${recipe.image}" alt="${recipe.name}">
-          <div class="recipe-info">
-            <h3>${recipe.name}</h3>
-            <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
-            <p><strong>Meal Type:</strong> ${recipe.mealType}</p>
-            <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
-            <p><strong>Total Time:</strong> ${recipe.time.total} mins</p>
-            <a href="${recipe.videoUrl}" target="_blank">🎥 Watch Video</a>
-          </div>
-        </div>
-      `;
-      container.append(card);
+        let card = `
+            <div class="recipe-card">
+                <img src="${recipe.image}" alt="${recipe.name}">
+                <div class="recipe-info">
+                    <h3><a href="recipe.html?name=${encodeURIComponent(recipe.name)}" class="recipe-link" style="color: #000000ff;">${recipe.name}</a></h3>
+                    <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+                    <p><strong>Meal Type:</strong> ${recipe.mealType}</p>
+                    <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+                    <p><strong>Total Time:</strong> ${recipe.time.total} mins</p>
+                    <a href="${recipe.videoUrl}" target="_blank">🎥 Watch Video</a>
+                </div>
+            </div>
+        `;
+        container.append(card);
     });
-  }
+}
 
   $("#reset-btn").click(function() {
     selectedIngredients = [];
