@@ -10,7 +10,6 @@ $(function () {
     let stepTimerRemaining = 0;
     let currentStepHasTimer = false;
 
-    let QA_TIMER_KEY = 'qa_timer_screen_awake';
     let QA_RATING_KEY = 'qa_recipe_ratings_';
     let QA_COMMENTS_KEY = 'qa_recipe_comments_';
 
@@ -42,7 +41,7 @@ $(function () {
             toast.addClass('show');
         }, 10);
 
-        const removeToast = () => {
+        let removeToast = () => {
             toast.removeClass('show');
             setTimeout(() => toast.remove(), 400);
         };
@@ -120,9 +119,9 @@ $(function () {
 
     function playTimerSound() {
         try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+            let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            let oscillator = audioContext.createOscillator();
+            let gainNode = audioContext.createGain();
 
             oscillator.connect(gainNode);
             gainNode.connect(audioContext.destination);
@@ -1061,13 +1060,13 @@ $(function () {
                style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd;">
     `);
         $('#ingredientSearch').on('input', function () {
-            const searchTerm = $(this).val().toLowerCase().trim();
+            let searchTerm = $(this).val().toLowerCase().trim();
 
             if (searchTerm === '') {
                 $('.ing-item').show();
             } else {
                 $('.ing-item').each(function () {
-                    const text = $(this).text().toLowerCase();
+                    let text = $(this).text().toLowerCase();
                     $(this).toggle(text.includes(searchTerm));
                 });
             }
@@ -1096,8 +1095,8 @@ $(function () {
     }
 
     function performExport() {
-        const format = $('input[name="exportFormat"]:checked').val();
-        const recipe = recipes[currentIndex];
+        let format = $('input[name="exportFormat"]:checked').val();
+        let recipe = recipes[currentIndex];
 
         if (!recipe) {
             showToast('❌ No recipe data available', 'error', 3000);
@@ -1119,7 +1118,7 @@ $(function () {
         let portions = parseInt($('#portionsInput').val()) || recipe.basePortions || 4;
         let ratio = portions / (recipe.basePortions || 4);
         let scaledIngredients = (recipe.ingredients || []).map(it => {
-            const parsed = parseQuantity(it);
+            let parsed = parseQuantity(it);
             if (parsed.number !== null) {
                 let scaled = parsed.number * ratio;
                 if (parsed.isIntegerUnit) scaled = Math.round(scaled);
@@ -1129,7 +1128,7 @@ $(function () {
             return it;
         });
 
-        const printContent = `
+        let printContent = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -1253,7 +1252,7 @@ $(function () {
                 <h2 class="section-title">Nutritional Information</h2>
                 <div class="nutrition-grid">
                     ${Object.entries(recipe.nutrition).map(([key, value]) => {
-            const labelMap = {
+            let labelMap = {
                 calories_kcal: "Calories",
                 energy_kj: "Energy",
                 fat_g: "Fat",
@@ -1264,8 +1263,8 @@ $(function () {
                 fatsat_g: "Sat. Fat",
                 sat_g: "Sat. Fat"
             };
-            const label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            const unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
+            let label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            let unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
             return `
                             <div class="nutrition-item">
                                 <div class="nutrition-value">${value}${unit}</div>
@@ -1299,7 +1298,7 @@ $(function () {
     }
 
     function exportToJSON(recipe) {
-        const exportData = {
+        let exportData = {
             exportedAt: new Date().toISOString(),
             source: "ctrl+alt+eat",
             recipe: {
@@ -1308,12 +1307,12 @@ $(function () {
             }
         };
 
-        const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+        let blob = new Blob([JSON.stringify(exportData, null, 2)], {
             type: 'application/json'
         });
 
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        let url = URL.createObjectURL(blob);
+        let a = document.createElement('a');
         a.href = url;
         a.download = `${recipe.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_recipe.json`;
         document.body.appendChild(a);

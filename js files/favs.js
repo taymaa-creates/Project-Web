@@ -43,7 +43,7 @@ let collectionToDelete = null;
 
 function initToastContainer() {
     if (!document.getElementById("toastContainer")) {
-        const toastContainer = document.createElement("div");
+        let toastContainer = document.createElement("div");
         toastContainer.id = "toastContainer";
         toastContainer.style.cssText = "position: fixed; top: 20px; right: 20px; z-index: 10000;";
         document.body.appendChild(toastContainer);
@@ -142,7 +142,7 @@ function getCurrentRecipes() {
     let favRecipes = allRecipes.filter(r => favoriteIds.includes(r.id));
     
     if (currentCollection) {
-        const collection = collections.find(c => c.id === currentCollection);
+        let collection = collections.find(c => c.id === currentCollection);
         if (collection) {
             favRecipes = favRecipes.filter(r => collection.recipes.includes(r.id));
         }
@@ -203,7 +203,7 @@ function renderFavorites() {
 }
 
 function showToast(message, type = "info", duration = 4000, actionText = null, onAction = null) {
-    const toast = document.createElement("div");
+    let toast = document.createElement("div");
     toast.className = `toast-notification toast-${type}`;
 
     let actionHtml = '';
@@ -232,14 +232,14 @@ function showToast(message, type = "info", duration = 4000, actionText = null, o
     }, 10);
 
     if (actionText && onAction) {
-        const actionBtn = toast.querySelector(".toast-action");
+        let actionBtn = toast.querySelector(".toast-action");
         actionBtn.addEventListener("click", () => {
             onAction();
             hideToast(toast);
         });
     }
 
-    const closeBtn = toast.querySelector(".toast-close");
+    let closeBtn = toast.querySelector(".toast-close");
     closeBtn.addEventListener("click", () => {
         hideToast(toast);
     });
@@ -435,7 +435,7 @@ function createNewCollection() {
 function deleteCollection() {
     if (!collectionToDelete) return;
 
-    const collection = collections.find(c => c.id === collectionToDelete);
+    let collection = collections.find(c => c.id === collectionToDelete);
     if (!collection) return;
 
     collections = collections.filter(c => c.id !== collectionToDelete);
@@ -545,7 +545,7 @@ function showExportModal() {
         return;
     }
 
-    const jsonRadio = exportModal.querySelector('input[value="json"]');
+    let jsonRadio = exportModal.querySelector('input[value="json"]');
     if (jsonRadio) jsonRadio.checked = true;
 
     exportModal.style.display = 'block';
@@ -554,7 +554,7 @@ function showExportModal() {
 function performExport() {
     
     try {
-        const formatInputs = exportModal.querySelectorAll('input[name="exportFormat"]');
+        let formatInputs = exportModal.querySelectorAll('input[name="exportFormat"]');
         let selectedFormat = 'json';
         
         formatInputs.forEach(input => {
@@ -673,7 +673,7 @@ function exportToPDF(recipes) {
 
             let nutritionHtml = '';
             if (recipe.nutrition && Object.keys(recipe.nutrition).length > 0) {
-                const labelMap = {
+                let labelMap = {
                     calories_kcal: "Calories",
                     energy_kj: "Energy",
                     fat_g: "Fat",
@@ -690,8 +690,8 @@ function exportToPDF(recipes) {
                         <h2 class="section-title">Nutritional Information</h2>
                         <div class="nutrition-grid">
                             ${Object.entries(recipe.nutrition).map(([key, value]) => {
-                                const label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                                const unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
+                                let label = labelMap[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                                let unit = key.includes('_g') ? 'g' : key.includes('kcal') ? 'kcal' : key.includes('kj') ? 'kJ' : '';
                                 return `
                                     <div class="nutrition-item">
                                         <div class="nutrition-value">${value}${unit}</div>
@@ -1007,7 +1007,7 @@ function attachCollectionListeners() {
                 renderCollections();
                 
                 if (currentCollection) {
-                    const collection = collections.find(c => c.id === collectionId);
+                    let collection = collections.find(c => c.id === collectionId);
                     showToast(`Viewing ${collection.name} collection (${collection.recipes.length} recipes)`, 'info');
                 } else {
                     showToast('Showing all favorites', 'info');
@@ -1068,7 +1068,7 @@ function addToCollectionFromQuickView(recipeId) {
         </div>`
     ).join('');
 
-    const collectionSelectionHTML = `
+    let collectionSelectionHTML = `
         <div class="collection-selection">
             <h5>Add to Collection:</h5>
             <div class="collection-options" style="max-height: 200px; overflow-y: auto; padding-right: 8px;">
@@ -1079,7 +1079,7 @@ function addToCollectionFromQuickView(recipeId) {
     
     quickViewContent.insertAdjacentHTML('beforeend', collectionSelectionHTML);
     quickViewModal.style.overflowY = 'auto';
-    const collectionSection = quickViewContent.querySelector('.collection-selection');
+    let collectionSection = quickViewContent.querySelector('.collection-selection');
     if (collectionSection) {
         collectionSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
