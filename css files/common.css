@@ -1209,7 +1209,21 @@ body.modal-open {
     body.search-expanded .hamburger {
         display: none;
     }
+
+        footer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .footer-main {
+padding: 2rem 5%;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
 }
+}
+
 @media (max-width: 480px) {
     footer{
         display: flex;
@@ -1219,6 +1233,9 @@ body.modal-open {
     }
     .footer-main {
 padding: 2rem 5%;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
 }
 
 .footer-social {

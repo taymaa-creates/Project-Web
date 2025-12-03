@@ -152,7 +152,7 @@ $(document).ready(function () {
     $("#recipesGrid").empty();
 
     if (recipes.length === 0) {
-      $("#recipesGrid").html('<div class="no-recipes"><p>No recipes found. Add some recipes to get started! 🍳</p></div>');
+      $("#recipesGrid").html('<div class="no-recipes"><p>Wait recipes are loading 🍳</p></div>');
       return;
     }
 
