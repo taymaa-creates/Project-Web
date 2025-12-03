@@ -1,10 +1,10 @@
 let recipes = [];
 let currentIndex = 0;
-const STORAGE_KEY = "favorites";
-const FALLBACK_IMAGE = "/mnt/data/0340e681-c707-4be8-8732-02e33e09cb78.png";
-const HERO_HISTORY_KEY = "hero_shown_stack_v1";
-const HISTORY_LIMIT = 3;
-const ROTATE_INTERVAL = 7000;
+let STORAGE_KEY = "favorites";
+let FALLBACK_IMAGE = "/mnt/data/0340e681-c707-4be8-8732-02e33e09cb78.png";
+let HERO_HISTORY_KEY = "hero_shown_stack_v1";
+let HISTORY_LIMIT = 3;
+let ROTATE_INTERVAL = 7000;
 
 async function loadRecipes() {
     if (recipes && recipes.length > 0) return recipes;
