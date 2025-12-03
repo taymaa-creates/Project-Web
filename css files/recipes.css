@@ -113,6 +113,7 @@ html {
 .sort-dropdown {
     position: absolute;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
     top: 100%;

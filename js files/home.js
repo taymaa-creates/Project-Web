@@ -1,10 +1,10 @@
 let recipes = [];
 let currentIndex = 0;
-const STORAGE_KEY = "favorites";
-const FALLBACK_IMAGE = "/mnt/data/0340e681-c707-4be8-8732-02e33e09cb78.png";
-const HERO_HISTORY_KEY = "hero_shown_stack_v1";
-const HISTORY_LIMIT = 3;
-const ROTATE_INTERVAL = 7000;
+let STORAGE_KEY = "favorites";
+let FALLBACK_IMAGE = "/mnt/data/0340e681-c707-4be8-8732-02e33e09cb78.png";
+let HERO_HISTORY_KEY = "hero_shown_stack_v1";
+let HISTORY_LIMIT = 3;
+let ROTATE_INTERVAL = 7000;
 
 async function loadRecipes() {
     if (recipes && recipes.length > 0) return recipes;
@@ -152,7 +152,7 @@ async function initHeroSection() {
         cardEl.dataset.id = recipe.id;
 
         readMoreBtn.onclick = () => {
-            location.assign(`recipe.html?id=${encodeURIComponent(recipe.id)}`);
+            location.assign(`pages/recipe.html?id=${encodeURIComponent(recipe.id)}`);
         };
 
         const heartBtn = cardEl.querySelector(".heart-btn");
@@ -242,7 +242,7 @@ async function initRecipeSlider() {
         cardEl.dataset.id = recipe.id;
 
         readMoreBtn.onclick = () => {
-            location.assign(`recipe.html?id=${encodeURIComponent(recipe.id)}`);
+            location.assign(`pages/recipe.html?id=${encodeURIComponent(recipe.id)}`);
         };
 
         const heartBtn = cardEl.querySelector(".heart-btn");
@@ -315,7 +315,7 @@ async function initCategoriesSlider() {
                 <p>${cat}</p>
             `;
             card.addEventListener("click", () => {
-                let url = 'recipes.html?';
+                let url = 'pages/recipes.html?';
                 
                 if (cuisines.includes(cat)) {
                     url += `cuisine=${encodeURIComponent(cat)}`;
@@ -412,7 +412,7 @@ async function initBestRecipes() {
                 `;
 
                 card.addEventListener("click", () => {
-                    location.assign(`recipe.html?id=${recipe.id}`);
+                    location.assign(`pages/recipe.html?id=${recipe.id}`);
                 });
 
                 recipeGrid.appendChild(card);
@@ -447,9 +447,9 @@ async function initSearchSection() {
             btn.addEventListener("click", () => {
                 const isCuisine = cuisines.some(c => c.toLowerCase() === value.toLowerCase());
                 if (isCuisine) {
-                    location.assign(`recipes.html?cuisine=${encodeURIComponent(value)}`);
+                    location.assign(`pages/recipes.html?cuisine=${encodeURIComponent(value)}`);
                 } else {
-                    location.assign(`recipes.html?mealType=${encodeURIComponent(value)}`);
+                    location.assign(`pages/recipes.html?mealType=${encodeURIComponent(value)}`);
                 }
             });
             tagsContainer.appendChild(btn);
@@ -470,20 +470,20 @@ async function initSearchSection() {
             input.focus();
             return;
         }
-        location.assign(`recipes.html?q=${encodeURIComponent(q)}`);
+        location.assign(`pages/recipes.html?q=${encodeURIComponent(q)}`);
     });
 }
 
 function initNewsletter() {
-    const form = document.getElementById("newsletter-form");
-    const nameInput = document.getElementById("subscriber-name");
-    const messageEl = document.getElementById("subscription-message");
-    const namesaved = "newsletterName";
+    let form = document.getElementById("newsletter-form");
+    let nameInput = document.getElementById("subscriber-name");
+    let messageEl = document.getElementById("subscription-message");
+    let namesaved = "newsletterName";
 
     if (form) {
-        const savedName = localStorage.getItem(namesaved);
+        let savedName = localStorage.getItem(namesaved);
         if (savedName) {
-            messageEl.innerHTML = `Welcome <strong>${escapeHtml(savedName)}</strong>, Thanks for your subscription! ❤️`;
+            messageEl.innerHTML = `Welcome ${escapeHtml(savedName)}, Thanks for your subscription! ❤️`;
         }
 
         form.addEventListener("submit", (e) => {
@@ -497,7 +497,7 @@ function initNewsletter() {
             }
 
             localStorage.setItem(namesaved, name);
-            messageEl.innerHTML = `Welcome <strong>${escapeHtml(name)}</strong>, Thanks for your subscription! ❤️`;
+            messageEl.innerHTML = `Welcome ${escapeHtml(name)}, Thanks for your subscription! ❤️`;
 
             form.reset();
         });
@@ -512,11 +512,11 @@ async function initSurpriseMe() {
     surpriseMeBtn.addEventListener('click', async () => {
         if (recipes && recipes.length > 0) {
             const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
-            window.location.href = `recipe.html?id=${encodeURIComponent(randomRecipe.id)}`;
+            window.location.href = `pages/recipe.html?id=${encodeURIComponent(randomRecipe.id)}`;
         } else {
             const data = await loadRecipes();
             const randomRecipe = data[Math.floor(Math.random() * data.length)];
-            window.location.href = `recipe.html?id=${encodeURIComponent(randomRecipe.id)}`;
+            window.location.href = `pages/recipe.html?id=${encodeURIComponent(randomRecipe.id)}`;
         }
     });
 }
@@ -533,10 +533,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     ]);
     
     document.getElementById("contact")?.addEventListener("click", () => {
-        window.location.href = "contact.html";
+        window.location.href = "pages/contact.html";
     });
     
     document.getElementById("about")?.addEventListener("click", () => {
-        window.location.href = "about.html";
+        window.location.href = "pages/about.html";
     });
 });

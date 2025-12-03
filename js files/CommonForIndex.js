@@ -1,6 +1,88 @@
 function initHeader() {
     let hamburger = document.getElementById('hamburger');
     let nav = document.querySelector('.nav');
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+
+    if (searchBtn && searchInput && window.innerWidth <= 768) {
+        let isSearchExpanded = false;
+
+        searchBtn.addEventListener('click', function (e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (!isSearchExpanded) {
+                    headerSearch.classList.add('expanded');
+                    searchInput.style.display = 'block';
+                    setTimeout(() => {
+                        searchInput.focus();
+                        searchInput.style.opacity = '1';
+                    }, 50);
+                    isSearchExpanded = true;
+
+                    if (nav && nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+
+                    document.body.classList.add('search-expanded');
+                } else {
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        goToSearch(query);
+                    } else {
+                        collapseSearch();
+                    }
+                }
+            } else {
+                goToSearch();
+            }
+        });
+
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    goToSearch(query);
+                }
+            }
+        });
+        document.addEventListener('click', function (event) {
+            if (isSearchExpanded &&
+                !headerSearch.contains(event.target) &&
+                !searchBtn.contains(event.target)) {
+                collapseSearch();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isSearchExpanded) {
+                collapseSearch();
+            }
+        });
+
+        function collapseSearch() {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.opacity = '0';
+            setTimeout(() => {
+                searchInput.style.display = 'none';
+                searchInput.blur();
+            }, 300);
+            isSearchExpanded = false;
+            document.body.classList.remove('search-expanded');
+        }
+
+        function goToSearch(query) {
+            if (!query) {
+                query = searchInput.value.trim();
+            }
+            if (query) {
+                window.location.href = `pages/recipes.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+    }
 
 
     if (hamburger && nav) {
@@ -40,9 +122,6 @@ function initHeader() {
         }
     });
 
-    let searchInput = document.getElementById("header-search-input");
-    let searchBtn = document.getElementById("header-search-btn");
-
     if (searchInput && searchBtn) {
         function goToSearch() {
             const query = searchInput.value.trim();
@@ -59,13 +138,7 @@ function initHeader() {
         });
     }
 
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.addEventListener('click', () => {
-            window.location.href = '../index.html';
-        });
-    }
-   const favHeart = document.getElementById('favheart');
+    let favHeart = document.getElementById('favheart');
     if (favHeart) {
         favHeart.addEventListener("click", (e) => {
             e.preventDefault();
@@ -73,9 +146,29 @@ function initHeader() {
         });
     }
 }
+
+function handleResize() {
+    let searchBtn = document.getElementById('header-search-btn');
+    let searchInput = document.getElementById('header-search-input');
+    let headerSearch = document.querySelector('.header-search');
+
+    if (window.innerWidth > 768) {
+        if (headerSearch) {
+            headerSearch.classList.remove('expanded');
+            searchInput.style.display = 'block';
+            searchInput.style.opacity = '1';
+        }
+    } else {
+        if (searchInput && headerSearch) {
+            searchInput.style.display = 'none';
+            searchInput.style.opacity = '0';
+        }
+    }
+}
+
 function openFavoritesModal() {
     const favoriteIds = loadFavorites();
-    
+
     if (favoriteIds.length === 0) {
         window.location.href = 'pages/favorites.html';
         return;
@@ -90,7 +183,7 @@ function loadFavorites() {
 async function createFavoritesModal(favoriteIds) {
     let allRecipes = [];
     try {
-        let response = await fetch('../data/recipes.json');
+        let response = await fetch('data/recipes.json');
         allRecipes = await response.json();
     } catch (error) {
         console.error('Failed to load recipes:', error);
@@ -136,11 +229,14 @@ async function createFavoritesModal(favoriteIds) {
     let closeModal = document.getElementById('close-favorites-modal');
     let closeModalBtn = document.getElementById('close-modal-btn');
     let seeAllBtn = document.getElementById('see-all-favorites');
+    
     let closeModalHandler = () => {
         modal.style.opacity = '0';
         setTimeout(() => {
             modal.remove();
         }, 300);
+        
+document.body.classList.remove('modal-open');
     };
 
     closeModal.addEventListener('click', closeModalHandler);
@@ -149,25 +245,38 @@ async function createFavoritesModal(favoriteIds) {
     seeAllBtn.addEventListener('click', () => {
         window.location.href = 'pages/favorites.html';
     });
+    
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const recipeId = item.dataset.id;
-            window.location.href = `recipe.html?id=${recipeId}`;
+            window.location.href = `pages/recipe.html?id=${recipeId}`;
         });
     });
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModalHandler();
         }
     });
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal) {
             closeModalHandler();
         }
     });
+    
     setTimeout(() => {
+        modal.style.display = 'flex'; 
         modal.style.opacity = '1';
+        
+        modal.addEventListener('touchmove', (e) => {
+            if (e.target === modal) {
+                e.preventDefault(); 
+            }
+        }, { passive: false });
     }, 10);
+document.body.classList.add('modal-open');
+
 }
 
 function initDropdowns() {
@@ -257,9 +366,9 @@ function showNewsletterMessage(message, type) {
         font-size: 0.9rem;
         text-align: center;
         ${type === 'success' ?
-                'background: rgba(182, 206, 180, 0.2); color: #fff; border: 1px solid rgba(182, 206, 180, 0.5);' :
-                'background: rgba(255, 100, 100, 0.2); color: #fff; border: 1px solid rgba(255, 100, 100, 0.5);'
-            }
+            'background: rgba(182, 206, 180, 0.2); color: #fff; border: 1px solid rgba(182, 206, 180, 0.5);' :
+            'background: rgba(255, 100, 100, 0.2); color: #fff; border: 1px solid rgba(255, 100, 100, 0.5);'
+        }
     `;
     const form = document.querySelector('.newsletter-form');
     form.parentNode.insertBefore(messageEl, form.nextSibling);
@@ -395,4 +504,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initFooter();
     darkmode();
     initDropdowns();
+    window.addEventListener('resize', handleResize);
+    handleResize();
 });

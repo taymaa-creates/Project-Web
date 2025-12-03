@@ -1506,11 +1506,28 @@ body {
         padding: 50px 15px 60px;
         padding-top: 60px;
     }
-    
-    .title {
-        font-size: 1.8rem;
+
+    .content-inner{
+        display: flex;
+        flex-direction: column;
     }
     
+    .hero-inner {
+        padding: 60px 20px 80px;
+        padding-top: 70px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .subtitle{
+        text-align: center;
+    }
+
     .circle-frame {
         width: 240px;
         height: 240px;
@@ -1708,6 +1725,28 @@ body {
         max-width: none;
         top: 10px;
     }
+
+     .center-image-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .circle-frame {
+        margin: 0 auto !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .section-bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1737,7 +1776,6 @@ body {
     }
 }
 
-/* Fix for very tall mobile devices */
 @media (max-height: 700px) and (max-width: 768px) {
     .hero {
         padding-top: 50px;
@@ -2223,7 +2261,6 @@ html, body {
   color: white;
 }
 
-/* Dark mode adjustments for export modal */
 .dark-mode .export-modal-content {
   background: rgba(11, 43, 38, 0.95);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);

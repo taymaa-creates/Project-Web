@@ -230,25 +230,41 @@ $(function () {
         updateRecipeDisplay();
     }
 
-    function navigateToRecipe(recipeId) {
-        let newUrl = `${window.location.pathname}?id=${recipeId}`;
-        window.history.pushState({}, '', newUrl);
-
-        let newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
-        if (newIndex !== -1) {
-            currentIndex = newIndex;
-            updateRecipeDisplay();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function navigateToRecipe(recipeId) {
+    if (window.scrollTo) {
+        window.scrollTo(0, 0);
     }
-
-    function updateRecipeDisplay() {
-        renderRecipe(currentIndex);
-        updateFavUI();
-        restoreChecks();
-        refreshQASections();
-        renderSuggestions();
+    if (document.documentElement.scrollTo) {
+        document.documentElement.scrollTo(0, 0);
     }
+    if (document.body.scrollTo) {
+        document.body.scrollTo(0, 0);
+    }
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.pageYOffset = 0;
+    document.body.style.display = 'none';
+    document.body.offsetHeight; 
+    document.body.style.display = '';
+    let newUrl = `${window.location.pathname}?id=${recipeId}`;
+    window.history.pushState({}, '', newUrl);
+
+    let newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
+    if (newIndex !== -1) {
+        currentIndex = newIndex;
+        updateRecipeDisplay();
+    }
+}
+function updateRecipeDisplay() {
+    renderRecipe(currentIndex);
+    updateFavUI();
+    restoreChecks();
+    refreshQASections();
+    renderSuggestions();
+    setTimeout(() => window.scrollTo(0, 0), 0);
+    setTimeout(() => window.scrollTo(0, 0), 10);
+    setTimeout(() => window.scrollTo(0, 0), 50);
+}
 
     function handlePopState() {
         let params = new URLSearchParams(window.location.search);
@@ -907,10 +923,13 @@ $(function () {
         let suggestionsHTML = suggestions.map(recipe => createSuggestionCard(recipe)).join('');
         $('#suggestionsList').html(suggestionsHTML);
 
-        $('.suggestion-card').off('click').on('click', function () {
-            let recipeId = $(this).data('id');
-            navigateToRecipe(recipeId);
-        });
+        $('.suggestion-card').off('click').on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    let recipeId = $(this).data('id');
+    navigateToRecipe(recipeId);
+    return false; // This prevents ANY default behavior
+});
     }
 
     function getRelatedRecipes(currentRecipe) {
