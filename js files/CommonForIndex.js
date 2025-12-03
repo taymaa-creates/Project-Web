@@ -183,7 +183,7 @@ function loadFavorites() {
 async function createFavoritesModal(favoriteIds) {
     let allRecipes = [];
     try {
-        let response = await fetch('../data/recipes.json');
+        let response = await fetch('data/recipes.json');
         allRecipes = await response.json();
     } catch (error) {
         console.error('Failed to load recipes:', error);
@@ -243,13 +243,13 @@ document.body.classList.remove('modal-open');
     closeModalBtn.addEventListener('click', closeModalHandler);
     
     seeAllBtn.addEventListener('click', () => {
-        window.location.href = 'favorites.html';
+        window.location.href = 'pages/favorites.html';
     });
     
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const recipeId = item.dataset.id;
-            window.location.href = `recipe.html?id=${recipeId}`;
+            window.location.href = `pages/recipe.html?id=${recipeId}`;
         });
     });
     
