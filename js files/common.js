@@ -144,7 +144,7 @@ function initHeader() {
             window.location.href = '../index.html';
         });
     }
-   const favHeart = document.getElementById('favheart');
+   let favHeart = document.getElementById('favheart');
     if (favHeart) {
         favHeart.addEventListener("click", (e) => {
             e.preventDefault();
@@ -173,7 +173,7 @@ function handleResize() {
 }
 
 function openFavoritesModal() {
-    const favoriteIds = loadFavorites();
+    let favoriteIds = loadFavorites();
     
     if (favoriteIds.length === 0) {
         window.location.href = 'favorites.html';
@@ -235,11 +235,14 @@ async function createFavoritesModal(favoriteIds) {
     let closeModal = document.getElementById('close-favorites-modal');
     let closeModalBtn = document.getElementById('close-modal-btn');
     let seeAllBtn = document.getElementById('see-all-favorites');
+    
     let closeModalHandler = () => {
         modal.style.opacity = '0';
         setTimeout(() => {
             modal.remove();
         }, 300);
+        
+document.body.classList.remove('modal-open');
     };
 
     closeModal.addEventListener('click', closeModalHandler);
@@ -248,27 +251,39 @@ async function createFavoritesModal(favoriteIds) {
     seeAllBtn.addEventListener('click', () => {
         window.location.href = 'favorites.html';
     });
+    
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const recipeId = item.dataset.id;
             window.location.href = `recipe.html?id=${recipeId}`;
         });
     });
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModalHandler();
         }
     });
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal) {
             closeModalHandler();
         }
     });
+    
     setTimeout(() => {
+        modal.style.display = 'flex'; 
         modal.style.opacity = '1';
+        
+        modal.addEventListener('touchmove', (e) => {
+            if (e.target === modal) {
+                e.preventDefault(); 
+            }
+        }, { passive: false });
     }, 10);
-}
+document.body.classList.add('modal-open');
 
+}
 function initDropdowns() {
     document.querySelectorAll('.dropdown').forEach(dropdown => {
         const button = dropdown.querySelector('.nav-link');

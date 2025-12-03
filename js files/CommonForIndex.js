@@ -191,7 +191,7 @@ async function createFavoritesModal(favoriteIds) {
     }
 
     let favoriteRecipes = allRecipes.filter(recipe => favoriteIds.includes(recipe.id));
-    let previewRecipes = favoriteRecipes.slice(0, 3);
+    let previewRecipes = favoriteRecipes.slice(0, 3); 
     let modalHTML = `
         <div class="favorites-modal" id="favorites-modal">
             <div class="favorites-modal-content">
@@ -200,8 +200,8 @@ async function createFavoritesModal(favoriteIds) {
                     <button class="close-modal" id="close-favorites-modal">&times;</button>
                 </div>
                 <div class="favorites-preview">
-                    ${previewRecipes.length > 0 ?
-            previewRecipes.map(recipe => `
+                    ${previewRecipes.length > 0 ? 
+                        previewRecipes.map(recipe => `
                             <div class="favorite-preview-item" data-id="${recipe.id}">
                                 <img src="${recipe.image}" alt="${recipe.name}" />
                                 <div class="favorite-preview-info">
@@ -209,10 +209,10 @@ async function createFavoritesModal(favoriteIds) {
                                     <p>${recipe.cuisine} · ${recipe.mealType}</p>
                                 </div>
                             </div>
-                        `).join('')
-            :
-            '<p class="no-favorites">No favorite recipes yet</p>'
-        }
+                        `).join('') 
+                        : 
+                        '<p class="no-favorites">No favorite recipes yet</p>'
+                    }
                 </div>
                 <div class="favorites-modal-actions">
                     <button class="btn secondary" id="see-all-favorites">
@@ -229,38 +229,54 @@ async function createFavoritesModal(favoriteIds) {
     let closeModal = document.getElementById('close-favorites-modal');
     let closeModalBtn = document.getElementById('close-modal-btn');
     let seeAllBtn = document.getElementById('see-all-favorites');
+    
     let closeModalHandler = () => {
         modal.style.opacity = '0';
         setTimeout(() => {
             modal.remove();
         }, 300);
+        
+document.body.classList.remove('modal-open');
     };
 
     closeModal.addEventListener('click', closeModalHandler);
     closeModalBtn.addEventListener('click', closeModalHandler);
-
+    
     seeAllBtn.addEventListener('click', () => {
-        window.location.href = 'pages/favorites.html';
+        window.location.href = 'favorites.html';
     });
+    
     document.querySelectorAll('.favorite-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const recipeId = item.dataset.id;
-            window.location.href = `pages/recipe.html?id=${recipeId}`;
+            window.location.href = `recipe.html?id=${recipeId}`;
         });
     });
+    
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModalHandler();
         }
     });
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal) {
             closeModalHandler();
         }
     });
+    
     setTimeout(() => {
+        modal.style.display = 'flex'; 
         modal.style.opacity = '1';
+        
+        modal.addEventListener('touchmove', (e) => {
+            if (e.target === modal) {
+                e.preventDefault(); 
+            }
+        }, { passive: false });
     }, 10);
+document.body.classList.add('modal-open');
+
 }
 
 function initDropdowns() {
