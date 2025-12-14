@@ -2,7 +2,6 @@ $(document).ready(function () {
 
   loadRecipes();
 
-  /* ---------------- Tabs ---------------- */
   $("#tabAll").on("click", function () {
     $("#recipesGrid").show();
     $(".tab").removeClass("active");
@@ -10,7 +9,6 @@ $(document).ready(function () {
     loadRecipes();
   });
 
-  /* ---------------- Filter Dropdown ---------------- */
   $("#filterSelect").on("change", function() {
     let selectedCategory = $(this).val();
 
@@ -23,7 +21,6 @@ $(document).ready(function () {
     }
   });
 
-  /* ---------------- Add to Planner Buttons ---------------- */
   $(document).on("click", ".add-to-planner-btn", function() {
     let $card = $(this).closest('.recipe-card');
     let recipeData = {
@@ -40,7 +37,6 @@ $(document).ready(function () {
     showMealSelectionModal(recipeData);
   });
 
-  /* ---------------- Drag & Drop Meals ---------------- */
   $(".meal-slot").droppable({
     accept: ".recipe-card",
     drop: function (event, ui) {
@@ -73,7 +69,6 @@ $(document).ready(function () {
     }
   });
 
-  // Remove a meal from slot
   $(".meal-planner").on("click", ".remove-slot", function () {
     $(this).parent().fadeOut(300, function () {
       $(this).remove();
@@ -82,7 +77,6 @@ $(document).ready(function () {
     });
   });
 
-  /* ---------------- Planner Actions ---------------- */
   $("#savePlanner").on("click", function () {
     $("#plannerSummary").fadeIn();
     alert("Meal plan saved successfully! 🎉");
@@ -122,15 +116,13 @@ $(document).ready(function () {
   });
 
   function extractIngredientName(ingredient) {
-    // Ultra-safe cleaning - only remove obvious quantities
     let clean = ingredient
-      .replace(/^(\d+\/\d+|\d+\.\d+|\d+)\s*/, '') // Remove leading numbers
-      .replace(/\s*,.*$/, '') // Remove everything after comma
-      .replace(/\s*(to taste|as needed|divided)$/gi, '') // Remove end phrases
+      .replace(/^(\d+\/\d+|\d+\.\d+|\d+)\s*/, '') 
+      .replace(/\s*,.*$/, '') 
+      .replace(/\s*(to taste|as needed|divided)$/gi, '') 
       .replace(/\s+/g, ' ')
       .trim();
 
-    // If we have nothing left, use simpler cleanup
     if (!clean || clean.length < 2) {
       clean = ingredient
         .replace(/^\d+\s*/, '')
@@ -138,7 +130,6 @@ $(document).ready(function () {
         .trim();
     }
 
-    // Capitalize and return
     return clean.replace(/\b\w/g, l => l.toUpperCase()) || ingredient;
   }
 
@@ -146,7 +137,6 @@ $(document).ready(function () {
     window.print();
   });
 
-  /* ---------------- Load Recipes ---------------- */
   function loadRecipes() {
     let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
     $("#recipesGrid").empty();
@@ -207,7 +197,6 @@ $(document).ready(function () {
     });
   }
 
-  /* ---------------- Meal Selection Modal ---------------- */
   function showMealSelectionModal(recipe) {
     let modalHtml = `
       <div id="mealSelectionModal" class="modal-overlay">
@@ -269,7 +258,6 @@ $(document).ready(function () {
       return;
     }
     
-    // Check for duplicates
     let existingRecipes = $slot.find('p');
     let alreadyExists = false;
     existingRecipes.each(function() {
@@ -284,7 +272,6 @@ $(document).ready(function () {
       return;
     }
     
-    // Add recipe to planner
     let item = $("<p>" + recipe.name + " <span class='remove-slot'>❌</span></p>");
     item.data({ 
       calories: recipe.nutrition.calories_kcal || 0,
@@ -299,7 +286,6 @@ $(document).ready(function () {
     updateNutrition();
   }
 
-  /* ---------------- Planner Summary ---------------- */
   function updateSummary() {
     $("#plannerSummary").empty();
     let hasMeals = false;
@@ -322,7 +308,6 @@ $(document).ready(function () {
     }
   }
 
-  /* ---------------- Nutrition Summary ---------------- */
   function updateNutrition() {
     let totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFats = 0;
 

@@ -22,7 +22,6 @@
   --border-dashed-dark: #333;
 }
 
-/* Base Styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg);
@@ -31,7 +30,7 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Main Layout */
+
 .planner-page {
   display: flex;
   min-height: 100vh;
@@ -138,6 +137,34 @@ body {
   display: inline-block;
   z-index: 20;
 }
+.tab-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+  margin-bottom: 1rem; 
+}
+
+.tab-header .tab {
+  padding: 0.5rem 1rem;
+}
+
+.filter-dropdown .pill {
+  padding: 0.4rem 0.6rem;
+}
+.drop-zone {
+  width: 100%;
+  padding: 1rem;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 1rem;
+  transition: border-color 0.3s ease;
+  height: 50px;
+  width: 350px;
+}
+
 
 .custom-select {
   padding: 10px 16px;

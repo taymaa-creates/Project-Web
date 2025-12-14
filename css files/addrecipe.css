@@ -488,13 +488,15 @@ textarea {
 
 
 #preview-card img {
-  width: 100%;
+  max-width: 40%;
   height: auto;
   max-height: 250px;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 1rem;
   transition: all 0.3s ease;
+   box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+  border: 1px solid #eee;  
 }
 
 #preview-card h4 {
