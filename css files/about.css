@@ -163,6 +163,8 @@
     .info-card.reverse {
         flex-direction: column;
         text-align: center;
+        min-height: auto;
+
     }
 
     .story-banner {
