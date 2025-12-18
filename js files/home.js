@@ -477,30 +477,47 @@ async function initSearchSection() {
 function initNewsletter() {
     let form = document.getElementById("newsletter-form");
     let nameInput = document.getElementById("subscriber-name");
+    let emailInput = document.getElementById("subscription-email");
     let messageEl = document.getElementById("subscription-message");
-    let namesaved = "newsletterName";
 
-    if (form) {
-        let savedName = localStorage.getItem(namesaved);
-        if (savedName) {
-            messageEl.innerHTML = `Welcome ${escapeHtml(savedName)}, Thanks for your subscription! ❤️`;
+    if (!form || !messageEl) return;
+    messageEl.textContent = "";
+    messageEl.style.display = "none";
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = (nameInput.value || "").trim();
+        const email = (emailInput.value || "").trim();
+
+        if (!name) {
+            showMessage("Please enter your name.", "error");
+            return;
         }
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
+        if (!email || !isValidEmail(email)) {
+            showMessage("Please enter a valid email address.", "error");
+            return;
+        }
 
-            const name = (nameInput.value || "").trim();
+        showMessage(`Welcome ${escapeHtml(name)}! Thanks for subscribing! ❤️`, "success");
+        form.reset();
 
-            if (!name) {
-                messageEl.textContent = "Please enter your name.";
-                return;
-            }
+        setTimeout(() => {
+            messageEl.textContent = "";
+            messageEl.style.display = "none";
+        }, 5000);
+    });
 
-            localStorage.setItem(namesaved, name);
-            messageEl.innerHTML = `Welcome ${escapeHtml(name)}, Thanks for your subscription! ❤️`;
+    function showMessage(text, type) {
+        messageEl.textContent = text;
+        messageEl.style.display = "flex";
+        messageEl.style.color = type === "error" ? "#d9534f" : "#034c22";
+    }
 
-            form.reset();
-        });
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
     }
 }
 
