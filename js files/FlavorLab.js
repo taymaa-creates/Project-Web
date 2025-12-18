@@ -64,8 +64,7 @@ $(document).ready(function() {
             <div class="recipe-card">
                 <img src="${recipe.image}" alt="${recipe.name}">
                 <div class="recipe-info">
-                    <h3><a href="recipe.html?name=${encodeURIComponent(recipe.name)}" class="recipe-link" style="color: #000000ff;">${recipe.name}</a></h3>
-                    <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+                    <h3><a href="recipe.html?id=${encodeURIComponent(recipe.id)}" class="recipe-link" style="color: #000000ff;">${recipe.name}</a></h3>                    <p><strong>Cuisine:</strong> ${recipe.cuisine}</p>
                     <p><strong>Meal Type:</strong> ${recipe.mealType}</p>
                     <p><strong>Difficulty:</strong> ${recipe.difficulty}</p>
                     <p><strong>Total Time:</strong> ${recipe.time.total} mins</p>

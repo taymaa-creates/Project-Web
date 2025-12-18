@@ -307,16 +307,10 @@ body {
 .ing-item {
     display: flex;
     align-items: center;
-    gap: 12px;
     background: transparent;
     padding: 8px;
     border-radius: 8px;
     transition: background-color 0.2s ease;
-}
-
-.ing-item input[type=checkbox] {
-    width: 16px;
-    height: 16px;
 }
 
 .ing-text {

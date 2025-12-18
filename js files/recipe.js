@@ -156,7 +156,6 @@ $(function () {
                 currentIndex = openRecipeFromQuery();
                 renderRecipe(currentIndex);
                 updateFavUI();
-                setTimeout(restoreChecks, 50);
             })
             .fail(function () {
                 console.error("Failed to load recipes.json");
@@ -172,7 +171,6 @@ $(function () {
 
         $('#portionsInput').on('input', handlePortionsChange);
 
-        $('#ingredientsList').on('change', 'input[type=checkbox]', handleIngredientCheck);
         $('#qaTimerDec').on('click', decrementTimer);
         $('#qaTimerInc').on('click', incrementTimer);
         $('#qaTimerStart').on('click', startQATimer);
@@ -230,41 +228,40 @@ $(function () {
         updateRecipeDisplay();
     }
 
-function navigateToRecipe(recipeId) {
-    if (window.scrollTo) {
-        window.scrollTo(0, 0);
-    }
-    if (document.documentElement.scrollTo) {
-        document.documentElement.scrollTo(0, 0);
-    }
-    if (document.body.scrollTo) {
-        document.body.scrollTo(0, 0);
-    }
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.pageYOffset = 0;
-    document.body.style.display = 'none';
-    document.body.offsetHeight; 
-    document.body.style.display = '';
-    let newUrl = `${window.location.pathname}?id=${recipeId}`;
-    window.history.pushState({}, '', newUrl);
+    function navigateToRecipe(recipeId) {
+        if (window.scrollTo) {
+            window.scrollTo(0, 0);
+        }
+        if (document.documentElement.scrollTo) {
+            document.documentElement.scrollTo(0, 0);
+        }
+        if (document.body.scrollTo) {
+            document.body.scrollTo(0, 0);
+        }
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.pageYOffset = 0;
+        document.body.style.display = 'none';
+        document.body.offsetHeight;
+        document.body.style.display = '';
+        let newUrl = `${window.location.pathname}?id=${recipeId}`;
+        window.history.pushState({}, '', newUrl);
 
-    let newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
-    if (newIndex !== -1) {
-        currentIndex = newIndex;
-        updateRecipeDisplay();
+        let newIndex = recipes.findIndex(recipe => recipe.id === recipeId);
+        if (newIndex !== -1) {
+            currentIndex = newIndex;
+            updateRecipeDisplay();
+        }
     }
-}
-function updateRecipeDisplay() {
-    renderRecipe(currentIndex);
-    updateFavUI();
-    restoreChecks();
-    refreshQASections();
-    renderSuggestions();
-    setTimeout(() => window.scrollTo(0, 0), 0);
-    setTimeout(() => window.scrollTo(0, 0), 10);
-    setTimeout(() => window.scrollTo(0, 0), 50);
-}
+    function updateRecipeDisplay() {
+        renderRecipe(currentIndex);
+        updateFavUI();
+        refreshQASections();
+        renderSuggestions();
+        setTimeout(() => window.scrollTo(0, 0), 0);
+        setTimeout(() => window.scrollTo(0, 0), 10);
+        setTimeout(() => window.scrollTo(0, 0), 50);
+    }
 
     function handlePopState() {
         let params = new URLSearchParams(window.location.search);
@@ -321,16 +318,14 @@ function updateRecipeDisplay() {
                 display = it.toLowerCase().includes('(as desired)') ? it : `${it} (as desired)`;
             }
 
-            return `<label class="ing-item">
-                <input type="checkbox" data-idx="${i}">
-                <span class="ing-text">
-                    <span class="ing-name">${escapeHtml(display)}</span>
-                </span>
-            </label>`;
+            return `<div class="ing-item">
+            <span class="ing-text">
+                <span class="ing-name">${escapeHtml(display)}</span>
+            </span>
+        </div>`;
         }).join('');
 
         $('#ingredientsList').html(html);
-        restoreChecks();
     }
 
     function renderInstructions(r) {
@@ -497,29 +492,6 @@ function updateRecipeDisplay() {
             if ($(this).closest('div').find('.ab-label').text().trim() === 'Portions') {
                 $(this).text(v);
             }
-        });
-    }
-    function handleIngredientCheck() {
-        let idx = $(this).data('idx');
-        let key = 'checked_' + recipes[currentIndex].id;
-        let stored = JSON.parse(sessionStorage.getItem(key) || '[]');
-
-        if (this.checked) {
-            stored.push(idx);
-        } else {
-            let pos = stored.indexOf(idx);
-            if (pos !== -1) stored.splice(pos, 1);
-        }
-        sessionStorage.setItem(key, JSON.stringify(stored));
-    }
-
-    function restoreChecks() {
-        if (!recipes[currentIndex]) return;
-        let key = 'checked_' + recipes[currentIndex].id;
-        let stored = JSON.parse(sessionStorage.getItem(key) || '[]');
-        $('#ingredientsList input[type=checkbox]').each(function () {
-            let idx = $(this).data('idx');
-            $(this).prop('checked', stored.includes(idx));
         });
     }
 
@@ -924,12 +896,12 @@ function updateRecipeDisplay() {
         $('#suggestionsList').html(suggestionsHTML);
 
         $('.suggestion-card').off('click').on('click', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    let recipeId = $(this).data('id');
-    navigateToRecipe(recipeId);
-    return false; // This prevents ANY default behavior
-});
+            e.preventDefault();
+            e.stopPropagation();
+            let recipeId = $(this).data('id');
+            navigateToRecipe(recipeId);
+            return false; // This prevents ANY default behavior
+        });
     }
 
     function getRelatedRecipes(currentRecipe) {

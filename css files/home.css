@@ -352,15 +352,16 @@ h2 {
 }
 
 .subscription-message {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
     font-size: 1.1rem;
-    color: #034c22;
-    gap: 5px;
     font-weight: 500;
-    padding: 6px 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background-color: rgba(3, 76, 34, 0.1);
+    transition: opacity 0.3s ease;
 }
 
 /* ===== CONTAINER 4: BEST RECIPES ===== */
@@ -910,17 +911,34 @@ h2 {
   padding: 18px;
   color: var(--card);
 }
-.card-tags { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.card-tags {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  height: 45px;
+  overflow: hidden;
+}
 .card-title {
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 20px;
   margin: 0 0 8px;
+  height: 48px; 
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
 }
 .card-desc {
   color: rgba(255,255,255,0.9);
   font-size: 13px;
   margin: 0 0 12px;
-  min-height: 38px;
+  height: 36px; 
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
 }
 .card-meta {
   display:flex;
